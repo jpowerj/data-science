@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Probabilistic Modeling and Statistical Computing",
+    "section": "",
+    "text": "Preface\nThis book serves as an introduction to data science, written with the goal of meeting you wherever you’re at in your educational/career journey, regardless of your background in math or computer science. That is to say, we don’t assume any background in STEM, only the desire to learn and the work ethic to put in the hours needed to become comfortable with each topic!\nIt is the companion to the course DSAN5000: Data Science and Analytics, taught at Georgetown University in the Fall of 2023."
+  },
+  {
+    "objectID": "01-intro.html",
+    "href": "01-intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "02-summary.html",
+    "href": "02-summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "m2-data-analysis.html",
+    "href": "m2-data-analysis.html",
+    "title": "Module 2: Data Analysis",
+    "section": "",
+    "text": "Data Analysis"
+  },
+  {
+    "objectID": "02-workflow.html",
+    "href": "02-workflow.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "13-conclusion.html",
+    "href": "13-conclusion.html",
+    "title": "3  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "03-data-cleaning.html",
+    "href": "03-data-cleaning.html",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "",
+    "text": "Data cleaning"
+  },
+  {
+    "objectID": "00-intro.html",
+    "href": "00-intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "01-ds-tools.html",
+    "href": "01-ds-tools.html",
+    "title": "2  Data Science Workflow",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  }
+]

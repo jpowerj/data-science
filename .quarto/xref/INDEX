@@ -1,0 +1,71 @@
+{
+  "intro.qmd": {
+    "intro.html": "f2ee1622"
+  },
+  "index.qmd": {
+    "index.html": "a73204dc"
+  },
+  "summary.qmd": {
+    "summary.html": "1cdde3af"
+  },
+  "references.qmd": {
+    "references.html": "3a772b35"
+  },
+  "01-intro.qmd": {
+    "01-intro.html": "a57d4fc0"
+  },
+  "02-summary.qmd": {
+    "02-summary.html": "2b7d0620"
+  },
+  "m1-workflow.qmd": {
+    "m1-workflow.html": "2313d523"
+  },
+  "02-workflow.qmd": {
+    "02-workflow.html": "413d67de"
+  },
+  "03-data-cleaning.qmd": {
+    "03-data-cleaning.html": "5d5f7634"
+  },
+  "13-conclusion.qmd": {
+    "13-conclusion.html": "8c4614b4"
+  },
+  "m2-data-analysis.qmd": {
+    "m2-data-analysis.html": "c352bd75"
+  },
+  "00-intro.qmd": {
+    "00-intro.html": "32b996e4"
+  },
+  "01-ds-tools.qmd": {
+    "01-ds-tools.html": "21a1274b"
+  },
+  "02-data-gathering.qmd": {
+    "02-data-gathering.html": "2f13206f"
+  },
+  "05-optimization.qmd": {
+    "05-optimization.html": "d1a91d09"
+  },
+  "06-classification.qmd": {
+    "06-classification.html": "d527c7e1"
+  },
+  "04-eda.qmd": {
+    "04-eda.html": "efe26645"
+  },
+  "07-classification-algs.qmd": {
+    "07-classification-algs.html": "16b14d5e"
+  },
+  "08-neural-nets.qmd": {
+    "08-neural-nets.html": "1786c8cc"
+  },
+  "09-unsupervised.qmd": {
+    "09-unsupervised.html": "c76af6de"
+  },
+  "10-network-data.qmd": {
+    "10-network-data.html": "b8161439"
+  },
+  "11-image-data.qmd": {
+    "11-image-data.html": "78253c3f"
+  },
+  "12-nlp.qmd": {
+    "12-nlp.html": "bc0ce5a8"
+  }
+}
