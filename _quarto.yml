@@ -1,9 +1,11 @@
 project:
   type: book
   output-dir: docs
+  preview:
+    port: 4000
 
 book:
-  title: "Probabilistic Modeling and Statistical Computing"
+  title: "Data Science Without Fear"
   author: "Jeff Jacobs"
   date: last-modified
   # navbar:

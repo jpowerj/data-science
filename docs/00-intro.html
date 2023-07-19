@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jeff Jacobs">
+<meta name="dcterms.date" content="2023-07-19">
 
-<title>Probabilistic Modeling and Statistical Computing - 1&nbsp; Introduction</title>
+<title>Data Science Without Fear - 1&nbsp; Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -80,7 +97,13 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -108,7 +131,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Probabilistic Modeling and Statistical Computing</a> 
+      <a href="./">Data Science Without Fear</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -275,7 +298,40 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#operating-systems" id="toc-operating-systems" class="nav-link active" data-scroll-target="#operating-systems"><span class="header-section-number">1.1</span> Operating Systems</a></li>
+  <li><a href="#git-vs.-github" id="toc-git-vs.-github" class="nav-link" data-scroll-target="#git-vs.-github"><span class="header-section-number">1.2</span> Git vs.&nbsp;GitHub</a></li>
+  <li><a href="#git-diagram" id="toc-git-diagram" class="nav-link" data-scroll-target="#git-diagram"><span class="header-section-number">1.3</span> Git Diagram</a></li>
+  <li><a href="#initializing-a-repo" id="toc-initializing-a-repo" class="nav-link" data-scroll-target="#initializing-a-repo"><span class="header-section-number">1.4</span> Initializing a Repo</a></li>
+  <li><a href="#adding-and-committing-a-file" id="toc-adding-and-committing-a-file" class="nav-link" data-scroll-target="#adding-and-committing-a-file"><span class="header-section-number">1.5</span> Adding and Committing a File</a></li>
+  <li><a href="#the-commit-log" id="toc-the-commit-log" class="nav-link" data-scroll-target="#the-commit-log"><span class="header-section-number">1.6</span> The Commit Log</a></li>
+  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes"><span class="header-section-number">1.7</span> Making Changes</a></li>
+  <li><a href="#more-changes" id="toc-more-changes" class="nav-link" data-scroll-target="#more-changes"><span class="header-section-number">1.8</span> More Changes</a></li>
+  <li><a href="#and-the-git-log" id="toc-and-the-git-log" class="nav-link" data-scroll-target="#and-the-git-log"><span class="header-section-number">1.9</span> And the <code>git log</code></a></li>
+  <li><a href="#undoing-a-commit-i" id="toc-undoing-a-commit-i" class="nav-link" data-scroll-target="#undoing-a-commit-i"><span class="header-section-number">1.10</span> Undoing a Commit I</a></li>
+  <li><a href="#undoing-a-commit-ii" id="toc-undoing-a-commit-ii" class="nav-link" data-scroll-target="#undoing-a-commit-ii"><span class="header-section-number">1.11</span> Undoing a Commit II</a></li>
+  <li><a href="#onwards-and-upwards" id="toc-onwards-and-upwards" class="nav-link" data-scroll-target="#onwards-and-upwards"><span class="header-section-number">1.12</span> Onwards and Upwards</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.13</span> </a></li>
+  <li><a href="#but-why-these-diagrams" id="toc-but-why-these-diagrams" class="nav-link" data-scroll-target="#but-why-these-diagrams"><span class="header-section-number">1.14</span> But Why These Diagrams?</a></li>
+  <li><a href="#the-github-side-remote" id="toc-the-github-side-remote" class="nav-link" data-scroll-target="#the-github-side-remote"><span class="header-section-number">1.15</span> The GitHub Side: Remote</a></li>
+  <li><a href="#an-empty-repo" id="toc-an-empty-repo" class="nav-link" data-scroll-target="#an-empty-repo"><span class="header-section-number">1.16</span> An Empty Repo</a></li>
+  <li><a href="#refresh-after-git-push" id="toc-refresh-after-git-push" class="nav-link" data-scroll-target="#refresh-after-git-push"><span class="header-section-number">1.17</span> Refresh after <code>git push</code></a></li>
+  <li><a href="#commit-history" id="toc-commit-history" class="nav-link" data-scroll-target="#commit-history"><span class="header-section-number">1.18</span> Commit History</a></li>
+  <li><a href="#checking-the-diff" id="toc-checking-the-diff" class="nav-link" data-scroll-target="#checking-the-diff"><span class="header-section-number">1.19</span> Checking the <code>diff</code></a></li>
+  <li><a href="#web-development" id="toc-web-development" class="nav-link" data-scroll-target="#web-development"><span class="header-section-number">1.20</span> Web Development</a></li>
+  <li><a href="#getting-content-onto-the-internet" id="toc-getting-content-onto-the-internet" class="nav-link" data-scroll-target="#getting-content-onto-the-internet"><span class="header-section-number">1.21</span> Getting Content onto the Internet</a></li>
+  <li><a href="#deploying-from-a-branchfolder" id="toc-deploying-from-a-branchfolder" class="nav-link" data-scroll-target="#deploying-from-a-branchfolder"><span class="header-section-number">1.22</span> Deploying from a Branch/Folder</a></li>
+  <li><a href="#r-vs.-rstudio-vs.-quarto" id="toc-r-vs.-rstudio-vs.-quarto" class="nav-link" data-scroll-target="#r-vs.-rstudio-vs.-quarto"><span class="header-section-number">1.23</span> R vs.&nbsp;RStudio vs.&nbsp;Quarto</a></li>
+  <li><a href="#getting-r-onto-your-computer" id="toc-getting-r-onto-your-computer" class="nav-link" data-scroll-target="#getting-r-onto-your-computer"><span class="header-section-number">1.24</span> Getting R Onto Your Computer</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">1.25</span> Python</a></li>
+  <li><a href="#google-colab" id="toc-google-colab" class="nav-link" data-scroll-target="#google-colab"><span class="header-section-number">1.26</span> Google Colab</a></li>
+  <li><a href="#colab-runtime-options" id="toc-colab-runtime-options" class="nav-link" data-scroll-target="#colab-runtime-options"><span class="header-section-number">1.27</span> Colab Runtime Options</a></li>
+  <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week"><span class="header-section-number">1.28</span> Next Week</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -283,13 +339,33 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<p class="subtitle lead">Setting Up a Data Science Workflow</p>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Jeff Jacobs </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a>
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 19, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -297,15 +373,521 @@ div.csl-indent {
 
 </header>
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
-
-
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="listitem">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+<p>Welcome to the world of data science! Before we can get to the fun stuff, learning about the world through data, we’ll need to set up a <strong>workflow</strong>: the toolbox you’ll use when you sit down to do some data science. Given our goal of meeting you wherever you’re at in terms of data science knowledge, we’ll start from the basics: operating systems, programming languages, setting up an <strong>Integrated Development Environment (IDE)</strong>, and using <strong>version control</strong> to make sure you can always “undo” if you make a change that breaks your code.</p>
+<section id="operating-systems" class="level2 smaller" data-name="Workflow" data-number="1.1">
+<h2 class="smaller anchored" data-name="Workflow" data-number="1.1" data-anchor-id="operating-systems"><span class="header-section-number">1.1</span> Operating Systems</h2>
+<ul>
+<li><p><strong>Linux</strong>: <i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> (<strong>Free!</strong>)</p>
+<ul>
+<li>The “standard” OS for developers! You can expect instructions to use Linux commands: <code>ls</code>, <code>cd</code>, <code>touch</code>, <code>mv</code> …</li>
+</ul></li>
+<li><p><strong>Windows</strong>: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> <strong>BUT</strong>, proprietary shell (constantly googling “PowerShell equivalent”)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Linux</th>
+<th>PowerShell</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ls</code></td>
+<td><code>Get-ChildItem</code></td>
+</tr>
+<tr class="even">
+<td><code>cd</code></td>
+<td><code>Set-Location</code></td>
+</tr>
+<tr class="odd">
+<td><code>touch</code></td>
+<td><code>New-Item</code></td>
+</tr>
+<tr class="even">
+<td><code>mv</code></td>
+<td><code>Move-Item</code></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>OSX</strong>: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i> <strong>BUT</strong>, OSX and Linux both built on Unix</p>
+<p><span class="math inline">\(\implies\)</span> if you know Terminal you know Linux!</p></li>
+</ul>
+</section>
+<section id="git-vs.-github" class="level2" data-name="Git" data-number="1.2">
+<h2 data-name="Git" data-number="1.2" class="anchored" data-anchor-id="git-vs.-github"><span class="header-section-number">1.2</span> Git vs.&nbsp;GitHub</h2>
+<p>Despite the confusingly similar names, it is important to keep in mind the distinction between <strong>Git</strong> and <strong>GitHub</strong>!</p>
+<ul>
+<li><strong>Git</strong> is a command-line program, which on its own just runs on your local computer and keeps track of changes to your code.</li>
+<li><strong>GitHub</strong>, on the other hand, is a <strong>website</strong> which allows you to take your <strong>Git</strong> repositories and store them <strong>online</strong>, whether privately or publicly.</li>
+</ul>
+<p>This means, for example, that (if your repository is public) once you <strong>push</strong> your code to GitHub, others can view it and download it for themselves.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong><a href="https://git-scm.com/" target="_blank">Git <i class="bi bi-git" style="margin-left: 5px !important;"></i></a></strong></p>
+<ul>
+<li>Command-line program</li>
+<li><code>git init</code> in shell to create</li>
+<li><code>git add</code> to track files</li>
+<li><code>git commit</code> to commit changes to tracked files</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong><a href="https://github.com/" target="_blank">GitHub <i class="bi bi-github" style="margin-left: 5px !important;"></i></a></strong></p>
+<ul>
+<li>Code hosting website</li>
+<li>Create a <strong>repository</strong> (repo) for each project</li>
+<li>Can <strong>clone</strong> repos onto your local machine</li>
+</ul>
 </div>
 </div>
+<center style="border: 2px solid black !important; padding: 5px !important;">
+<strong><code>git push</code>/<code>git pull</code></strong>: The link between the two!
+</center>
+</section>
+<section id="git-diagram" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="git-diagram"><span class="header-section-number">1.3</span> Git Diagram</h2>
+<p><img src="https://mermaid.ink/svg/pako:eNp9j70KAjEQhF8lbH1PkFqwsrJNsyZ7STB_rBtBjnt34x0IitgNM9_AzAK2OgINPsqRsQVTlFK25hzlW14Yiw3K0Z1SbXsayF5rl0_zZ_uNZoxlczKxp_9NmGBQo-HGxOUVGJBAmQzoIR3N2JMYMGUdKHap50exoIU7TdCbQ6FDRM-YQc-YbsMlF6Xyab-9vV-fAwFZpw" class="quarto-figure quarto-figure-center"></p>
+</section>
+<section id="initializing-a-repo" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="initializing-a-repo"><span class="header-section-number">1.4</span> Initializing a Repo</h2>
+<p>Let’s make a directory for our project called <code>cool-project</code>, and initialize a Git repository for it:</p>
+<!-- ```{.bash code-line-numbers="|3|4|"} -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~$</span> mkdir cool-project</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~$</span> cd cool-project</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git init</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Initialized</span> empty Git repository in /home/user/cool-project/.git/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a hidden folder, <code>.git</code>, in the directory:</p>
+<!-- ```bash{.bash code-line-numbers="|3-5"} -->
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> ls <span class="at">-lah</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 12K</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>  3 user user 4.0K May 28 00:53 .</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 12 user user 4.0K May 28 00:53 ..</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>  7 user user 4.0K May 28 00:53 .git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adding-and-committing-a-file" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="adding-and-committing-a-file"><span class="header-section-number">1.5</span> Adding and Committing a File</h2>
+<p>We’re writing Python code, so let’s create and track <code>cool_code.py</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> touch cool_code.py</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> commits yet</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">new</span> file:   cool_code.py</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Initial version of cool_code.py"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">b40dc25]</span> Initial version of cool_code.py</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 0 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 0 deletions<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-commit-log" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="the-commit-log"><span class="header-section-number">1.6</span> The Commit Log</h2>
+<p>View the commit log using <code>git log</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc252a3b7355cc4c28397fefe7911ff3c94b9 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:57:16 2023 +0000</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> version of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="hidden">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit id: "b40dc25"
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<p><img class="r-stretch center" src="https://mermaid.ink/svg/pako:eNpdjjELwjAUhP9KOOjWQYoumQUnJzfJ8sx7bQNNUuLLIKX_3VZxcb37vuMW-MwCiyHopdA8umSM8TnGoCawNQ6P44F9d3JwqWn-y84BLaKUSIG3mWX3HXSUKA47wdJTnXTX1w2lqvn2Sh5WS5UWdWZSOQcaCkXYnqbnlgoHzeX6vfZ52GKmdM_5x6xvd4Y8pg"></p>
+</div>
+</section>
+<section id="making-changes" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="making-changes"><span class="header-section-number">1.7</span> Making Changes</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">nothing</span> to commit, working tree clean</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"1 + 1"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> more cool_code.py</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> + 1</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Added code to cool_code.py"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> e3bc497] Added code to cool_code.py</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output of the <code>git log</code> command will show the new version:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12eassets/img/gh_history.png</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> version of cool_code.py</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNpljrEKwjAURX8l3LmDaEXMLDg5uUmW17zXNtA0Jb4MUvrvtoqT672Hw5nhEwssuqDXTFPvRmOMTzEGNYGtcWjqHfv90eH_kkPj6_PJARWi5EiBV9W8gQ7aSxSHjWNpqQy6KZYVpaLp_ho9rOYiFcrEpHIJ1GWKsC0Nz3UVDpry7Zv3qaww0fhI6ccsb4kvPis"></p>
+</section>
+<section id="more-changes" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="more-changes"><span class="header-section-number">1.8</span> More Changes</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"2 + 2"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> more cool_code.py</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> + 1</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> + 2</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Second version of cool_code.py"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> 4007db9] Second version of cool_code.py</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="and-the-git-log" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="and-the-git-log"><span class="header-section-number">1.9</span> And the <code>git log</code></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 4007db9a031ca134fe09eab840b2bc845366a9c1 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:39:28 2023 +0000</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Second</span> version of cool_code.py</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="undoing-a-commit-i" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="undoing-a-commit-i"><span class="header-section-number">1.10</span> Undoing a Commit I</h2>
+<p>First check the <code>git log</code> to find the <strong>hash</strong> for the commit you want to revert back to:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNptjz8PgjAQxb9KczNDoxhCZxMnJzfT5do7oAmlpF4HQ_jugsZJ1_d-eX8W8IkYDPRBLhnnwU5KKZ9iDKICGWXB1Zr84WTh1-Kj83Xb_LNqrRtyrQWoIHKOGGhrWXbQggwc2cLOEXdYRtkj1g3FIun2nDwYyYUrKDOh8DlgnzGC6XB8bCpTkJSvn-XvAxXMON1T-jLrC-H5Res"></p>
+</section>
+<section id="undoing-a-commit-ii" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="undoing-a-commit-ii"><span class="header-section-number">1.11</span> Undoing a Commit II</h2>
+<ul>
+<li><i class="bi bi-exclamation-triangle"></i> <strong>This is irreversable!</strong> <i class="bi bi-exclamation-triangle"></i></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git reset <span class="at">--hard</span> e3bc497ac</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HEAD</span> is now at e3bc497 Added code to cool_code.py</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="onwards-and-upwards" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="onwards-and-upwards"><span class="header-section-number">1.12</span> Onwards and Upwards</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"3 + 3"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Added different code to cool_code.py"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> 700d955] Added different code to cool_code.py</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="https://mermaid.ink/svg/pako:eNptz7EOgkAMBuBXuXRmuCiGcLPEyQUSB3NLuVa4xOPIWQZDeHdB46Rr_y9t_xlcJAYDnZdTwrG3g1LKxRC8KE9GWWhzTW53sPAb8b51eVn8i3KtC2pLC0qeIxtVV5eqbqpfWGhN5WFdDxkETgE9re_MG7QgPQe2sDniG0532W4tK8VJYvMcHBhJE2cwjYTCR49dwgDmhvfHOmXyEtP5U_HdNIMRh2uMX7O8ADEKUdc"></p>
+</section>
+<section id="section" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="section"><span class="header-section-number">1.13</span> </h2>
+<p>The final <code>git log</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 700d955faacb27d7b8bc464b9451851b5e319f20 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:44:49 2023 +0000</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> different code to cool_code.py</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="but-why-these-diagrams" class="level2" data-number="1.14">
+<h2 data-number="1.14" class="anchored" data-anchor-id="but-why-these-diagrams"><span class="header-section-number">1.14</span> But Why These Diagrams?</h2>
+<p>Even the simplest projects can start to look like:</p>
+<div class="hidden">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+       commit id: "537dd67"
+       commit id: "6639143"
+       branch nice_feature
+       checkout nice_feature
+       commit id: "937ded8"
+       checkout main
+       commit id: "9e6679c"
+       checkout nice_feature
+       branch very_nice_feature
+       checkout very_nice_feature
+       commit id: "7f4de03"
+       checkout main
+       commit id: "6df80c1"
+       checkout nice_feature
+       commit id: "bd0ebb8"
+       checkout main
+       merge nice_feature id: "9ff61cc" tag: "V 1.0.0" type: HIGHLIGHT
+       checkout very_nice_feature
+       commit id: "370613b"
+       checkout main
+       commit id: "9a07a97"
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img src="https://mermaid.ink/svg/pako:eNqdU8FqwzAM_RWjcykO6Zwm50E72E4bO4xAUWw5MWvi4DmDUPrvc9aFpdB27Qy-SO9JjydpB9IqggxK41cO2ypv2OFJW9fGM6MylsNdnCglkhxOp4WI02gRT9KFw0ZWrDGSNprQd45-qRXJd9v5M9lp4TT0JbWc9h3JNZrmDImESFJ5inSy44_WT3L95rLgC5CpgEQvFPH4NtVC6SWX0dWqj8iF4lQUf_tUkyvpqN7omdYiksEz5rEcAq8smvM5HwJ9SxlbP6zWj-G__NuVOOEiiosbZ4k8wTQsHswgiA9AFZZ1N4Bz8BXVlMOAU6Sx2_qh-D5AsfP2uW8kZN51NIOuVejp3mDpsIZM4_YjREkZb93T4QC-72AGLTZv1o6Y_RdGMfVs"></p>
+</section>
+<section id="the-github-side-remote" class="level2" data-number="1.15">
+<h2 data-number="1.15" class="anchored" data-anchor-id="the-github-side-remote"><span class="header-section-number">1.15</span> The GitHub Side: Remote</h2>
+<p><img src="./assets/img/ch00/github_repo.png" class="img-fluid"></p>
+</section>
+<section id="an-empty-repo" class="level2" data-number="1.16">
+<h2 data-number="1.16" class="anchored" data-anchor-id="an-empty-repo"><span class="header-section-number">1.16</span> An Empty Repo</h2>
+<p><img src="./assets/img/ch00/github_empty_repo.png" class="img-fluid"></p>
+</section>
+<section id="refresh-after-git-push" class="level2" data-number="1.17">
+<h2 data-number="1.17" class="anchored" data-anchor-id="refresh-after-git-push"><span class="header-section-number">1.17</span> Refresh after <code>git push</code></h2>
+<p><img src="./assets/img/ch00/github_push.png" class="img-fluid"></p>
+</section>
+<section id="commit-history" class="level2" data-number="1.18">
+<h2 data-number="1.18" class="anchored" data-anchor-id="commit-history"><span class="header-section-number">1.18</span> Commit History</h2>
+<p><img src="./assets/img/ch00/gh_history.png" class="img-fluid"></p>
+</section>
+<section id="checking-the-diff" class="level2" data-number="1.19">
+<h2 data-number="1.19" class="anchored" data-anchor-id="checking-the-diff"><span class="header-section-number">1.19</span> Checking the <code>diff</code></h2>
+<p><img src="./assets/img/ch00/gh_diff.png" class="img-fluid"></p>
+</section>
+<section id="web-development" class="level2" data-name="Web Dev" data-number="1.20">
+<h2 data-name="Web Dev" data-number="1.20" class="anchored" data-anchor-id="web-development"><span class="header-section-number">1.20</span> Web Development</h2>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Frontend<br><i class="bi bi-layout-text-window-reverse"></i> <i class="bi bi-display"></i> <i class="bi bi-graph-up"></i> <i class="bi bi-ui-checks"></i></th>
+<th>Backend<br><i class="bi bi-database"></i> <i class="bi bi-terminal"></i> <i class="bi bi-table"></i> <i class="bi bi-key"></i></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Low Level</strong></td>
+<td>HTML/CSS/JavaScript</td>
+<td>GitHub Pages</td>
+</tr>
+<tr class="even">
+<td><strong>Middle Level</strong></td>
+<td>JS Libraries</td>
+<td>PHP, SQL</td>
+</tr>
+<tr class="odd">
+<td><strong>High Level</strong></td>
+<td>React, Next.js</td>
+<td>Node.js, Vercel</td>
+</tr>
+</tbody>
+</table>
+<div class="notes">
+<p>Frontend icons: UI+UI elements, what the user sees (on the screen), user experience (UX), data visualization Backend icons: Databases, Security</p>
+</div>
+</section>
+<section id="getting-content-onto-the-internet" class="level2 nostretch" data-number="1.21">
+<h2 class="nostretch anchored" data-number="1.21" data-anchor-id="getting-content-onto-the-internet"><span class="header-section-number">1.21</span> Getting Content onto the Internet</h2>
+<ul>
+<li>
+Step 1: <code>index.html</code>
+</li>
+<li>
+Step 2: Create GitHub repository
+</li>
+<li>
+Step 3: <code>git init</code>, <code>git add -A .</code>, <code>git push</code>
+</li>
+<li style="border: 2px solid black !important; padding: 4px !important;">
+<span>Step 4: Enable GitHub Pages in repo settings</span>
+</li>
+<li>
+Step 5: <code>&lt;username&gt;.github.io</code>!
+</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./assets/img/ch00/gh_pages.png" class="img-fluid figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</section>
+<section id="deploying-from-a-branchfolder" class="level2" data-number="1.22">
+<h2 data-number="1.22" class="anchored" data-anchor-id="deploying-from-a-branchfolder"><span class="header-section-number">1.22</span> Deploying from a Branch/Folder</h2>
+<p><img src="./assets/img/ch00/gh_pages_2.png" class="img-fluid"></p>
+</section>
+<section id="r-vs.-rstudio-vs.-quarto" class="level2 smaller" data-name="R" data-number="1.23">
+<h2 class="smaller anchored" data-name="R" data-number="1.23" data-anchor-id="r-vs.-rstudio-vs.-quarto"><span class="header-section-number">1.23</span> R vs.&nbsp;RStudio vs.&nbsp;Quarto</h2>
+<!-- (Another important distinction!) -->
+<!-- start Quarto box -->
+<div style="border: 2px solid black; padding: 10px;">
+<center>
+<img src="./assets/img/ch00/quarto_logo.svg" width="20%">
+</center>
+<!-- start columns -->
+<div class="columns">
+<!-- start RStudio column --><div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
+<center style="margin: 0px !important;">
+<img src="./assets/img/ch00/RStudio_logo.svg" width="25%">
+</center>
+<ul>
+<li>GUI wrapper around R (Integrated Development Environment = IDE)</li>
+<li>Run <strong>blocks</strong> of R code (<code>.qmd</code> <strong>chunks</strong>)</li>
+</ul>
+<!-- start R box inside RStudio box -->
+<div style="border: 2px solid black; width: 98%; margin: auto; padding: 2px;">
+<p><strong><a href="https://www.r-project.org/" target="_blank">The R Language <i class="fa-brands fa-r-project"></i></a></strong></p>
+<ul>
+<li>Programming language</li>
+<li>Runs scripts via <code>Rscript &lt;script&gt;.r</code> <!-- * Comes with a basic GUI (R-GUI) --></li>
+</ul>
+</div>
+<!-- end R box -->
+</div><!-- end RStudio column --><!-- start + column --><div class="column" style="width: 5%; padding: 5px;">
+<div class="center r-stretch" style="margin-top: auto;">
+<h3 style="text-align: center;" class="anchored">
++
+</h3>
+</div>
+</div><!-- end + column --><!-- start Jupyter column --><div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
+<center style="margin: 0px !important;">
+<img src="./assets/img/ch00/jupyter_logo.svg" width="50%" style="margin: 0px;">
+</center>
+<ul>
+<li>GUI wrapper around Python (IDE)</li>
+<li>Run <strong>blocks</strong> of Python code (<code>.ipynb</code> <strong>cells</strong>)</li>
+</ul>
+<!-- start python box inside Jupyter column -->
+<div class="column" style="width: 98%; border: 2px solid black; margin: auto; padding: 2px;">
+<!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
+<p><a href="https://www.python.org/" target="_blank">The Python Language <i class="fa-brands fa-python"></i></a></p>
+<ul>
+<li>Scripting language</li>
+<li>On its own, just runs scripts via <code>python &lt;script&gt;.py</code></li>
+</ul>
+</div>
+<!-- end Python column -->
+</div><!-- end Jupyter column -->
+</div>
+<!-- end columns -->
+</div>
+<!-- end quarto box -->
+</section>
+<section id="getting-r-onto-your-computer" class="level2" data-number="1.24">
+<h2 data-number="1.24" class="anchored" data-anchor-id="getting-r-onto-your-computer"><span class="header-section-number">1.24</span> Getting R Onto Your Computer</h2>
+<ol type="1">
+<li>Download the <code>R</code> <strong>language</strong>: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></li>
+</ol>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>VSCode</strong> (recommended)</p>
+<ul>
+<li><p><a href="https://code.visualstudio.com/docs/setup/linux" target="_blank">Linux</a> | <a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">Windows</a> | <a href="https://code.visualstudio.com/docs/setup/mac" target="_blank">OSX</a></p></li>
+<li>Install the <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto" target="_blank">Quarto Extension for VSCode</a> (more info from Quarto <a href="https://quarto.org/docs/tools/vscode.html" target="_blank">here</a>)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>RStudio</strong></p>
+<ul>
+<li><a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="python" class="level2" data-name="Python" data-number="1.25">
+<h2 data-name="Python" data-number="1.25" class="anchored" data-anchor-id="python"><span class="header-section-number">1.25</span> Python</h2>
+<ul>
+<li><p>The Python interpreter: <a href="https://www.python.org/downloads/source/" target="_blank">Linux</a> | <a href="https://www.python.org/downloads/windows/" target="_blank">Windows</a> | <a href="https://www.python.org/downloads/macos/" target="_blank">OSX</a></p></li>
+<li><p>With <strong>VSCode</strong> (recommended): you can start coding!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>my_python_code.qmd</strong></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown quarto code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>With <strong>Jupyter</strong> there are two options:</p>
+<ul>
+<li><strong>JupyterLab</strong> (recommended) vs.&nbsp;<strong>Jupyter</strong></li>
+<li>Main difference (imo): JupyterLab has a tabbed interface</li>
+</ul></li>
+</ul>
+</section>
+<section id="google-colab" class="level2" data-number="1.26">
+<h2 data-number="1.26" class="anchored" data-anchor-id="google-colab"><span class="header-section-number">1.26</span> Google Colab</h2>
+<p>Alternative when all else fails! <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a></p>
+<ul>
+<li>Fully web-based Jupyter editing/execution (import/export <code>.ipynb</code> files)</li>
+<li>Can persist code/data to Google Drive</li>
+<li>Drawback: RAM limitations, have to activate GPU mode (pretty much required for any AI work), idle time limitation</li>
+</ul>
+</section>
+<section id="colab-runtime-options" class="level2" data-number="1.27">
+<h2 data-number="1.27" class="anchored" data-anchor-id="colab-runtime-options"><span class="header-section-number">1.27</span> Colab Runtime Options</h2>
+<center>
+<img src="./assets/img/ch00/colab_language.png" width="68%" style="margin: 0px;"> <img src="./assets/img/ch00/colab_runtime.png" width="68%" style="margin: 0px;">
+</center>
+</section>
+<section id="next-week" class="level2" data-state="hide-menubar" data-number="1.28">
+<h2 data-state="hide-menubar" data-number="1.28" class="anchored" data-anchor-id="next-week"><span class="header-section-number">1.28</span> Next Week</h2>
+<p>Data Gathering and APIs</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
