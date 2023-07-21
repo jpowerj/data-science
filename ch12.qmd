@@ -1,2 +1,3 @@
 # Image Data
 
+Given that so much of AI and Machine Learning research has been driven, historically, by the desire to create machines that can emulate the human brain, it makes sense that lots of progress was made early on in creating algorithms for computers to process and reason about **visual** information---what our brain is doing at every waking moment in its interface with our eyes.

@@ -1,17 +1,18 @@
 ---
 title: "Introduction"
-subtitle: "Setting Up a Data Science Workflow"
-date: last-modified
-institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
-author: "Jeff Jacobs"
+subtitle: "Setting Up Your Environment"
+# institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
+# author: "Jeff Jacobs"
 #categories:
 #  - "Lecture Slides"
 format:
   html:
     include-in-header: {"text": "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous' referrerpolicy='no-referrer' />"}
 metadata-files: 
-  - "./_bookdown.globals.yml"
+  - "_bookdown.globals.yml"
 ---
+
+{{< include _draft-notice.qmd >}}
 
 Welcome to the world of data science! Before we can get to the fun stuff, learning about the world through data, we'll need to set up a **workflow**: the toolbox you'll use when you sit down to do some data science. Given our goal of meeting you wherever you're at in terms of data science knowledge, we'll start from the basics: operating systems, programming languages, setting up an **Integrated Development Environment (IDE)**, and using **version control** to make sure you can always "undo" if you make a change that breaks your code.
 
@@ -31,7 +32,9 @@ Welcome to the world of data science! Before we can get to the fun stuff, learni
   
   $\implies$ if you know Terminal you know Linux!
 
-## Git vs. GitHub {data-name="Git"}
+## Version Control with Git and GitHub
+
+### Git vs. GitHub {data-name="Git"}
 
 Despite the confusingly similar names, it is important to keep in mind the distinction between **Git** and **GitHub**!
 
@@ -66,11 +69,11 @@ This means, for example, that (if your repository is public) once you **push** y
 **`git push`/`git pull`**: The link between the two!
 </center>
 
-## Git Diagram
+### Git Diagram
 
 <img src="https://mermaid.ink/svg/pako:eNp9j70KAjEQhF8lbH1PkFqwsrJNsyZ7STB_rBtBjnt34x0IitgNM9_AzAK2OgINPsqRsQVTlFK25hzlW14Yiw3K0Z1SbXsayF5rl0_zZ_uNZoxlczKxp_9NmGBQo-HGxOUVGJBAmQzoIR3N2JMYMGUdKHap50exoIU7TdCbQ6FDRM-YQc-YbsMlF6Xyab-9vV-fAwFZpw" class="quarto-figure quarto-figure-center"></img>
 
-## Initializing a Repo
+### Initializing a Repository
 
 Let's make a directory for our project called `cool-project`, and initialize a Git repository for it:
 
@@ -93,7 +96,7 @@ drwxr-xr-x 12 user user 4.0K May 28 00:53 ..
 drwxr-xr-x  7 user user 4.0K May 28 00:53 .git
 ```
 
-## Adding and Committing a File
+### Adding and Committing a File
 
 We're writing Python code, so let's create and track `cool_code.py`:
 
@@ -115,7 +118,7 @@ user@hostname:~/cool-project$ git commit -m "Initial version of cool_code.py"
  create mode 100644 cool_code.py
 ```
 
-## The Commit Log
+### The Commit Log
 
 View the commit log using `git log`:
 
@@ -139,7 +142,7 @@ gitGraph
 <img class="r-stretch center" src="https://mermaid.ink/svg/pako:eNpdjjELwjAUhP9KOOjWQYoumQUnJzfJ8sx7bQNNUuLLIKX_3VZxcb37vuMW-MwCiyHopdA8umSM8TnGoCawNQ6P44F9d3JwqWn-y84BLaKUSIG3mWX3HXSUKA47wdJTnXTX1w2lqvn2Sh5WS5UWdWZSOQcaCkXYnqbnlgoHzeX6vfZ52GKmdM_5x6xvd4Y8pg"></img>
 </div>
 
-## Making Changes
+### Making Changes
 
 ```bash
 user@hostname:~/cool-project$ git status
@@ -181,7 +184,7 @@ Date:   Sun May 28 00:37:02 2023 +0000
 
 <img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNpljrEKwjAURX8l3LmDaEXMLDg5uUmW17zXNtA0Jb4MUvrvtoqT672Hw5nhEwssuqDXTFPvRmOMTzEGNYGtcWjqHfv90eH_kkPj6_PJARWi5EiBV9W8gQ7aSxSHjWNpqQy6KZYVpaLp_ho9rOYiFcrEpHIJ1GWKsC0Nz3UVDpry7Zv3qaww0fhI6ccsb4kvPis"></img>
 
-## More Changes
+### More Changes
 
 ```bash
 user@hostname:~/cool-project$ echo "2 + 2" >> cool_code.py
@@ -200,7 +203,7 @@ user@hostname:~/cool-project$ git commit -m "Second version of cool_code.py"
  1 file changed, 1 insertion(+)
 ```
 
-## And the `git log`
+And we check the output of `git log`:
 
 ```bash
 user@hostname:~/cool-project$ git log
@@ -223,7 +226,7 @@ Date:   Sun May 28 00:37:02 2023 +0000
     Initial (empty) version of cool_code.py
 ```
 
-## Undoing a Commit I
+### Undoing a Commit I
 
 First check the `git log` to find the **hash** for the commit you want to revert back to:
 
@@ -237,7 +240,7 @@ Date:   Sun May 28 00:38:05 2023 +0000
 
 <img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNptjz8PgjAQxb9KczNDoxhCZxMnJzfT5do7oAmlpF4HQ_jugsZJ1_d-eX8W8IkYDPRBLhnnwU5KKZ9iDKICGWXB1Zr84WTh1-Kj83Xb_LNqrRtyrQWoIHKOGGhrWXbQggwc2cLOEXdYRtkj1g3FIun2nDwYyYUrKDOh8DlgnzGC6XB8bCpTkJSvn-XvAxXMON1T-jLrC-H5Res"></img>
 
-## Undoing a Commit II
+### Undoing a Commit II
 
 * <i class="bi bi-exclamation-triangle"></i> **This is irreversable!** <i class="bi bi-exclamation-triangle"></i>
 
@@ -258,7 +261,7 @@ Date:   Sun May 28 00:37:02 2023 +0000
     Initial (empty) version of cool_code.py
 ```
 
-## Onwards and Upwards
+### Onwards and Upwards
 
 ```bash
 user@hostname:~/cool-project$ echo "3 + 3" >> cool_code.py
@@ -276,9 +279,7 @@ user@hostname:~/cool-project$ git commit -m "Added different code to cool_code.p
 
 <img src="https://mermaid.ink/svg/pako:eNptz7EOgkAMBuBXuXRmuCiGcLPEyQUSB3NLuVa4xOPIWQZDeHdB46Rr_y9t_xlcJAYDnZdTwrG3g1LKxRC8KE9GWWhzTW53sPAb8b51eVn8i3KtC2pLC0qeIxtVV5eqbqpfWGhN5WFdDxkETgE9re_MG7QgPQe2sDniG0532W4tK8VJYvMcHBhJE2cwjYTCR49dwgDmhvfHOmXyEtP5U_HdNIMRh2uMX7O8ADEKUdc"></img>
 
-##
-
-The final `git log`:
+The final `git log` output looks like:
 
 ```bash
 user@hostname:~/cool-project$ git log
@@ -302,7 +303,7 @@ Date:   Sun May 28 00:37:02 2023 +0000
 
 ```
 
-## But Why These Diagrams?
+### But Why These Diagrams?
 
 Even the simplest projects can start to look like:
 
@@ -335,25 +336,25 @@ gitGraph
 
 <img src="https://mermaid.ink/svg/pako:eNqdU8FqwzAM_RWjcykO6Zwm50E72E4bO4xAUWw5MWvi4DmDUPrvc9aFpdB27Qy-SO9JjydpB9IqggxK41cO2ypv2OFJW9fGM6MylsNdnCglkhxOp4WI02gRT9KFw0ZWrDGSNprQd45-qRXJd9v5M9lp4TT0JbWc9h3JNZrmDImESFJ5inSy44_WT3L95rLgC5CpgEQvFPH4NtVC6SWX0dWqj8iF4lQUf_tUkyvpqN7omdYiksEz5rEcAq8smvM5HwJ9SxlbP6zWj-G__NuVOOEiiosbZ4k8wTQsHswgiA9AFZZ1N4Bz8BXVlMOAU6Sx2_qh-D5AsfP2uW8kZN51NIOuVejp3mDpsIZM4_YjREkZb93T4QC-72AGLTZv1o6Y_RdGMfVs"></img>
 
-## The GitHub Side: Remote
+### The GitHub Side: Remote
 
-![](/assets/img/ch00/github_repo.png)
+![](/assets/img/ch01/github_repo.png)
 
-## An Empty Repo
+### An Empty Repo
 
-![](/assets/img/ch00/github_empty_repo.png)
+![](/assets/img/ch01/github_empty_repo.png)
 
-## Refresh after `git push`
+### Refresh after `git push`
 
-![](/assets/img/ch00/github_push.png)
+![](/assets/img/ch01/github_push.png)
 
-## Commit History
+### Commit History
 
-![](/assets/img/ch00/gh_history.png)
+![](/assets/img/ch01/gh_history.png)
 
-## Checking the `diff`
+### Checking the `diff`
 
-![](/assets/img/ch00/gh_diff.png)
+![](/assets/img/ch01/gh_diff.png)
 
 ## Web Development {data-name="Web Dev"}
 
@@ -368,7 +369,7 @@ Frontend icons: UI+UI elements, what the user sees (on the screen), user experie
 Backend icons: Databases, Security
 :::
 
-## Getting Content onto the Internet {.nostretch}
+### Getting Content onto the Internet {.nostretch}
 
 <ul>
 <li>Step 1: `index.html`</li>
@@ -378,13 +379,15 @@ Backend icons: Databases, Security
 <li>Step 5: `<username>.github.io`!</li>
 </ul>
 
-![](/assets/img/ch00/gh_pages.png){fig-align="center" width=70%}
+![](/assets/img/ch01/gh_pages.png){fig-align="center" width=70%}
 
-## Deploying from a Branch/Folder
+### Deploying from a Branch/Folder
 
-![](/assets/img/ch00/gh_pages_2.png)
+![](/assets/img/ch01/gh_pages_2.png)
 
-## R vs. RStudio vs. Quarto {.smaller data-name="R"}
+## The Coding Environment
+
+### R vs. RStudio vs. Quarto {.smaller data-name="R"}
 
 <!-- (Another important distinction!) -->
 
@@ -393,7 +396,7 @@ Backend icons: Databases, Security
 :::::: {style="border: 2px solid black; padding: 10px;"}
 
 <center>
-<img src="/assets/img/ch00/quarto_logo.svg" width="20%"></img>
+<img src="/assets/img/ch01/quarto_logo.svg" width="20%"></img>
 </center>
 
 <!-- start columns -->
@@ -403,7 +406,7 @@ Backend icons: Databases, Security
 <div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
 
 <center style="margin: 0px !important;">
-<img src="/assets/img/ch00/RStudio_logo.svg" width="25%"></img>
+<img src="/assets/img/ch01/RStudio_logo.svg" width="25%"></img>
 </center>
 
 * GUI wrapper around R (Integrated Development Environment = IDE)
@@ -466,7 +469,7 @@ Backend icons: Databases, Security
 ::::::
 <!-- end quarto box -->
 
-## Getting R Onto Your Computer
+### Getting R Onto Your Computer
 
 1. Download the `R` **language**: [https://cran.r-project.org/](https://cran.r-project.org/)
 
@@ -488,7 +491,7 @@ Backend icons: Databases, Security
 :::
 :::
 
-## Python {data-name="Python"}
+### Python {data-name="Python"}
 
 * The Python interpreter: <a href="https://www.python.org/downloads/source/" target="_blank">Linux</a> | <a href="https://www.python.org/downloads/windows/" target="_blank">Windows</a> | <a href="https://www.python.org/downloads/macos/" target="_blank">OSX</a>
 * With **VSCode** (recommended): you can start coding!
@@ -502,7 +505,7 @@ Backend icons: Databases, Security
   * **JupyterLab** (recommended) vs. **Jupyter**
   * Main difference (imo): JupyterLab has a tabbed interface
 
-## Google Colab
+### Google Colab
 
 Alternative when all else fails! <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a>
 
@@ -510,13 +513,9 @@ Alternative when all else fails! <a href="https://colab.research.google.com/" ta
 * Can persist code/data to Google Drive
 * Drawback: RAM limitations, have to activate GPU mode (pretty much required for any AI work), idle time limitation
 
-## Colab Runtime Options
+### Colab Runtime Options
 
 <center>
-<img src="/assets/img/ch00/colab_language.png" width="68%" style="margin: 0px;"></img>
-<img src="/assets/img/ch00/colab_runtime.png" width="68%" style="margin: 0px;"></img>
+<img src="/assets/img/ch01/colab_language.png" width="68%" style="margin: 0px;"></img>
+<img src="/assets/img/ch01/colab_runtime.png" width="68%" style="margin: 0px;"></img>
 </center>
-
-## Next Week {data-state="hide-menubar"}
-
-Data Gathering and APIs

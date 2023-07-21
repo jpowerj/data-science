@@ -1,2 +1,5 @@
 # Natural Language Processing
 
+Data that is "born numeric" is, if you think about it, probably a small portion of all the data that humans have produced over the course of history. When humans started communicating information to one another, it wasn't in the form of numbers, but of **words**: **natural language**, not tabular arrays of numbers, is thus in a sense the "natural" medium for human-relevant information.
+
+Thus in this chapter we delve into the rest of the "data iceberg", beyond that tip of it in which data arrives in nice, computationally-analyzable numeric form.

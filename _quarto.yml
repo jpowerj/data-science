@@ -6,7 +6,9 @@ project:
 
 book:
   title: "Data Science Without Fear"
-  author: "Jeff Jacobs"
+  author:
+    - name: "Jeff Jacobs"
+      url: "mailto:jj1088@georgetown.edu"
   date: last-modified
   # navbar:
   #   title: "PMSC"
@@ -16,11 +18,12 @@ book:
   #     - text: "Home"
   #       file: index.qmd
   #     - talks.qmd
-  #     - about.qmd 
+  #     - about.qmd
+  page-footer: "&copy; 2023 Jeff Jacobs"
   chapters:
     - index.qmd
     - ch01.qmd
-    - part: "Data Science Workflow"
+    - part: "Data Science Fundamentals"
       chapters:
         - ch02.qmd
         - ch03.qmd
@@ -45,15 +48,15 @@ book:
     - ch14.qmd
     - references.qmd
   appendices:
-    - resources.qmd
+    - data-sources.qmd
 
-bibliography: references.bib
+#bibliography: references.bib
 
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+#  pdf:
+#    documentclass: scrreprt
 
 
 

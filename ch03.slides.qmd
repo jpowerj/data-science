@@ -13,19 +13,6 @@ metadata-files:
   - "../_revealjs.globals.yml"
 ---
 
-## What We'll Cover Today
-
-<ul class="menu"></ul>
-
-::: {.hidden}
-```{r,echo=FALSE}
-set.seed(1948)
-knitr::opts_template$set(
-    tikz_settings = list(fig.ext = "svg", fig.align = "center", engine.opts = list(dvisvgm.opts = "--font-format=woff"))
-  )
-```
-:::
-
 ## Data Gathering {data-name="Data Gathering"}
 
 * Preexisting data sources
@@ -104,7 +91,7 @@ D val_D1  val_D2  val_D3
 ```{r}
 #| label: sample-csv
 library(readr)
-data <- read_csv("../assets/data/lec02/mydata.csv")
+data <- read_csv("../assets/data/ch02/mydata.csv")
 data
 # | index | var_1 | var_2 | var_3 |
 # | - | - | - | - |

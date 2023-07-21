@@ -1,15 +1,21 @@
 ---
 title: "Data Gathering and APIs"
 #subtitle: "*DSAN 5000: Data Science and Analytics*"
-date: last-modified
-institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
-author: "Jeff Jacobs"
+#date: last-modified
+#institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
+#author: "Jeff Jacobs"
 format:
   html:
-    cache: true
+    cache: false
 metadata-files: 
-  - "./_bookdown.globals.yml"
+  - "_bookdown.globals.yml"
 ---
+
+<!-- <a href="./ch03.slides.html" target="_blank" class="h2">Open slides for chapter in new window &rarr;</a>
+
+```{=html}
+<iframe src="./ch03.slides.html" width="100%" height="400"></iframe>
+``` -->
 
 ## Data Gathering {data-name="Data Gathering"}
 
@@ -29,7 +35,7 @@ metadata-files:
 * Less fun fact: modern web frameworks like **React** or **Next.js** generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source
   * Data scraping still possible for these websites, however, using browser automation tools like <a href="https://www.selenium.dev/" target="_blank">**Selenium**</a>
 
-## Scraping Difficulty
+### Scraping Difficulty
 
 | | How is data loaded? | Solution |
 |-|-|-|
@@ -48,7 +54,7 @@ metadata-files:
 
 [^dbs]: This is considering only cases where the data comes in the form of individual **files**. There are also **database** formats like SQL and MongoDB (which we'll learn about later on) where data is spread over many files and obtained via database **queries**.
 
-## `.csv` / `.tsv`
+### Comma/Tab-Delimited: `.csv` / `.tsv`
 
 ::: columns
 ::: {.column width="47%"}
@@ -107,7 +113,7 @@ data
 * Python: `pd.read_csv()` (from Pandas library)
 * R: `read_csv()` (from `readr` library)
 
-## `.json`
+### `.json`
 
 ::: {.smallish-codeblock}
 
@@ -137,7 +143,7 @@ data
 * R: <a href="https://cran.r-project.org/web/packages/jsonlite/index.html" target="_blank">`jsonlite`</a> (`install.packages(jsonlite)`)
 * <a href="https://jsonlint.com/" target="_blank">Helpful validator</a> (for when `.json` file won't load)
 
-## Other Formats
+### Other Formats
 
 * `.xls`/`.xlsx`: Requires special libraries in Python/R
   * Python: <a href="https://openpyxl.readthedocs.io" target="_blank">`openpyxl`</a>
@@ -154,7 +160,7 @@ data
   * water fountain: you just want **water** from it, without knowing details of how it's pumped into the fountain
   * car: you just want to accelerate, brake, and reverse, without knowing details of combustion engine
 
-## What Does an API Do?
+### What Does an API Do?
 
 * Exposes **endpoints** for use by other developers, without requiring them to know the nuts and bolts of your pipeline/service
 * In our examples...
@@ -168,7 +174,7 @@ When I'm teaching programming to students in refugee camps who may have never us
 
 :::
 
-## Example: Math API
+### Example: Math API
 
 * Base URL: <a href="https://newton.vercel.app/api/v2/" target="_blank">`https://newton.vercel.app/api/v2/`</a>
 * The **endpoint**: `factor`
@@ -184,7 +190,7 @@ response_obj <- req_perform(request_obj)
 writeLines(response_obj %>% resp_body_string())
 ```
 
-## Math API Endpoints {.smaller}
+### Math API Endpoints {.smaller}
 
 | Operation | API Endpoint | Result |
 | - | - | - |
@@ -205,7 +211,7 @@ Inverse Tangent 	/arctan/0 	0
 Absolute Value 	/abs/-1 	1
 Logarithm 	/log/2l8 	3 -->
 
-## Scraping HTML with `httr2` and `xml2`
+### Scraping HTML with `httr2` and `xml2`
 
 <a href="https://httr2.r-lib.org/" target="_blank">`httr2` Documentation</a> | <a href="https://xml2.r-lib.org/" target="_blank">`xml2` Documentation</a>
 
@@ -229,7 +235,7 @@ Note: `httr2` is a re-written version of the original `httr` package, which is n
 
 :::
 
-## Navigating HTML with XPath
+### Navigating HTML with XPath
 
 <a href="https://devhints.io/xpath" target="_blank">XPath Cheatsheet</a>
 
@@ -247,7 +253,7 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
 :::
 
-## XPath I: Selecting Elements
+### XPath I: Selecting Elements
 
 ```html {filename="mypage.html"}
 <div class="container">
@@ -272,9 +278,7 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
     <img class="footer-image m-5" src="footer.png">
     ```
 
-## XPath II: Filtering by Attributes {.smaller}
-
-
+### XPath II: Filtering by Attributes {.smaller}
 
 ```html {filename="mypage.html"}
 <div class="container">
@@ -303,12 +307,12 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
 [^multi-class]: Your intuition may be to just use `'//img[@class="footer-image"]'`. Sadly, however, this will match only elements with `footer-image` as their **only** class. i.e., it will match `<img class="footer-image">` but not `<img class="footer-image another-class">`. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap</a>, `<p class="p-5 m-3"></p>` creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.
 
-## Authentication
+### Authentication
 
 * Most APIs don't allow requests to be made by anonymous requesters, and require **authentication**.
 * For example, to access private GitHub repos using GitHub's API, you'll need to authenticate that you are in fact the one making the request
 
-## Authentication via `GH`
+### Authentication via `GH`
 
 * The `GH` library for `R` can handle this authentication process for you. For example, <a href="https://github.com/jpowerj/private-repo-test/" target="_blank">this private repo</a> in my account does not show up if requested anonymously, but does show up when requested using `GH` with a Personal Access Token[^security]:
 
@@ -336,8 +340,3 @@ if (!gh_error) {
 &nbsp;
 
 [^security]: Your code should **never** contain authentication info, especially when using GitHub. In this case, I created an OS environment variable called `GITHUB_TOKEN` containing my Personal Access Token, which `GH` then uses to make authenticated requests.
-
-## Next Week {data-state="hide-menubar"}
-
-* Data Cleaning
-* Tidy Data

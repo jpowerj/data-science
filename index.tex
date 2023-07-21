@@ -1,0 +1,2167 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod,
+  oneside]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[left=1in,marginparwidth=2.0666666666667in,textwidth=4.1333333333333in,marginparsep=0.3in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{sidenotes}{}{\usepackage{sidenotes}}
+\@ifpackageloaded{marginnote}{}{\usepackage{marginnote}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Data Science Without Fear},
+  pdfauthor={Jeff Jacobs},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Data Science Without Fear}
+\author{Jeff Jacobs}
+\date{2023-07-20}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
+
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+This book serves as an introduction to data science, written with the
+goal of meeting you wherever you're at in your educational/career
+journey, regardless of your background in math or computer science. That
+is to say, we don't assume any background in STEM, only the desire to
+learn and the work ethic to put in the hours needed to become
+comfortable with each topic!
+
+It is the companion to the course DSAN5000: Data Science and Analytics,
+taught at Georgetown University in the Fall of 2023.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+Setting Up Your Environment
+
+\hfill\break
+
+Welcome to the world of data science! Before we can get to the fun
+stuff, learning about the world through data, we'll need to set up a
+\textbf{workflow}: the toolbox you'll use when you sit down to do some
+data science. Given our goal of meeting you wherever you're at in terms
+of data science knowledge, we'll start from the basics: operating
+systems, programming languages, setting up an \textbf{Integrated
+Development Environment (IDE)}, and using \textbf{version control} to
+make sure you can always ``undo'' if you make a change that breaks your
+code.
+
+\hypertarget{operating-systems}{%
+\section{Operating Systems}\label{operating-systems}}
+
+\begin{itemize}
+\item
+  \textbf{Linux}: (\textbf{Free!})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The ``standard'' OS for developers! You can expect instructions to
+    use Linux commands: \texttt{ls}, \texttt{cd}, \texttt{touch},
+    \texttt{mv} \ldots{}
+  \end{itemize}
+\item
+  \textbf{Windows}: \textbf{BUT}, proprietary shell (constantly googling
+  ``PowerShell equivalent'')
+
+  \begin{longtable}[]{@{}ll@{}}
+  \toprule\noalign{}
+  Linux & PowerShell \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  \texttt{ls} & \texttt{Get-ChildItem} \\
+  \texttt{cd} & \texttt{Set-Location} \\
+  \texttt{touch} & \texttt{New-Item} \\
+  \texttt{mv} & \texttt{Move-Item} \\
+  \end{longtable}
+\item
+  \textbf{OSX}: \textbf{BUT}, OSX and Linux both built on Unix
+
+  \(\implies\) if you know Terminal you know Linux!
+\end{itemize}
+
+\hypertarget{git-vs.-github}{%
+\section{Git vs.~GitHub}\label{git-vs.-github}}
+
+Despite the confusingly similar names, it is important to keep in mind
+the distinction between \textbf{Git} and \textbf{GitHub}!
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Git} is a command-line program, which on its own just runs on
+  your local computer and keeps track of changes to your code.
+\item
+  \textbf{GitHub}, on the other hand, is a \textbf{website} which allows
+  you to take your \textbf{Git} repositories and store them
+  \textbf{online}, whether privately or publicly.
+\end{itemize}
+
+This means, for example, that (if your repository is public) once you
+\textbf{push} your code to GitHub, others can view it and download it
+for themselves.
+
+\textbf{Git }
+
+\begin{itemize}
+\tightlist
+\item
+  Command-line program
+\item
+  \texttt{git\ init} in shell to create
+\item
+  \texttt{git\ add} to track files
+\item
+  \texttt{git\ commit} to commit changes to tracked files
+\end{itemize}
+
+\textbf{GitHub }
+
+\begin{itemize}
+\tightlist
+\item
+  Code hosting website
+\item
+  Create a \textbf{repository} (repo) for each project
+\item
+  Can \textbf{clone} repos onto your local machine
+\end{itemize}
+
+\textbf{\texttt{git\ push}/\texttt{git\ pull}}: The link between the
+two!
+
+\hypertarget{git-diagram}{%
+\section{Git Diagram}\label{git-diagram}}
+
+\hypertarget{initializing-a-repo}{%
+\section{Initializing a Repo}\label{initializing-a-repo}}
+
+Let's make a directory for our project called \texttt{cool-project}, and
+initialize a Git repository for it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}$}\NormalTok{ mkdir cool{-}project}
+\ExtensionTok{user@hostname:\textasciitilde{}$}\NormalTok{ cd cool{-}project}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git init}
+\ExtensionTok{Initialized}\NormalTok{ empty Git repository in /home/user/cool{-}project/.git/}
+\end{Highlighting}
+\end{Shaded}
+
+This creates a hidden folder, \texttt{.git}, in the directory:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ ls }\AttributeTok{{-}lah}
+\ExtensionTok{total}\NormalTok{ 12K}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{  3 user user 4.0K May 28 00:53 .}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{ 12 user user 4.0K May 28 00:53 ..}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{  7 user user 4.0K May 28 00:53 .git}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{adding-and-committing-a-file}{%
+\section{Adding and Committing a
+File}\label{adding-and-committing-a-file}}
+
+We're writing Python code, so let's create and track
+\texttt{cool\_code.py}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ touch cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+
+\ExtensionTok{No}\NormalTok{ commits yet}
+
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git rm {-}{-}cached \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{new}\NormalTok{ file:   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Initial version of cool\_code.py"}
+\ExtensionTok{[main} \ErrorTok{(}\ExtensionTok{root{-}commit}\KeywordTok{)} \ExtensionTok{b40dc25]}\NormalTok{ Initial version of cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 0 insertions}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ 0 deletions}\ErrorTok{(}\ExtensionTok{{-}}\KeywordTok{)}
+ \ExtensionTok{create}\NormalTok{ mode 100644 cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-commit-log}{%
+\section{The Commit Log}\label{the-commit-log}}
+
+View the commit log using \texttt{git\ log}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ b40dc252a3b7355cc4c28397fefe7911ff3c94b9 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:57:16 2023 +0000}
+
+    \ExtensionTok{Initial}\NormalTok{ version of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1.29in,height=0.58in]{chapters/ch01_files/figure-latex/mermaid-figure-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{making-changes}{%
+\section{Making Changes}\label{making-changes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{nothing}\NormalTok{ to commit, working tree clean}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"1 + 1"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ more cool\_code.py}
+\ExtensionTok{1}\NormalTok{ + 1}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Added code to cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ e3bc497] Added code to cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The output of the \texttt{git\ log} command will show the new version:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12eassets/img/gh\_history.png}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial}\NormalTok{ version of cool\_code.py}
+
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{more-changes}{%
+\section{More Changes}\label{more-changes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"2 + 2"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ more cool\_code.py}
+\ExtensionTok{1}\NormalTok{ + 1}
+\ExtensionTok{2}\NormalTok{ + 2}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Second version of cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ 4007db9] Second version of cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{and-the-git-log}{%
+\section{\texorpdfstring{And the
+\texttt{git\ log}}{And the git log}}\label{and-the-git-log}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ 4007db9a031ca134fe09eab840b2bc845366a9c1 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:39:28 2023 +0000}
+
+    \ExtensionTok{Second}\NormalTok{ version of cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{undoing-a-commit-i}{%
+\section{Undoing a Commit I}\label{undoing-a-commit-i}}
+
+First check the \texttt{git\ log} to find the \textbf{hash} for the
+commit you want to revert back to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{undoing-a-commit-ii}{%
+\section{Undoing a Commit II}\label{undoing-a-commit-ii}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{This is irreversable!}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git reset }\AttributeTok{{-}{-}hard}\NormalTok{ e3bc497ac}
+\ExtensionTok{HEAD}\NormalTok{ is now at e3bc497 Added code to cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{onwards-and-upwards}{%
+\section{Onwards and Upwards}\label{onwards-and-upwards}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"3 + 3"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Added different code to cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ 700d955] Added different code to cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{section}{%
+\section{}\label{section}}
+
+The final \texttt{git\ log}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ 700d955faacb27d7b8bc464b9451851b5e319f20 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:44:49 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ different code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{but-why-these-diagrams}{%
+\section{But Why These Diagrams?}\label{but-why-these-diagrams}}
+
+Even the simplest projects can start to look like:
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=5.33in,height=5.33in]{chapters/ch01_files/figure-latex/mermaid-figure-2.png}
+
+}
+
+\end{figure}
+
+\hypertarget{the-github-side-remote}{%
+\section{The GitHub Side: Remote}\label{the-github-side-remote}}
+
+\includegraphics{assets/img/ch00/github_repo.png}
+
+\hypertarget{an-empty-repo}{%
+\section{An Empty Repo}\label{an-empty-repo}}
+
+\includegraphics{assets/img/ch00/github_empty_repo.png}
+
+\hypertarget{refresh-after-git-push}{%
+\section{\texorpdfstring{Refresh after
+\texttt{git\ push}}{Refresh after git push}}\label{refresh-after-git-push}}
+
+\includegraphics{assets/img/ch00/github_push.png}
+
+\hypertarget{commit-history}{%
+\section{Commit History}\label{commit-history}}
+
+\includegraphics{assets/img/ch00/gh_history.png}
+
+\hypertarget{checking-the-diff}{%
+\section{\texorpdfstring{Checking the
+\texttt{diff}}{Checking the diff}}\label{checking-the-diff}}
+
+\includegraphics{assets/img/ch00/gh_diff.png}
+
+\hypertarget{web-development}{%
+\section{Web Development}\label{web-development}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Frontend
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Backend
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Low Level} & HTML/CSS/JavaScript & GitHub Pages \\
+\textbf{Middle Level} & JS Libraries & PHP, SQL \\
+\textbf{High Level} & React, Next.js & Node.js, Vercel \\
+\end{longtable}
+
+Frontend icons: UI+UI elements, what the user sees (on the screen), user
+experience (UX), data visualization Backend icons: Databases, Security
+
+\hypertarget{getting-content-onto-the-internet}{%
+\section{Getting Content onto the
+Internet}\label{getting-content-onto-the-internet}}
+
+Step 1: \texttt{index.html}
+
+Step 2: Create GitHub repository
+
+Step 3: \texttt{git\ init}, \texttt{git\ add\ -A\ .}, \texttt{git\ push}
+
+{Step 4: Enable GitHub Pages in repo settings}
+
+Step 5: \texttt{\textless{}username\textgreater{}.github.io}!
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{assets/img/ch00/gh_pages.png}
+
+}
+
+\end{figure}
+
+\hypertarget{deploying-from-a-branchfolder}{%
+\section{Deploying from a
+Branch/Folder}\label{deploying-from-a-branchfolder}}
+
+\includegraphics{assets/img/ch00/gh_pages_2.png}
+
+\hypertarget{r-vs.-rstudio-vs.-quarto}{%
+\section{R vs.~RStudio vs.~Quarto}\label{r-vs.-rstudio-vs.-quarto}}
+
+\begin{itemize}
+\tightlist
+\item
+  GUI wrapper around R (Integrated Development Environment = IDE)
+\item
+  Run \textbf{blocks} of R code (\texttt{.qmd} \textbf{chunks})
+\end{itemize}
+
+\textbf{The R Language }
+
+\begin{itemize}
+\tightlist
+\item
+  Programming language
+\item
+  Runs scripts via \texttt{Rscript\ \textless{}script\textgreater{}.r}
+\end{itemize}
+
++
+
+\begin{itemize}
+\tightlist
+\item
+  GUI wrapper around Python (IDE)
+\item
+  Run \textbf{blocks} of Python code (\texttt{.ipynb} \textbf{cells})
+\end{itemize}
+
+The Python Language
+
+\begin{itemize}
+\tightlist
+\item
+  Scripting language
+\item
+  On its own, just runs scripts via
+  \texttt{python\ \textless{}script\textgreater{}.py}
+\end{itemize}
+
+\hypertarget{getting-r-onto-your-computer}{%
+\section{Getting R Onto Your
+Computer}\label{getting-r-onto-your-computer}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Download the \texttt{R} \textbf{language}:
+  \url{https://cran.r-project.org/}
+\end{enumerate}
+
+\textbf{VSCode} (recommended)
+
+\begin{itemize}
+\item
+  Linux \textbar{} Windows \textbar{} OSX
+\item
+  Install the Quarto Extension for VSCode (more info from Quarto here)
+\end{itemize}
+
+\textbf{RStudio}
+
+\begin{itemize}
+\tightlist
+\item
+  RStudio Desktop
+\end{itemize}
+
+\hypertarget{python}{%
+\section{Python}\label{python}}
+
+\begin{itemize}
+\item
+  The Python interpreter: Linux \textbar{} Windows \textbar{} OSX
+\item
+  With \textbf{VSCode} (recommended): you can start coding!
+
+  \begin{codelisting}
+
+  \caption{\texttt{my_python_code.qmd}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{python\}}
+\DecValTok{1} \OperatorTok{+} \DecValTok{1}
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+  \end{codelisting}
+\item
+  With \textbf{Jupyter} there are two options:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{JupyterLab} (recommended) vs.~\textbf{Jupyter}
+  \item
+    Main difference (imo): JupyterLab has a tabbed interface
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{google-colab}{%
+\section{Google Colab}\label{google-colab}}
+
+Alternative when all else fails! https://colab.research.google.com/
+
+\begin{itemize}
+\tightlist
+\item
+  Fully web-based Jupyter editing/execution (import/export
+  \texttt{.ipynb} files)
+\item
+  Can persist code/data to Google Drive
+\item
+  Drawback: RAM limitations, have to activate GPU mode (pretty much
+  required for any AI work), idle time limitation
+\end{itemize}
+
+\hypertarget{colab-runtime-options}{%
+\section{Colab Runtime Options}\label{colab-runtime-options}}
+
+\hypertarget{next-week}{%
+\section{Next Week}\label{next-week}}
+
+Data Gathering and APIs
+
+\part{Data Science Workflow}
+
+\hypertarget{data-science-workflow-1}{%
+\chapter{Data Science Workflow}\label{data-science-workflow-1}}
+
+\hypertarget{operating-systems-1}{%
+\section{Operating Systems}\label{operating-systems-1}}
+
+\begin{itemize}
+\item
+  \textbf{Linux}: (\textbf{Free!})
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The ``standard'' OS for developers! You can expect instructions to
+    use Linux commands: \texttt{ls}, \texttt{cd}, \texttt{touch},
+    \texttt{mv} \ldots{}
+  \end{itemize}
+\item
+  \textbf{Windows}: \textbf{BUT}, proprietary shell (constantly googling
+  ``PowerShell equivalent'')
+
+  \begin{longtable}[]{@{}ll@{}}
+  \toprule\noalign{}
+  Linux & PowerShell \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  \texttt{ls} & \texttt{Get-ChildItem} \\
+  \texttt{cd} & \texttt{Set-Location} \\
+  \texttt{touch} & \texttt{New-Item} \\
+  \texttt{mv} & \texttt{Move-Item} \\
+  \end{longtable}
+\item
+  \textbf{OSX}: \textbf{BUT}, OSX and Linux both built on Unix
+
+  \(\implies\) if you know Terminal you know Linux!
+\end{itemize}
+
+\hypertarget{git-vs.-github-1}{%
+\section{Git vs.~GitHub}\label{git-vs.-github-1}}
+
+(Important distinction!)
+
+\textbf{Git }
+
+\begin{itemize}
+\tightlist
+\item
+  Command-line program
+\item
+  \texttt{git\ init} in shell to create
+\item
+  \texttt{git\ add} to track files
+\item
+  \texttt{git\ commit} to commit changes to tracked files
+\end{itemize}
+
+\textbf{GitHub }
+
+\begin{itemize}
+\tightlist
+\item
+  Code hosting website
+\item
+  Create a \textbf{repository} (repo) for each project
+\item
+  Can \textbf{clone} repos onto your local machine
+\end{itemize}
+
+\textbf{\texttt{git\ push}/\texttt{git\ pull}}: The link between the
+two!
+
+\hypertarget{git-diagram-1}{%
+\section{Git Diagram}\label{git-diagram-1}}
+
+\hypertarget{initializing-a-repo-1}{%
+\section{Initializing a Repo}\label{initializing-a-repo-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  Let's make a directory for our project called \texttt{cool-project},
+  and initialize a Git repo for it
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}$}\NormalTok{ mkdir cool{-}project}
+\ExtensionTok{user@hostname:\textasciitilde{}$}\NormalTok{ cd cool{-}project}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git init}
+\ExtensionTok{Initialized}\NormalTok{ empty Git repository in /home/user/cool{-}project/.git/}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  This creates a hidden folder, \texttt{.git}, in the directory:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ ls }\AttributeTok{{-}lah}
+\ExtensionTok{total}\NormalTok{ 12K}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{  3 user user 4.0K May 28 00:53 .}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{ 12 user user 4.0K May 28 00:53 ..}
+\ExtensionTok{drwxr{-}xr{-}x}\NormalTok{  7 user user 4.0K May 28 00:53 .git}
+\end{Highlighting}
+\end{Shaded}
+
+The Git Side: Local I
+
+\hypertarget{adding-and-committing-a-file-1}{%
+\section{Adding and Committing a
+File}\label{adding-and-committing-a-file-1}}
+
+We're writing Python code, so let's create and track
+\texttt{cool\_code.py}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ touch cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+
+\ExtensionTok{No}\NormalTok{ commits yet}
+
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git rm {-}{-}cached \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{new}\NormalTok{ file:   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Initial version of cool\_code.py"}
+\ExtensionTok{[main} \ErrorTok{(}\ExtensionTok{root{-}commit}\KeywordTok{)} \ExtensionTok{b40dc25]}\NormalTok{ Initial version of cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 0 insertions}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ 0 deletions}\ErrorTok{(}\ExtensionTok{{-}}\KeywordTok{)}
+ \ExtensionTok{create}\NormalTok{ mode 100644 cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-commit-log-1}{%
+\section{The Commit Log}\label{the-commit-log-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  View the commit log using \texttt{git\ log}:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ b40dc252a3b7355cc4c28397fefe7911ff3c94b9 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:57:16 2023 +0000}
+
+    \ExtensionTok{Initial}\NormalTok{ version of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1.29in,height=0.58in]{chapters/ch02_files/figure-latex/mermaid-figure-1.png}
+
+}
+
+\end{figure}
+
+\hypertarget{making-changes-1}{%
+\section{Making Changes}\label{making-changes-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{nothing}\NormalTok{ to commit, working tree clean}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"1 + 1"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ more cool\_code.py}
+\ExtensionTok{1}\NormalTok{ + 1}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Added code to cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ e3bc497] Added code to cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{section-1}{%
+\section{}\label{section-1}}
+
+The \texttt{git\ log} will show the new version:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial}\NormalTok{ version of cool\_code.py}
+
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{more-changes-1}{%
+\section{More Changes}\label{more-changes-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"2 + 2"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ more cool\_code.py}
+\ExtensionTok{1}\NormalTok{ + 1}
+\ExtensionTok{2}\NormalTok{ + 2}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Second version of cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ 4007db9] Second version of cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{and-the-git-log-1}{%
+\section{\texorpdfstring{And the
+\texttt{git\ log}}{And the git log}}\label{and-the-git-log-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ 4007db9a031ca134fe09eab840b2bc845366a9c1 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:39:28 2023 +0000}
+
+    \ExtensionTok{Second}\NormalTok{ version of cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{undoing-a-commit-i-1}{%
+\section{Undoing a Commit I}\label{undoing-a-commit-i-1}}
+
+First check the \texttt{git\ log} to find the \textbf{hash} for the
+commit you want to revert back to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{undoing-a-commit-ii-1}{%
+\section{Undoing a Commit II}\label{undoing-a-commit-ii-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{This is irreversable!}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git reset }\AttributeTok{{-}{-}hard}\NormalTok{ e3bc497ac}
+\ExtensionTok{HEAD}\NormalTok{ is now at e3bc497 Added code to cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{onwards-and-upwards-1}{%
+\section{Onwards and Upwards}\label{onwards-and-upwards-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ echo }\StringTok{"3 + 3"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git add cool\_code.py}
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git status}
+\ExtensionTok{On}\NormalTok{ branch main}
+\ExtensionTok{Changes}\NormalTok{ to be committed:}
+  \KeywordTok{(}\ExtensionTok{use} \StringTok{"git restore {-}{-}staged \textless{}file\textgreater{}..."}\NormalTok{ to unstage}\KeywordTok{)}
+        \ExtensionTok{modified:}\NormalTok{   cool\_code.py}
+
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git commit }\AttributeTok{{-}m} \StringTok{"Added different code to cool\_code.py"}
+\ExtensionTok{[main}\NormalTok{ 700d955] Added different code to cool\_code.py}
+ \ExtensionTok{1}\NormalTok{ file changed, 1 insertion}\ErrorTok{(}\ExtensionTok{+}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{section-2}{%
+\section{}\label{section-2}}
+
+The final \texttt{git\ log}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{user@hostname:\textasciitilde{}/cool{-}project$}\NormalTok{ git log}
+\ExtensionTok{commit}\NormalTok{ 700d955faacb27d7b8bc464b9451851b5e319f20 }\ErrorTok{(}\ExtensionTok{HEAD} \AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ main}\KeywordTok{)}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:44:49 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ different code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ e3bc497acbb5a487566ff2014dcd7b83d0c75224}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:38:05 2023 +0000}
+
+    \ExtensionTok{Added}\NormalTok{ code to cool\_code.py}
+
+\ExtensionTok{commit}\NormalTok{ b40dc25b14c0426b06c8d182184e147853f3c12e}
+\ExtensionTok{Author:}\NormalTok{ Jeff Jacobs }\OperatorTok{\textless{}}\NormalTok{jjacobs3@cs.stanford.edu}\OperatorTok{\textgreater{}}
+\ExtensionTok{Date:}\NormalTok{   Sun May 28 00:37:02 2023 +0000}
+
+    \ExtensionTok{Initial} \ErrorTok{(}\ExtensionTok{empty}\KeywordTok{)} \ExtensionTok{version}\NormalTok{ of cool\_code.py}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{but-why-these-diagrams-1}{%
+\section{But Why These Diagrams?}\label{but-why-these-diagrams-1}}
+
+Even the simplest projects can start to look like:
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=5.33in,height=5.33in]{chapters/ch02_files/figure-latex/mermaid-figure-2.png}
+
+}
+
+\end{figure}
+
+\hypertarget{the-github-side-remote-1}{%
+\section{The GitHub Side: Remote}\label{the-github-side-remote-1}}
+
+\includegraphics{assets/img/github_repo.png}
+
+\hypertarget{an-empty-repo-1}{%
+\section{An Empty Repo}\label{an-empty-repo-1}}
+
+\includegraphics{assets/img/github_empty_repo.png}
+
+\hypertarget{refresh-after-git-push-1}{%
+\section{\texorpdfstring{Refresh after
+\texttt{git\ push}}{Refresh after git push}}\label{refresh-after-git-push-1}}
+
+\includegraphics{assets/img/github_push.png}
+
+\hypertarget{commit-history-1}{%
+\section{Commit History}\label{commit-history-1}}
+
+\includegraphics{assets/img/gh_history.png}
+
+\hypertarget{checking-the-diff-1}{%
+\section{\texorpdfstring{Checking the
+\texttt{diff}}{Checking the diff}}\label{checking-the-diff-1}}
+
+\includegraphics{assets/img/gh_diff.png}
+
+\hypertarget{web-development-1}{%
+\section{Web Development}\label{web-development-1}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Frontend
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Backend
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Low Level} & HTML/CSS/JavaScript & GitHub Pages \\
+\textbf{Middle Level} & JS Libraries & PHP, SQL \\
+\textbf{High Level} & React, Next.js & Node.js, Vercel \\
+\end{longtable}
+
+Frontend icons: UI+UI elements, what the user sees (on the screen), user
+experience (UX), data visualization Backend icons: Databases, Security
+
+\hypertarget{getting-content-onto-the-internet-1}{%
+\section{Getting Content onto the
+Internet}\label{getting-content-onto-the-internet-1}}
+
+Step 1: \texttt{index.html}
+
+Step 2: Create GitHub repository
+
+Step 3: \texttt{git\ init}, \texttt{git\ add\ -A\ .}, \texttt{git\ push}
+
+{Step 4: Enable GitHub Pages in repo settings}
+
+Step 5: \texttt{\textless{}username\textgreater{}.github.io}!
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{assets/img/gh_pages.png}
+
+}
+
+\end{figure}
+
+\hypertarget{deploying-from-a-branchfolder-1}{%
+\section{Deploying from a
+Branch/Folder}\label{deploying-from-a-branchfolder-1}}
+
+\includegraphics{assets/img/gh_pages_2.png}
+
+\hypertarget{r-vs.-rstudio-vs.-quarto-1}{%
+\section{R vs.~RStudio vs.~Quarto}\label{r-vs.-rstudio-vs.-quarto-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  GUI wrapper around R (Integrated Development Environment = IDE)
+\item
+  Run \textbf{blocks} of R code (\texttt{.qmd} \textbf{chunks})
+\end{itemize}
+
+\textbf{The R Language }
+
+\begin{itemize}
+\tightlist
+\item
+  Programming language
+\item
+  Runs scripts via \texttt{Rscript\ \textless{}script\textgreater{}.r}
+\end{itemize}
+
++
+
+\begin{itemize}
+\tightlist
+\item
+  GUI wrapper around Python (IDE)
+\item
+  Run \textbf{blocks} of Python code (\texttt{.ipynb} \textbf{cells})
+\end{itemize}
+
+The Python Language
+
+\begin{itemize}
+\tightlist
+\item
+  Scripting language
+\item
+  On its own, just runs scripts via
+  \texttt{python\ \textless{}script\textgreater{}.py}
+\end{itemize}
+
+\hypertarget{getting-r-onto-your-computer-1}{%
+\section{Getting R Onto Your
+Computer}\label{getting-r-onto-your-computer-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Download the \texttt{R} \textbf{language}:
+  \url{https://cran.r-project.org/}
+\end{enumerate}
+
+\textbf{VSCode} (recommended)
+
+\begin{itemize}
+\item
+  Linux \textbar{} Windows \textbar{} OSX
+\item
+  Install the Quarto Extension for VSCode (more info from Quarto here)
+\end{itemize}
+
+\textbf{RStudio}
+
+\begin{itemize}
+\tightlist
+\item
+  RStudio Desktop
+\end{itemize}
+
+\hypertarget{python-1}{%
+\section{Python}\label{python-1}}
+
+\begin{itemize}
+\item
+  The Python interpreter: Linux \textbar{} Windows \textbar{} OSX
+\item
+  With \textbf{VSCode} (recommended): you can start coding!
+
+  \begin{codelisting}
+
+  \caption{\texttt{my_python_code.qmd}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{python\}}
+\DecValTok{1} \OperatorTok{+} \DecValTok{1}
+\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+  \end{codelisting}
+\item
+  With \textbf{Jupyter} there are two options:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{JupyterLab} (recommended) vs.~\textbf{Jupyter}
+  \item
+    Main difference (imo): JupyterLab has a tabbed interface
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{google-colab-1}{%
+\section{Google Colab}\label{google-colab-1}}
+
+Alternative when all else fails! https://colab.research.google.com/
+
+\begin{itemize}
+\tightlist
+\item
+  Fully web-based Jupyter editing/execution (import/export
+  \texttt{.ipynb} files)
+\item
+  Can persist code/data to Google Drive
+\item
+  Drawback: RAM limitations, have to activate GPU mode (pretty much
+  required for any AI work), idle time limitation
+\end{itemize}
+
+\hypertarget{colab-runtime-options-1}{%
+\section{Colab Runtime Options}\label{colab-runtime-options-1}}
+
+\hypertarget{next-week-1}{%
+\section{Next Week}\label{next-week-1}}
+
+Data Gathering and APIs
+
+\hypertarget{data-gathering-and-apis}{%
+\chapter{Data Gathering and APIs}\label{data-gathering-and-apis}}
+
+Open chapter slides in new window →
+
+\hypertarget{data-gathering}{%
+\section{Data Gathering}\label{data-gathering}}
+
+\begin{itemize}
+\tightlist
+\item
+  Preexisting data sources
+\item
+  Web scraping
+\item
+  Converting between formats
+\end{itemize}
+
+\hypertarget{preexisting-data-sources}{%
+\section{Preexisting Data Sources}\label{preexisting-data-sources}}
+
+\begin{itemize}
+\tightlist
+\item
+  Depending on your field, or the type of data you're looking for, there
+  may be a ``standard'' data source!
+\item
+  e.g., in \emph{Economics}, for US data, FRED
+\end{itemize}
+
+\hypertarget{web-scraping}{%
+\section{Web Scraping}\label{web-scraping}}
+
+\begin{itemize}
+\tightlist
+\item
+  Fun fact: you can view a webpage's \textbf{HTML source code} by
+  right-clicking on the page and selecting ``View Source''
+
+  \begin{itemize}
+  \tightlist
+  \item
+    On older websites, this means we can just request
+    \texttt{https://www.page.com} and parse the returned HTML
+  \end{itemize}
+\item
+  Less fun fact: modern web frameworks like \textbf{React} or
+  \textbf{Next.js} generate pages dynamically using JS, meaning that
+  what you see on the page will not be visible in the HTML source
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data scraping still possible for these websites, however, using
+    browser automation tools like \textbf{Selenium}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{scraping-difficulty}{%
+\subsection{Scraping Difficulty}\label{scraping-difficulty}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+How is data loaded?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Solution
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Easy} & Data in HTML source & ``View Source'' \\
+\textbf{Medium} & Data loaded dynamically via API & ``View Source'',
+find API call, request programmatically \\
+\textbf{Hard} & Data loaded dynamically via web framework & Use
+Selenium \\
+\end{longtable}
+
+\hypertarget{data-formats}{%
+\section{Data Formats}\label{data-formats}}
+
+\begin{itemize}
+\tightlist
+\item
+  The most common formats, for most fields\footnote{This is considering
+    only cases where the data comes in the form of individual
+    \textbf{files}. There are also \textbf{database} formats like SQL
+    and MongoDB (which we'll learn about later on) where data is spread
+    over many files and obtained via database \textbf{queries}.}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{.csv}: Comma-Separated Values
+  \item
+    \texttt{.tsv}: Tab-Separated Values
+  \item
+    \texttt{.json}: JavaScript Object Notation
+  \item
+    \texttt{.xls}/\texttt{.xlsx}: Excel format
+  \item
+    \texttt{.dta}: Stata format
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{commatab-delimited-.csv-.tsv}{%
+\subsection{\texorpdfstring{Comma/Tab-Delimited: \texttt{.csv} /
+\texttt{.tsv}}{Comma/Tab-Delimited: .csv / .tsv}}\label{commatab-delimited-.csv-.tsv}}
+
+👍
+
+\begin{codelisting}
+
+\caption{\texttt{mydata.csv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{index,var\_1,var\_2,var\_3}
+\NormalTok{A,val\_A1,val\_A2,val\_A3}
+\NormalTok{B,val\_B1,val\_B2,val\_B3}
+\NormalTok{C,val\_C1,val\_C2,val\_C3}
+\NormalTok{D,val\_D1,val\_D2,val\_D3}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+👎
+
+\begin{codelisting}
+
+\caption{\texttt{mydata.tsv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{index var\_1 var\_2 var\_3}
+\NormalTok{A val\_A1  val\_A2  val\_A3}
+\NormalTok{B val\_B1  val\_B2  val\_B3}
+\NormalTok{C val\_C1  val\_C2  val\_C3}
+\NormalTok{D val\_D1  val\_D2  val\_D3}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+→
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readr)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"../assets/data/ch02/mydata.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 3 Columns: 4
+-- Column specification --------------------------------------------------------
+Delimiter: ","
+chr (4): index, var_1, var_2, var_3
+
+i Use `spec()` to retrieve the full column specification for this data.
+i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 4
+  index var_1  var_2  var_3 
+  <chr> <chr>  <chr>  <chr> 
+1 A     val_A1 val_A2 val_A3
+2 B     val_B1 val_B2 val_B3
+3 C     val_C1 val_C2 val_C3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# | index | var\_1 | var\_2 | var\_3 |}
+\CommentTok{\# | {-} | {-} | {-} | {-} |}
+\CommentTok{\# | A | val\_A1 | val\_A2 | val\_A3 |}
+\CommentTok{\# | B | val\_B1 | val\_B2 | val\_B3 |}
+\CommentTok{\# | C | val\_C1 | val\_C2 | val\_C3 |}
+\CommentTok{\# | D | val\_D1 | val\_D2 | val\_D3 | }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Python: \texttt{pd.read\_csv()} (from Pandas library)
+\item
+  R: \texttt{read\_csv()} (from \texttt{readr} library)
+\end{itemize}
+
+\hypertarget{json}{%
+\subsection{\texorpdfstring{\texttt{.json}}{.json}}\label{json}}
+
+\begin{codelisting}
+
+\caption{\texttt{courses.json}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\{}
+  \DataTypeTok{"dsan5000"}\FunctionTok{:} \FunctionTok{\{}
+    \DataTypeTok{"title"}\FunctionTok{:} \StringTok{"Data Science and Analytics"}\FunctionTok{,}
+    \DataTypeTok{"credits"}\FunctionTok{:} \DecValTok{3}\FunctionTok{,}
+    \DataTypeTok{"lectures"}\FunctionTok{:} \OtherTok{[}
+      \StringTok{"Intro"}\OtherTok{,}
+      \StringTok{"Tools and Workflow"}
+    \OtherTok{]}
+  \FunctionTok{\},}
+  \DataTypeTok{"dsan5100"}\FunctionTok{:} \FunctionTok{\{}
+    \DataTypeTok{"title"}\FunctionTok{:} \StringTok{"Probabilistic Modeling and Statistical Computing"}\FunctionTok{,}
+    \DataTypeTok{"credits"}\FunctionTok{:} \DecValTok{3}\FunctionTok{,}
+    \DataTypeTok{"lectures"}\FunctionTok{:} \OtherTok{[}
+      \StringTok{"Intro"}\OtherTok{,}
+      \StringTok{"Conditional Probability"}
+    \OtherTok{]}
+  \FunctionTok{\}}
+\FunctionTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{itemize}
+\tightlist
+\item
+  Python: \texttt{json} (built-in library, \texttt{import\ json})
+\item
+  R: \texttt{jsonlite} (\texttt{install.packages(jsonlite)})
+\item
+  Helpful validator (for when \texttt{.json} file won't load)
+\end{itemize}
+
+\hypertarget{other-formats}{%
+\subsection{Other Formats}\label{other-formats}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{.xls}/\texttt{.xlsx}: Requires special libraries in Python/R
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Python: \texttt{openpyxl}
+  \item
+    R: \texttt{readxl} (part of tidyverse)
+  \end{itemize}
+\item
+  \texttt{.dta}: Stata format, but can be read/written to in Python/R
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Python: Pandas has built-in \texttt{pd.read\_stata()} and
+    \texttt{pd.to\_stata()}
+  \item
+    R: \texttt{read\_dta()} from Haven library (part of tidyverse)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{apis}{%
+\section{APIs}\label{apis}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{A}pplication \textbf{P}rogramming \textbf{I}nterfaces: the
+  ``developer-facing'' part of a data pipeline/service
+\item
+  Can think of it like\ldots{}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    an electrical outlet: you just want \textbf{electricity} from it,
+    without knowing details of Alternating/Direct Currents
+  \item
+    water fountain: you just want \textbf{water} from it, without
+    knowing details of how it's pumped into the fountain
+  \item
+    car: you just want to accelerate, brake, and reverse, without
+    knowing details of combustion engine
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{what-does-an-api-do}{%
+\subsection{What Does an API Do?}\label{what-does-an-api-do}}
+
+\begin{itemize}
+\tightlist
+\item
+  Exposes \textbf{endpoints} for use by other developers, without
+  requiring them to know the nuts and bolts of your pipeline/service
+\item
+  In our examples\ldots{}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Electrical outlet: endpoint is \textbf{socket}, wiring not exposed
+  \item
+    Water fountain: endpoint is \textbf{aerator}, pump not exposed
+  \item
+    Car: endpoint is \textbf{pedals}, \textbf{steering wheel},
+    etc\ldots{} engine is not exposed
+  \end{itemize}
+\end{itemize}
+
+When I'm teaching programming to students in refugee camps who may have
+never used a computer before, I try to use the idea of ``robots'': a
+program is a robot trained to sit there and wait for inputs, then
+process them in some way and spit out some output. APIs really capture
+this notion, honestly.
+
+\hypertarget{example-math-api}{%
+\subsection{Example: Math API}\label{example-math-api}}
+
+\begin{itemize}
+\tightlist
+\item
+  Base URL: \texttt{https://newton.vercel.app/api/v2/}
+\item
+  The \textbf{endpoint}: \texttt{factor}
+\item
+  The \textbf{argument}: \texttt{"x\^{}2\ -\ 1"}
+\item
+  The \textbf{request}:
+  \texttt{https://newton.vercel.app/api/v2/factor/x\^{}2-1}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(httr2)}
+\NormalTok{request\_obj }\OtherTok{\textless{}{-}} \FunctionTok{request}\NormalTok{(}\StringTok{"https://newton.vercel.app/api/v2/factor/x\^{}2{-}1"}\NormalTok{)}
+\NormalTok{response\_obj }\OtherTok{\textless{}{-}} \FunctionTok{req\_perform}\NormalTok{(request\_obj)}
+\FunctionTok{writeLines}\NormalTok{(response\_obj }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{resp\_body\_string}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+{"operation":"factor","expression":"x^2-1","result":"(x - 1) (x + 1)"}
+\end{verbatim}
+
+\hypertarget{math-api-endpoints}{%
+\subsection{Math API Endpoints}\label{math-api-endpoints}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Operation & API Endpoint & Result \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Simplify & \texttt{/simplify/2\^{}2+2(2)} & \texttt{8} \\
+Factor & \texttt{/factor/x\^{}2\ +\ 2x} & \texttt{x\ (x\ +\ 2)} \\
+Derive & \texttt{/derive/x\^{}2+2x} & \texttt{2\ x\ +\ 2} \\
+Integrate & \texttt{/integrate/x\^{}2+2x} &
+\texttt{1/3\ x\^{}3\ +\ x\^{}2\ +\ C} \\
+Find 0's & \texttt{/zeroes/x\^{}2+2x} & \texttt{{[}-2,\ 0{]}} \\
+Find Tangent & \texttt{/tangent/2\textbar{}x\^{}3} &
+\texttt{12\ x\ +\ -16} \\
+Area Under Curve & \texttt{/area/2:4\textbar{}x\^{}3} & \texttt{60} \\
+Cosine & \texttt{/cos/pi} & \texttt{-1} \\
+Sine & \texttt{/sin/0} & \texttt{0} \\
+Tangent & \texttt{/tan/0} & \texttt{0} \\
+\end{longtable}
+
+\hypertarget{scraping-html-with-httr2-and-xml2}{%
+\subsection{\texorpdfstring{Scraping HTML with \texttt{httr2} and
+\texttt{xml2}}{Scraping HTML with httr2 and xml2}}\label{scraping-html-with-httr2-and-xml2}}
+
+\texttt{httr2} Documentation \textbar{} \texttt{xml2} Documentation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get HTML}
+\FunctionTok{library}\NormalTok{(httr2)}
+\NormalTok{request\_obj }\OtherTok{\textless{}{-}} \FunctionTok{request}\NormalTok{(}\StringTok{"https://en.wikipedia.org/wiki/Data\_science"}\NormalTok{)}
+\NormalTok{response\_obj }\OtherTok{\textless{}{-}} \FunctionTok{req\_perform}\NormalTok{(request\_obj)}
+\CommentTok{\# Parse HTML}
+\FunctionTok{library}\NormalTok{(xml2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Attaching package: 'xml2'
+\end{verbatim}
+
+\begin{verbatim}
+The following object is masked from 'package:httr2':
+
+    url_parse
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{html\_obj }\OtherTok{\textless{}{-}}\NormalTok{ response\_obj }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{resp\_body\_html}\NormalTok{()}
+\NormalTok{html\_obj }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{xml\_find\_all}\NormalTok{(}\StringTok{\textquotesingle{}//h2//span[@class="mw{-}headline"]\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+{xml_nodeset (5)}
+[1] <span class="mw-headline" id="Foundations">Foundations</span>
+[2] <span class="mw-headline" id="Etymology">Etymology</span>
+[3] <span class="mw-headline" id="Data_Science_And_Data_Analysis">Data Scienc ...
+[4] <span class="mw-headline" id="See_also">See also</span>
+[5] <span class="mw-headline" id="References">References</span>
+\end{verbatim}
+
+\marginnote{\begin{footnotesize}
+
+Note: \texttt{httr2} is a re-written version of the original
+\texttt{httr} package, which is now deprecated. You'll still see lots of
+code using \texttt{httr}, however, so it's good to know how both
+versions work. Click here for a helpful vignette on the original
+\texttt{httr} library.
+
+\end{footnotesize}}
+
+\hypertarget{navigating-html-with-xpath}{%
+\subsection{Navigating HTML with
+XPath}\label{navigating-html-with-xpath}}
+
+XPath Cheatsheet
+
+\begin{itemize}
+\tightlist
+\item
+  Notice the last line on the previous slide:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{html\_obj }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{xml\_find\_all}\NormalTok{(}\StringTok{\textquotesingle{}//h2//span[@class="mw{-}headline"]\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  The string passed to \texttt{xml\_find\_all()} is an \textbf{XPath
+  selector}
+\end{itemize}
+
+\marginnote{\begin{footnotesize}
+
+XPath selectors are used by many different libraries, including
+\textbf{Selenium} (which we'll look at very soon) and \textbf{jQuery} (a
+standard extension to plain JavaScript allowing easy
+searching/manipulation of the DOM), so it's good to learn it now!
+
+\end{footnotesize}}
+
+\hypertarget{xpath-i-selecting-elements}{%
+\subsection{XPath I: Selecting
+Elements}\label{xpath-i-selecting-elements}}
+
+\begin{codelisting}
+
+\caption{\texttt{mypage.html}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}div} \ErrorTok{class}\OtherTok{=}\StringTok{"container"}\KeywordTok{\textgreater{}}
+  \KeywordTok{\textless{}h1\textgreater{}}\NormalTok{Header}\KeywordTok{\textless{}/h1\textgreater{}}
+  \KeywordTok{\textless{}p} \ErrorTok{id}\OtherTok{=}\StringTok{"page{-}content"}\KeywordTok{\textgreater{}}\NormalTok{Content}\KeywordTok{\textless{}/p\textgreater{}}
+  \KeywordTok{\textless{}img} \ErrorTok{class}\OtherTok{=}\StringTok{"footer{-}image m{-}5"} \ErrorTok{src}\OtherTok{=}\StringTok{"footer.png"}\KeywordTok{\textgreater{}}
+\KeywordTok{\textless{}/div\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{itemize}
+\item
+  \texttt{\textquotesingle{}//div\textquotesingle{}} matches all
+  elements \texttt{\textless{}div\textgreater{}} in the document:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}div} \ErrorTok{class}\OtherTok{=}\StringTok{"container"}\KeywordTok{\textgreater{}}
+  \KeywordTok{\textless{}h1\textgreater{}}\NormalTok{Header}\KeywordTok{\textless{}/h1\textgreater{}}
+  \KeywordTok{\textless{}p} \ErrorTok{id}\OtherTok{=}\StringTok{"page{-}content"}\KeywordTok{\textgreater{}}\NormalTok{Content}\KeywordTok{\textless{}/p\textgreater{}}
+  \KeywordTok{\textless{}img} \ErrorTok{class}\OtherTok{=}\StringTok{"footer{-}image m{-}5"} \ErrorTok{src}\OtherTok{=}\StringTok{"footer.png"}\KeywordTok{\textgreater{}}
+\KeywordTok{\textless{}/div\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{\textquotesingle{}//div//img\textquotesingle{}} matches
+  \texttt{\textless{}img\textgreater{}} elements which are
+  \textbf{children of} \texttt{\textless{}div\textgreater{}} elements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}img} \ErrorTok{class}\OtherTok{=}\StringTok{"footer{-}image m{-}5"} \ErrorTok{src}\OtherTok{=}\StringTok{"footer.png"}\KeywordTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+\hypertarget{xpath-ii-filtering-by-attributes}{%
+\subsection{XPath II: Filtering by
+Attributes}\label{xpath-ii-filtering-by-attributes}}
+
+\begin{codelisting}
+
+\caption{\texttt{mypage.html}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}div} \ErrorTok{class}\OtherTok{=}\StringTok{"container"}\KeywordTok{\textgreater{}}
+  \KeywordTok{\textless{}h1\textgreater{}}\NormalTok{Header}\KeywordTok{\textless{}/h1\textgreater{}}
+  \KeywordTok{\textless{}p} \ErrorTok{id}\OtherTok{=}\StringTok{"page{-}content"}\KeywordTok{\textgreater{}}\NormalTok{Content}\KeywordTok{\textless{}/p\textgreater{}}
+  \KeywordTok{\textless{}img} \ErrorTok{class}\OtherTok{=}\StringTok{"footer{-}image m{-}5"} \ErrorTok{src}\OtherTok{=}\StringTok{"footer.png"}\KeywordTok{\textgreater{}}
+\KeywordTok{\textless{}/div\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{itemize}
+\item
+  \texttt{\textquotesingle{}//p{[}id="page-content"{]}\textquotesingle{}}
+  matches all \texttt{\textless{}p\textgreater{}} elements with id
+  \texttt{page-content}\footnote{In HTML, \texttt{id}s are required to
+    be \textbf{unique} to particular elements (and elements cannot have
+    more than one \texttt{id}), meaning that this should only return a
+    \textbf{single} element, for valid HTML code (not followed by all
+    webpages!). Also note the \textbf{double-quotes} after \texttt{id=},
+    which are required in XPath.}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}p} \ErrorTok{id}\OtherTok{=}\StringTok{"page{-}content"}\KeywordTok{\textgreater{}}\NormalTok{Content}\KeywordTok{\textless{}/p\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Matching \textbf{classes} is a bit trickier:
+
+  {\texttt{\textquotesingle{}//img{[}contains(concat("\ ",\ normalize-space(@class),\ "\ "),\ "\ footer-image\ "){]}\textquotesingle{}}}
+
+  matches all \texttt{\textless{}img\textgreater{}} elements with
+  \texttt{page-content} as one of their classes\footnote{Your intuition
+    may be to just use
+    \texttt{\textquotesingle{}//img{[}@class="footer-image"{]}\textquotesingle{}}.
+    Sadly, however, this will match only elements with
+    \texttt{footer-image} as their \textbf{only} class. i.e., it will
+    match \texttt{\textless{}img\ class="footer-image"\textgreater{}}
+    but not
+    \texttt{\textless{}img\ class="footer-image\ another-class"\textgreater{}}.
+    This will usually fail, since most elements on modern webpages have
+    several classes. For example, if the site is using Bootstrap,
+    \texttt{\textless{}p\ class="p-5\ m-3"\textgreater{}\textless{}/p\textgreater{}}
+    creates a paragraph element with a padding of 5 pixels and a margin
+    of 3 pixels.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textless{}img} \ErrorTok{class}\OtherTok{=}\StringTok{"footer{-}image m{-}5"} \ErrorTok{src}\OtherTok{=}\StringTok{"footer.png"}\KeywordTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+\hypertarget{authentication}{%
+\subsection{Authentication}\label{authentication}}
+
+\begin{itemize}
+\tightlist
+\item
+  Most APIs don't allow requests to be made by anonymous requesters, and
+  require \textbf{authentication}.
+\item
+  For example, to access private GitHub repos using GitHub's API, you'll
+  need to authenticate that you are in fact the one making the request
+\end{itemize}
+
+\hypertarget{authentication-via-gh}{%
+\subsection{\texorpdfstring{Authentication via
+\texttt{GH}}{Authentication via GH}}\label{authentication-via-gh}}
+
+\begin{itemize}
+\tightlist
+\item
+  The \texttt{GH} library for \texttt{R} can handle this authentication
+  process for you. For example, this private repo in my account does not
+  show up if requested anonymously, but does show up when requested
+  using \texttt{GH} with a Personal Access Token\footnote{Your code
+    should \textbf{never} contain authentication info, especially when
+    using GitHub. In this case, I created an OS environment variable
+    called \texttt{GITHUB\_TOKEN} containing my Personal Access Token,
+    which \texttt{GH} then uses to make authenticated requests.}:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gh)}
+\CommentTok{\# We use tryCatch so that code still runs even if (a) GITHUB\_TOKEN isn\textquotesingle{}t set, or (b) no internet connection}
+\NormalTok{gh\_error }\OtherTok{\textless{}{-}} \ConstantTok{FALSE}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{tryCatch}\NormalTok{( }
+\NormalTok{  \{}
+    \FunctionTok{gh}\NormalTok{(}\StringTok{"GET /repos/jpowerj/private{-}repo{-}test"}\NormalTok{)}
+\NormalTok{  \},}
+  \AttributeTok{error =} \ControlFlowTok{function}\NormalTok{(e) \{}
+\NormalTok{    gh\_error }\OtherTok{\textless{}{-}} \ConstantTok{TRUE}
+    \FunctionTok{writeLines}\NormalTok{(}\StringTok{"Could not fetch github repo"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\NormalTok{gh\_error) \{}
+    \FunctionTok{writeLines}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(result}\SpecialCharTok{$}\NormalTok{name, }\StringTok{": "}\NormalTok{,result}\SpecialCharTok{$}\NormalTok{description))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+private-repo-test: Private repo example for DSAN5000
+\end{verbatim}
+
+~
+
+\part{Data Cleaning and Analysis}
+
+\hypertarget{data-cleaning-and-tidy-data}{%
+\chapter{Data Cleaning and Tidy
+Data}\label{data-cleaning-and-tidy-data}}
+
+Data cleaning
+
+\hypertarget{exploratory-data-analysis}{%
+\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+\part{Machine Learning Fundamentals}
+
+\hypertarget{optimization}{%
+\chapter{Optimization}\label{optimization}}
+
+\hypertarget{introduction-to-classification}{%
+\chapter{Introduction to
+Classification}\label{introduction-to-classification}}
+
+\part{Machine Learning Algorithms}
+
+\hypertarget{classification-algorithms}{%
+\chapter{Classification Algorithms}\label{classification-algorithms}}
+
+\hypertarget{neural-networks}{%
+\chapter{Neural Networks}\label{neural-networks}}
+
+\hypertarget{unsupervised-learning-and-clustering}{%
+\chapter{Unsupervised Learning and
+Clustering}\label{unsupervised-learning-and-clustering}}
+
+\part{Applications}
+
+\hypertarget{network-data}{%
+\chapter{Network Data}\label{network-data}}
+
+\hypertarget{image-data}{%
+\chapter{Image Data}\label{image-data}}
+
+\hypertarget{natural-language-processing}{%
+\chapter{Natural Language
+Processing}\label{natural-language-processing}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{summary}{%
+\chapter{Summary}\label{summary}}
+
+In summary, this book has no content whatsoever.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\markboth{References}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\end{CSLReferences}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Appendices}
+\appendix
+
+\hypertarget{resources}{%
+\chapter{Resources}\label{resources}}
+
+\hypertarget{data-sources}{%
+\section{Data Sources}\label{data-sources}}
+
+\hypertarget{general}{%
+\subsection{General}\label{general}}
+
+\begin{itemize}
+\tightlist
+\item
+  List of public-facing APIs
+\item
+  Data is Plural: Weekly newsletter with collection of interesting
+  publicly-available datasets
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data is Plural dataset archive, as Google spreadsheet
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{economics}{%
+\subsection{Economics}\label{economics}}
+
+\begin{itemize}
+\tightlist
+\item
+  FRED: Federal Reserve Economic Data
+\end{itemize}
+
+\hypertarget{textbook-links}{%
+\section{Textbook Links}\label{textbook-links}}
+
+
+
+\end{document}

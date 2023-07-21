@@ -1,2 +1,3 @@
 # Neural Networks
 
+We looked at the basics of neural networks in @sec-nn-intro, but in this chapter we dive head-first into the world of neural networks, which (at least at the time of writing---things change fast in the AI world!) are making waves even outside of the AI community due to popular apps built upon neural networks like ChatGPT and Dall-E.

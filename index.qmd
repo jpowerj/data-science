@@ -1,3 +1,7 @@
+---
+toc: false
+---
+
 # Preface {.unnumbered}
 
 This book serves as an introduction to data science, written with the goal of meeting you wherever you're at in your educational/career journey, regardless of your background in math or computer science. That is to say, we don't assume any background in STEM, only the desire to learn and the work ethic to put in the hours needed to become comfortable with each topic!
