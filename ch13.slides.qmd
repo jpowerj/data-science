@@ -1,0 +1,16 @@
+---
+title: "Lecture 12: Novelty and Anomaly Detection"
+subtitle: "*DSAN 5000: Data Science and Analytics*"
+date: last-modified
+institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
+author: "Jeff Jacobs"
+categories:
+  - "Lecture Slides"
+format:
+  revealjs:
+    cache: false
+metadata-files: 
+  - "../_revealjs.globals.yml"
+---
+
+## Novelty and Anomaly Detection

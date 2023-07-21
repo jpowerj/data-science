@@ -67,5 +67,53 @@
   },
   "12-nlp.qmd": {
     "12-nlp.html": "bc0ce5a8"
+  },
+  "ch01.qmd": {
+    "ch01.html": "75a4f210"
+  },
+  "ch00.qmd": {
+    "ch00.html": "7d74d903"
+  },
+  "ch02.qmd": {
+    "ch02.html": "ea8af782"
+  },
+  "ch03.qmd": {
+    "ch03.html": "96313f58"
+  },
+  "ch04.qmd": {
+    "ch04.html": "1f33f33e"
+  },
+  "ch05.qmd": {
+    "ch05.html": "fc77ee04"
+  },
+  "ch06.qmd": {
+    "ch06.html": "979afd36"
+  },
+  "ch07.qmd": {
+    "ch07.html": "80cf9b63"
+  },
+  "ch08.qmd": {
+    "ch08.html": "1d2dec6d"
+  },
+  "ch09.qmd": {
+    "ch09.html": "b8ebc8c0"
+  },
+  "ch10.qmd": {
+    "ch10.html": "36957c11"
+  },
+  "ch11.qmd": {
+    "ch11.html": "1d3a99f5"
+  },
+  "ch12.qmd": {
+    "ch12.html": "b7eacace"
+  },
+  "ch13.qmd": {
+    "ch13.html": "f7307b86"
+  },
+  "resources.qmd": {
+    "resources.html": "4e13410e"
+  },
+  "ch14.qmd": {
+    "ch14.html": "b450c346"
   }
 }

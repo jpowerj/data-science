@@ -1,0 +1,528 @@
+---
+title: "Data Science Workflow"
+#subtitle: "*DSAN 5000: Data Science and Analytics*"
+date: last-modified
+institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
+author: "Jeff Jacobs"
+format:
+  html:
+    include-in-header: {"text": "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous' referrerpolicy='no-referrer' />"}
+metadata-files: 
+  - "./_bookdown.globals.yml"
+---
+
+## Operating Systems {.smaller data-name="Workflow"}
+
+* **Linux**: <i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> (**Free!**)
+  * The "standard" OS for developers! You can expect instructions to use Linux commands: `ls`, `cd`, `touch`, `mv` ...
+* **Windows**: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> **BUT**, proprietary shell (constantly googling "PowerShell equivalent")
+  
+  | Linux | PowerShell |
+  | - | - |
+  | `ls` | `Get-ChildItem` |
+    | `cd` | `Set-Location` |
+    | `touch` | `New-Item` |
+    | `mv` | `Move-Item` |
+* **OSX**: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i> **BUT**, OSX and Linux both built on Unix
+  
+  $\implies$ if you know Terminal you know Linux!
+
+## Git vs. GitHub {data-name="Git"}
+
+(Important distinction!)
+
+::: columns
+::: {.column width="50%"}
+
+**<a href="https://git-scm.com/" target="_blank">Git <i class="bi bi-git" style="margin-left: 5px !important;"></i></a>**
+
+* Command-line program
+* `git init` in shell to create
+* `git add` to track files
+* `git commit` to commit changes to tracked files
+
+:::
+::: {.column width="50%"}
+
+**<a href="https://github.com/" target="_blank">GitHub <i class="bi bi-github"style="margin-left: 5px !important;"></i></a>**
+
+* Code hosting website
+* Create a **repository** (repo) for each project
+* Can **clone** repos onto your local machine
+
+:::
+:::
+
+<center style="border: 2px solid black !important; padding: 5px !important;">
+**`git push`/`git pull`**: The link between the two!
+</center>
+
+## Git Diagram
+
+<img src="https://mermaid.ink/svg/pako:eNp9j70KAjEQhF8lbH1PkFqwsrJNsyZ7STB_rBtBjnt34x0IitgNM9_AzAK2OgINPsqRsQVTlFK25hzlW14Yiw3K0Z1SbXsayF5rl0_zZ_uNZoxlczKxp_9NmGBQo-HGxOUVGJBAmQzoIR3N2JMYMGUdKHap50exoIU7TdCbQ6FDRM-YQc-YbsMlF6Xyab-9vV-fAwFZpw" class="quarto-figure quarto-figure-center"></img>
+
+## Initializing a Repo
+
+* Let's make a directory for our project called `cool-project`, and initialize a Git repo for it
+
+<!-- ```{.bash code-line-numbers="|3|4|"} -->
+```bash
+user@hostname:~$ mkdir cool-project
+user@hostname:~$ cd cool-project
+user@hostname:~/cool-project$ git init
+Initialized empty Git repository in /home/user/cool-project/.git/
+```
+
+* This creates a hidden folder, `.git`, in the directory:
+
+<!-- ```bash{.bash code-line-numbers="|3-5"} -->
+```bash
+user@hostname:~/cool-project$ ls -lah
+total 12K
+drwxr-xr-x  3 user user 4.0K May 28 00:53 .
+drwxr-xr-x 12 user user 4.0K May 28 00:53 ..
+drwxr-xr-x  7 user user 4.0K May 28 00:53 .git
+```
+
+::: {.footer .footersmall}
+The Git Side: Local I
+:::
+
+## Adding and Committing a File
+
+We're writing Python code, so let's create and track `cool_code.py`:
+
+```bash
+user@hostname:~/cool-project$ touch cool_code.py
+user@hostname:~/cool-project$ git add cool_code.py
+user@hostname:~/cool-project$ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   cool_code.py
+
+user@hostname:~/cool-project$ git commit -m "Initial version of cool_code.py"
+[main (root-commit) b40dc25] Initial version of cool_code.py
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 cool_code.py
+```
+
+## The Commit Log
+
+* View the commit log using `git log`:
+
+```bash
+user@hostname:~/cool-project$ git log
+commit b40dc252a3b7355cc4c28397fefe7911ff3c94b9 (HEAD -> main)
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:57:16 2023 +0000
+
+    Initial version of cool_code.py
+```
+
+::: {.hidden}
+```{mermaid}
+gitGraph
+   commit id: "b40dc25"
+```
+:::
+
+<div class="quarto-figure quarto-figure-center">
+<img class="r-stretch center" src="https://mermaid.ink/svg/pako:eNpdjjELwjAUhP9KOOjWQYoumQUnJzfJ8sx7bQNNUuLLIKX_3VZxcb37vuMW-MwCiyHopdA8umSM8TnGoCawNQ6P44F9d3JwqWn-y84BLaKUSIG3mWX3HXSUKA47wdJTnXTX1w2lqvn2Sh5WS5UWdWZSOQcaCkXYnqbnlgoHzeX6vfZ52GKmdM_5x6xvd4Y8pg"></img>
+</div>
+
+## Making Changes
+
+```bash
+user@hostname:~/cool-project$ git status
+On branch main
+nothing to commit, working tree clean
+user@hostname:~/cool-project$ echo "1 + 1" >> cool_code.py
+user@hostname:~/cool-project$ more cool_code.py
+1 + 1
+user@hostname:~/cool-project$ git add cool_code.py
+user@hostname:~/cool-project$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   cool_code.py
+
+user@hostname:~/cool-project$ git commit -m "Added code to cool_code.py"
+[main e3bc497] Added code to cool_code.py
+ 1 file changed, 1 insertion(+)
+```
+
+##
+
+The `git log` will show the new version:
+
+```bash
+user@hostname:~/cool-project$ git log
+commit e3bc497acbb5a487566ff2014dcd7b83d0c75224 (HEAD -> main)
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:38:05 2023 +0000
+
+    Added code to cool_code.py
+
+commit b40dc25b14c0426b06c8d182184e147853f3c12e
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:37:02 2023 +0000
+
+    Initial version of cool_code.py
+
+
+```
+
+<img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNpljrEKwjAURX8l3LmDaEXMLDg5uUmW17zXNtA0Jb4MUvrvtoqT672Hw5nhEwssuqDXTFPvRmOMTzEGNYGtcWjqHfv90eH_kkPj6_PJARWi5EiBV9W8gQ7aSxSHjWNpqQy6KZYVpaLp_ho9rOYiFcrEpHIJ1GWKsC0Nz3UVDpry7Zv3qaww0fhI6ccsb4kvPis"></img>
+
+## More Changes
+
+```bash
+user@hostname:~/cool-project$ echo "2 + 2" >> cool_code.py
+user@hostname:~/cool-project$ more cool_code.py
+1 + 1
+2 + 2
+user@hostname:~/cool-project$ git add cool_code.py
+user@hostname:~/cool-project$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   cool_code.py
+
+user@hostname:~/cool-project$ git commit -m "Second version of cool_code.py"
+[main 4007db9] Second version of cool_code.py
+ 1 file changed, 1 insertion(+)
+```
+
+## And the `git log`
+
+```bash
+user@hostname:~/cool-project$ git log
+commit 4007db9a031ca134fe09eab840b2bc845366a9c1 (HEAD -> main)
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:39:28 2023 +0000
+
+    Second version of cool_code.py
+
+commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:38:05 2023 +0000
+
+    Added code to cool_code.py
+
+commit b40dc25b14c0426b06c8d182184e147853f3c12e
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:37:02 2023 +0000
+
+    Initial (empty) version of cool_code.py
+```
+
+## Undoing a Commit I
+
+First check the `git log` to find the **hash** for the commit you want to revert back to:
+
+```{.bash}
+commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:38:05 2023 +0000
+
+    Added code to cool_code.py
+```
+
+<img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNptjz8PgjAQxb9KczNDoxhCZxMnJzfT5do7oAmlpF4HQ_jugsZJ1_d-eX8W8IkYDPRBLhnnwU5KKZ9iDKICGWXB1Zr84WTh1-Kj83Xb_LNqrRtyrQWoIHKOGGhrWXbQggwc2cLOEXdYRtkj1g3FIun2nDwYyYUrKDOh8DlgnzGC6XB8bCpTkJSvn-XvAxXMON1T-jLrC-H5Res"></img>
+
+## Undoing a Commit II
+
+* <i class="bi bi-exclamation-triangle"></i> **This is irreversable!** <i class="bi bi-exclamation-triangle"></i>
+
+```bash
+user@hostname:~/cool-project$ git reset --hard e3bc497ac
+HEAD is now at e3bc497 Added code to cool_code.py
+user@hostname:~/cool-project$ git log
+commit e3bc497acbb5a487566ff2014dcd7b83d0c75224 (HEAD -> main)
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:38:05 2023 +0000
+
+    Added code to cool_code.py
+
+commit b40dc25b14c0426b06c8d182184e147853f3c12e
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:37:02 2023 +0000
+
+    Initial (empty) version of cool_code.py
+```
+
+## Onwards and Upwards
+
+```bash
+user@hostname:~/cool-project$ echo "3 + 3" >> cool_code.py
+user@hostname:~/cool-project$ git add cool_code.py
+user@hostname:~/cool-project$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   cool_code.py
+
+user@hostname:~/cool-project$ git commit -m "Added different code to cool_code.py"
+[main 700d955] Added different code to cool_code.py
+ 1 file changed, 1 insertion(+)
+```
+
+<img src="https://mermaid.ink/svg/pako:eNptz7EOgkAMBuBXuXRmuCiGcLPEyQUSB3NLuVa4xOPIWQZDeHdB46Rr_y9t_xlcJAYDnZdTwrG3g1LKxRC8KE9GWWhzTW53sPAb8b51eVn8i3KtC2pLC0qeIxtVV5eqbqpfWGhN5WFdDxkETgE9re_MG7QgPQe2sDniG0532W4tK8VJYvMcHBhJE2cwjYTCR49dwgDmhvfHOmXyEtP5U_HdNIMRh2uMX7O8ADEKUdc"></img>
+
+##
+
+The final `git log`:
+
+```bash
+user@hostname:~/cool-project$ git log
+commit 700d955faacb27d7b8bc464b9451851b5e319f20 (HEAD -> main)
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:44:49 2023 +0000
+
+    Added different code to cool_code.py
+
+commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:38:05 2023 +0000
+
+    Added code to cool_code.py
+
+commit b40dc25b14c0426b06c8d182184e147853f3c12e
+Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
+Date:   Sun May 28 00:37:02 2023 +0000
+
+    Initial (empty) version of cool_code.py
+
+```
+
+## But Why These Diagrams?
+
+Even the simplest projects can start to look like:
+
+::: {.hidden}
+```{mermaid}
+gitGraph
+       commit id: "537dd67"
+       commit id: "6639143"
+       branch nice_feature
+       checkout nice_feature
+       commit id: "937ded8"
+       checkout main
+       commit id: "9e6679c"
+       checkout nice_feature
+       branch very_nice_feature
+       checkout very_nice_feature
+       commit id: "7f4de03"
+       checkout main
+       commit id: "6df80c1"
+       checkout nice_feature
+       commit id: "bd0ebb8"
+       checkout main
+       merge nice_feature id: "9ff61cc" tag: "V 1.0.0" type: HIGHLIGHT
+       checkout very_nice_feature
+       commit id: "370613b"
+       checkout main
+       commit id: "9a07a97"
+```
+:::
+
+<img src="https://mermaid.ink/svg/pako:eNqdU8FqwzAM_RWjcykO6Zwm50E72E4bO4xAUWw5MWvi4DmDUPrvc9aFpdB27Qy-SO9JjydpB9IqggxK41cO2ypv2OFJW9fGM6MylsNdnCglkhxOp4WI02gRT9KFw0ZWrDGSNprQd45-qRXJd9v5M9lp4TT0JbWc9h3JNZrmDImESFJ5inSy44_WT3L95rLgC5CpgEQvFPH4NtVC6SWX0dWqj8iF4lQUf_tUkyvpqN7omdYiksEz5rEcAq8smvM5HwJ9SxlbP6zWj-G__NuVOOEiiosbZ4k8wTQsHswgiA9AFZZ1N4Bz8BXVlMOAU6Sx2_qh-D5AsfP2uW8kZN51NIOuVejp3mDpsIZM4_YjREkZb93T4QC-72AGLTZv1o6Y_RdGMfVs"></img>
+
+## The GitHub Side: Remote
+
+![](/assets/img/github_repo.png)
+
+## An Empty Repo
+
+![](/assets/img/github_empty_repo.png)
+
+## Refresh after `git push`
+
+![](/assets/img/github_push.png)
+
+## Commit History
+
+![](/assets/img/gh_history.png)
+
+## Checking the `diff`
+
+![](/assets/img/gh_diff.png)
+
+## Web Development {data-name="Web Dev"}
+
+| | Frontend<br><i class="bi bi-layout-text-window-reverse"></i> <i class="bi bi-display"></i> <i class="bi bi-graph-up"></i> <i class="bi bi-ui-checks"></i> | Backend<br><i class="bi bi-database"></i> <i class="bi bi-terminal"></i> <i class="bi bi-table"></i> <i class="bi bi-key"></i> |
+| - | - | - |
+| **Low Level** | HTML/CSS/JavaScript | GitHub Pages
+| **Middle Level** | JS Libraries | PHP, SQL |
+| **High Level** | React, Next.js | Node.js, Vercel |
+
+::: {.notes}
+Frontend icons: UI+UI elements, what the user sees (on the screen), user experience (UX), data visualization
+Backend icons: Databases, Security
+:::
+
+## Getting Content onto the Internet {.nostretch}
+
+::: columns
+::: {.column width="50%"}
+
+<ul>
+<li>Step 1: `index.html`</li>
+<li>Step 2: Create GitHub repository</li>
+<li>Step 3: `git init`, `git add -A .`, `git push`</li>
+<li style="border: 2px solid black !important; padding: 4px !important;"><span>Step 4: Enable GitHub Pages in repo settings</span></li>
+<li>Step 5: `<username>.github.io`!</li>
+</ul>
+
+:::
+::: {.column width="50%"}
+
+![](/assets/img/gh_pages.png){fig-align="center" width=70%}
+
+:::
+:::
+
+## Deploying from a Branch/Folder
+
+![](/assets/img/gh_pages_2.png)
+
+## R vs. RStudio vs. Quarto {.smaller data-name="R"}
+
+<!-- (Another important distinction!) -->
+
+<!-- start Quarto box -->
+
+:::::: {style="border: 2px solid black; padding: 10px;"}
+
+<center>
+<img src="/assets/img/quarto_logo.svg" width="20%"></img>
+</center>
+
+<!-- start columns -->
+::::: columns
+
+<!-- start RStudio column -->
+<div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
+
+<center style="margin: 0px !important;">
+<img src="/assets/img/RStudio_logo.svg" width="25%"></img>
+</center>
+
+* GUI wrapper around R (Integrated Development Environment = IDE)
+* Run **blocks** of R code (`.qmd` **chunks**)
+
+<!-- start R box inside RStudio box -->
+
+::: {style="border: 2px solid black; width: 98%; margin: auto; padding: 2px;"}
+
+**<a href="https://www.r-project.org/" target="_blank">The R Language <i class="fa-brands fa-r-project"></i></a>**
+
+* Programming language
+* Runs scripts via `Rscript <script>.r`
+<!-- * Comes with a basic GUI (R-GUI) -->
+
+:::
+<!-- end R box -->
+
+</div>
+<!-- end RStudio column -->
+
+<!-- start + column -->
+<div class="column" style="width: 5%; padding: 5px;">
+
+<div class="center r-stretch" style="margin-top: auto;">
+<h3 style="text-align: center;">\+</h3>
+</div>
+
+</div>
+<!-- end + column -->
+
+<!-- start Jupyter column -->
+<div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
+
+<center style="margin: 0px !important;">
+<img src="/assets/img/jupyter_logo.svg" width="50%" style="margin: 0px;"></img></span>
+</center>
+
+* GUI wrapper around Python (IDE)
+* Run **blocks** of Python code (`.ipynb` **cells**)
+
+<!-- start python box inside Jupyter column -->
+::: {.column style="width: 98%; border: 2px solid black; margin: auto; padding: 2px;"}
+
+<!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
+<a href="https://www.python.org/" target="_blank">The Python Language <i class="fa-brands fa-python"></i></a>
+
+* Scripting language
+* On its own, just runs scripts via `python <script>.py`
+
+:::
+<!-- end Python column -->
+
+</div>
+<!-- end Jupyter column -->
+
+:::::
+<!-- end columns -->
+
+::::::
+<!-- end quarto box -->
+
+## Getting R Onto Your Computer
+
+1. Download the `R` **language**: [https://cran.r-project.org/](https://cran.r-project.org/)
+
+::: columns
+::: {.column width="50%"}
+
+**VSCode** (recommended)
+
+* | <a href="https://code.visualstudio.com/docs/setup/linux" target="_blank">Linux</a> | <a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">Windows</a> | <a href="https://code.visualstudio.com/docs/setup/mac" target="_blank">OSX</a>
+* Install the <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto" target="_blank">Quarto Extension for VSCode</a> (more info from Quarto <a href="https://quarto.org/docs/tools/vscode.html" target="_blank">here</a>)
+
+:::
+::: {.column width="50%"}
+
+**RStudio**
+
+* <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>
+
+:::
+:::
+
+## Python {data-name="Python"}
+
+* The Python interpreter: <a href="https://www.python.org/downloads/source/" target="_blank">Linux</a> | <a href="https://www.python.org/downloads/windows/" target="_blank">Windows</a> | <a href="https://www.python.org/downloads/macos/" target="_blank">OSX</a>
+* With **VSCode** (recommended): you can start coding!
+  ````{.quarto filename="my_python_code.qmd"}
+  ```{{python}}
+  1 + 1
+  ```
+  ````
+
+* With **Jupyter** there are two options:
+  * **JupyterLab** (recommended) vs. **Jupyter**
+  * Main difference (imo): JupyterLab has a tabbed interface
+
+## Google Colab
+
+Alternative when all else fails! <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a>
+
+* Fully web-based Jupyter editing/execution (import/export `.ipynb` files)
+* Can persist code/data to Google Drive
+* Drawback: RAM limitations, have to activate GPU mode (pretty much required for any AI work), idle time limitation
+
+## Colab Runtime Options
+
+<center>
+<img src="/assets/img/colab_language.png" width="68%" style="margin: 0px;"></img>
+<img src="/assets/img/colab_runtime.png" width="68%" style="margin: 0px;"></img>
+</center>
+
+## Next Week {data-state="hide-menubar"}
+
+Data Gathering and APIs

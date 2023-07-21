@@ -1,0 +1,267 @@
+---
+title: "Lecture 5: Optimization"
+subtitle: "*DSAN 5000: Data Science and Analytics*"
+date: last-modified
+institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"
+author: "Jeff Jacobs"
+categories:
+  - "Lecture Slides"
+format:
+  revealjs:
+    cache: false
+metadata-files: 
+  - "../_revealjs.globals.yml"
+---
+
+## Levels of Difficulty
+
+{{< include ../_r.globals.qmd >}}
+{{< include ../_gg.globals.qmd >}}
+
+* Easy: Linear/Quadratic Optimization
+* Medium: Convex Optimization
+* Hard: Nonlinear Optimization
+
+```{r}
+#| label: optimization-levels
+library(ggplot2)
+quadFn <- function(x) x^2
+ggplot(data=data.frame(x=c(-4,4)), aes(x=x)) +
+  stat_function(fun=quadFn, linewidth = g_linewidth) +
+  dsan_theme("quarter")
+```
+
+## Convex Optimization {data-name="Convex Optimization"}
+
+::: {.callout-tip title="Convex Function" .nobotmargin}
+A function $f: \mathbb{R}^n \to \mathbb{R}$ is **convex** if for all $x_1, x_2 \in \text{dom} f$ and $0 \leq \theta \leq 1$ we have
+
+$$
+\color{orange}{f\left(\theta x_1 + (1 − \theta)x_2\right)} \leq \color{lightblue}{\theta f(x_1) + (1 − \theta) f(x_2)}
+$$
+
+:::
+
+<center>
+```{r, engine='tikz', opts.label="tikz_settings_fancy", fig.ext='svg', out.width='60%', label="convex-example-diagram"}
+\usetikzlibrary{calc}
+\usetikzlibrary{bayesnet}
+\def\axisdefaultwidth{14cm}
+\def\axisdefaultheight{5cm}
+\pgfplotsset{every axis/.style={scale only axis}}
+\begin{tikzpicture}
+%\pgfplotsset{ticks=none}
+		\begin{axis}[
+		    axis x line=bottom,
+			axis y line=left,
+			xmin=0.25, xmax=0.95,
+			ymin=-0.25, ymax=0.5,
+      xtick={0.3,0.4,0.5,0.6,0.7,0.8,0.9},
+      title={\large A Convex Function: $f(x) = x^6 + x^4 - x^2 + \frac{1}{10}$}
+    ]
+    \addplot[smooth,black,mark=none,samples=20,
+line width=1.25pt,domain=0.25:0.408248]  {x^6 + x^4 - x^2 + 0.1
+} node[above left] {};
+% Orange curve
+\addplot[smooth,mjorange,mark=none,samples=80,
+line width=1.25pt,domain=0.408248:0.81649658]  {x^6 + x^4 - x^2 + 0.1
+} node[below right,pos=0.5] {\Large $f(\theta x_1 + (1-\theta)x_2)$};
+\addplot[smooth,black,mark=none,samples=20,
+line width=1.25pt,domain=0.81649658:0.95]  {x^6 + x^4 - x^2 + 0.1
+} node[above left] {};
+% Blue dashed line
+\draw [thick, draw=mjblue, dashed] 
+        (axis cs: 0.408248,-29/216 + 0.1) -- (axis cs: 0.81649658,2/27 + 0.1)
+        node[pos=0.5, above left=0.1cm and -0.9cm,mjblue] {\Large $\theta f(x_1) + (1-\theta)f(x_2)$};
+\node[label={200:{\large $\left(x_1,f(x_1)\right)$}},circle,fill,inner sep=2pt] at (axis cs:0.408248,-29/216 + 0.1) {};
+\node[label={160:{\large $\left(x_2,f(x_2)\right)$}},circle,fill,inner sep=2pt] at (axis cs:0.81649658,2/27 + 0.1) {};
+\end{axis}
+\end{tikzpicture}
+```
+</center>
+
+::: {.aside .small-aside}
+
+For a free, 730-page book containing everything you'll ever need to know about convex optimization, see: <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf" target="_blank">https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf</a>
+
+:::
+
+## How Does Convexity Help Us?
+
+* tldr: If $f$ is convex, **tangent line** to $f$ at some point $x$ lies **underneath** $f$, and **points to** lower values of $f(x)$
+* $\implies$ procedure for **global** minimization via (e.g.) gradient descent
+
+
+<center>
+```{r, engine='tikz', opts.label="tikz_settings_fancy", fig.ext='svg', out.width='60%', label="gradient-descent-diagram"}
+\usetikzlibrary{calc}
+\usetikzlibrary{bayesnet}
+\def\axisdefaultwidth{14cm}
+\def\axisdefaultheight{7cm}
+\pgfplotsset{every axis/.style={scale only axis}}
+\begin{tikzpicture}
+%
+% sqrt(6)/3 = 0.81649658
+% sqrt(6)/6 = 0.408248
+% Halfway pt is sqrt(6)/4 = 0.612372
+% Global min: 1/sqrt(3) = 0.57735
+%
+%\pgfplotsset{ticks=none}
+		\begin{axis}[
+		    axis x line=bottom,
+			axis y line=left,
+			xmin=0.408248, xmax=0.85,
+			ymin=-0.2, ymax=0.4,
+      xtick={0.3,0.4,0.5,0.6,0.7,0.8,0.9},
+      title={\large Minimizing $f(x) = x^6 + x^4 - x^2 + \frac{1}{10}$ via Gradient Descent}
+    ]
+    \addplot[smooth,black,mark=none,samples=20,
+line width=1.25pt,domain=0.25:0.408248]  {x^6 + x^4 - x^2 + 0.1
+} node[above left] {};
+
+% Tangent at x_1
+%\addplot[smooth,black,samples=50,domain=0.5:0.9] {0.16019 - 0.47629*x};
+
+\addplot[smooth,mjorange,mark=none,samples=80,line width=1.25pt,domain=0.408248:0.81649658]  {x^6 + x^4 - x^2 + 0.1} node[below right,pos=0.5] {};
+% Right of orange curve
+%\addplot[smooth,black,mark=none,samples=20,line width=1.25pt,domain=0.81649658:0.95]  {x^6 + x^4 - x^2 + 0.1} node[above left] {};
+% x_1 label
+%\node[label={200:{\large $\left(x_1,f(x_1)\right)$}},circle,fill,inner sep=2pt] at (axis cs:0.408248,-29/216 + 0.1) {};
+% x_2 point+label
+\node[circle,fill,inner sep=2pt] at (axis cs:0.81649658,2/27 + 0.1) {};
+
+% Point after jump
+\node[label={160:{\large $\left(x_3,f(x_3)\right)$}},circle,fill,inner sep=2pt] at (axis cs:0.72,-0.0103) {};
+
+% Point after 2 jumps
+\node[label={160:{\large $\left(x_3,f(x_3)\right)$}},circle,fill,inner sep=2pt] at (axis cs:0.64,-0.0731) {};
+
+% Tangent line at x_2
+\addplot[smooth,black,samples=50,domain=0.8165-0.05:0.8165+0.05,thick,<-] {(10/3)*sqrt(2/3)*x - 553/270};
+
+% Tangent after step
+\addplot[smooth,black,samples=50,domain=0.72-0.04:0.72+0.04,thick,<-] {1.21394*x - 0.884386};
+
+% Tangent after 2 steps
+\addplot[smooth,black,samples=50,domain=0.64-0.03:0.64+0.03,thick,<-] {0.412821*x - 0.337314};
+
+% Global minimum
+
+\node[label={160:{$a,b$}},circle, fill,inner sep=2pt] at (axis cs:0.57735,-23/270) {};
+\end{axis}
+\end{tikzpicture}
+```
+</center>
+
+##
+
+```{r}
+#| label: loss-fn-plot
+#| fig-width: 4
+#| fig-height: 2.8
+base <-
+  ggplot() +
+  xlim(-5, 5) +
+  ylim(0, 25) +
+  labs(
+    x = "Y[obs] - Y[pred]",
+    y = "Prediction Badness (Loss)"
+  ) +
+  dsan_theme("full")
+
+my_fn <- function(x) { return(x^2) }
+my_deriv2 <- function(x) { return(4*x - 4) }
+my_derivN4 <- function(x) { return(-8*x - 16) }
+base + geom_function(fun = my_fn, color=cbPalette[1], linewidth=1) +
+  geom_point(data=as.data.frame(list(x=2,y=4)), aes(x=x,y=y), color=cbPalette[2], size=g_pointsize/2) + 
+  geom_function(fun = my_deriv2, color=cbPalette[2], linewidth=1) +
+  geom_point(data=as.data.frame(list(x=-4,y=16)), aes(x=x,y=y), color=cbPalette[3], size=g_pointsize/2) + 
+  geom_function(fun = my_derivN4, color=cbPalette[3], linewidth=1)
+```
+
+## Why is Convexity Important? {data-name="Neural Networks"}
+
+* Neural networks are trained via an algorithm called **backpropagation**
+
+![](/assets/img/lec05/backprop.png){fig-align="center"}
+
+## Backing Up: What is a Neural Network? {.smaller-title}
+
+* A **linked network** of $L$ **layers** each containing **nodes** $\nu_i^{[\ell]}$
+
+```{r, engine='tikz', opts.label="tikz_settings_fancy", fig.ext='svg', label="neural-net-diagram"}
+\colorlet{myred}{red!80!black}
+\colorlet{myblue}{blue!80!black}
+\colorlet{mygreen}{green!60!black}
+\colorlet{myorange}{orange!70!red!60!black}
+\colorlet{mydarkred}{red!30!black}
+\colorlet{mydarkblue}{blue!40!black}
+\colorlet{mydarkgreen}{green!30!black}
+\tikzstyle{node}=[thick,circle,draw=myblue,minimum size=22,inner sep=0.5,outer sep=0.6]
+\tikzstyle{node in}=[node,green!20!black,draw=mygreen!30!black,fill=mygreen!25]
+\tikzstyle{node hidden}=[node,blue!20!black,draw=myblue!30!black,fill=myblue!20]
+\tikzstyle{node convol}=[node,orange!20!black,draw=myorange!30!black,fill=myorange!20]
+\tikzstyle{node out}=[node,red!20!black,draw=myred!30!black,fill=myred!20]
+\tikzstyle{connect}=[thick,mydarkblue] %,line cap=round
+\tikzstyle{connect arrow}=[-{Latex[length=4,width=3.5]},thick,mydarkblue,shorten <=0.5,shorten >=1]
+\tikzset{ % node styles, numbered for easy mapping with \nstyle
+	node 1/.style={node in},
+	node 2/.style={node hidden},
+	node 3/.style={node out},
+}
+\def\nstyle{int(\lay<\Nnodlen?min(2,\lay):3)} % map layer number onto 1, 2, or 3
+\begin{tikzpicture}[x=2.2cm,y=1.4cm]
+\readlist\Nnod{4,5,5,5,3} % array of number of nodes per layer
+\readlist\Nstr{n,N_1,N_2,N_3,k} % array of string number of nodes per layer
+\readlist\Cstr{\strut x,\nu^{[\prev]},\nu^{[\prev]},\nu^{[\prev]},y} % array of coefficient symbol per layer
+\def\yshift{0.5} % shift last node for dots
+\foreachitem \N \in \Nnod{ % loop over layers
+  \def\lay{\Ncnt} % alias of index of current layer
+  \pgfmathsetmacro\prev{int(\Ncnt-1)} % number of previous layer
+  \foreach \i [evaluate={\c=int(\i==\N); \y=\N/2-\i-\c*\yshift;
+    \index=(\i<\N?int(\i):"\Nstr[\lay]");
+    \x=\lay; \n=\nstyle;}] in {1,...,\N}{ % loop over nodes
+    % NODES
+    \node[node \n] (N\lay-\i) at (\x,\y) {$\Cstr[\lay]_{\index}$};
+    
+    % CONNECTIONS
+    \ifnum\lay>1 % connect to previous layer
+    \foreach \j in {1,...,\Nnod[\prev]}{ % loop over nodes in previous layer
+      \draw[connect,white,line width=1.2] (N\prev-\j) -- (N\lay-\i);
+      \draw[connect] (N\prev-\j) -- (N\lay-\i);
+      %\draw[connect] (N\prev-\j.0) -- (N\lay-\i.180); % connect to left
+    }
+    \fi % else: nothing to connect first layer
+  }
+  \path (N\lay-\N) --++ (0,1+\yshift) node[midway,scale=1.5] {$\vdots$};
+}
+\end{tikzpicture}
+```
+
+## What Do the Nodes Do?
+
+Each node $\nu_i^{[\ell]}$ in the network:
+
+* Takes in an **input**,
+* Transforms it using a **weight** $w^{[\ell]}_i$ and **bias** $b^{[\ell]}_i$, and
+* Produces an **output**, typically using a **sigmoid function** like $\sigma(x) = \frac{1}{1+e^{-x}}$:
+
+$$
+\text{output}^{[\ell]}_i = \sigma(w^{[\ell]}_i \cdot \text{input} + b^{[\ell]}_i)
+$$
+
+## How Does it "Learn"?
+
+* Need a **loss function** $\mathcal{L}(\widehat{y}, y)$
+* Starting from the end, we **backpropagate** the loss, updating **weights** and **biases** as we go
+* Higher loss $\implies$ greater change to weights and biases
+
+## Next Week {data-state="hide-menubar"}
+
+* Classification
+  * Binary
+  * Multi-Class
+* Here we're **optimizing** the **decision boundary** separating classes we want to distinguish between!
+* We'll start with models simpler than neural nets, but remember that neural net is **one of many tools** for classification (and regression, and many other tasks!)
+
+<!-- ## References {data-state="hide-menubar"} -->

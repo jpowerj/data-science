@@ -19,31 +19,33 @@ book:
   #     - about.qmd 
   chapters:
     - index.qmd
-    - 00-intro.qmd
+    - ch01.qmd
     - part: "Data Science Workflow"
       chapters:
-        - 01-ds-tools.qmd
-        - 02-data-gathering.qmd
+        - ch02.qmd
+        - ch03.qmd
     - part: "Data Cleaning and Analysis"
       chapters:
-        - 03-data-cleaning.qmd
-        - 04-eda.qmd
+        - ch04.qmd
+        - ch05.qmd
     - part: "Machine Learning Fundamentals"
       chapters:
-        - 05-optimization.qmd
-        - 06-classification.qmd
+        - ch06.qmd
+        - ch07.qmd
     - part: "Machine Learning Algorithms"
       chapters:
-        - 07-classification-algs.qmd
-        - 08-neural-nets.qmd
-        - 09-unsupervised.qmd
+        - ch08.qmd
+        - ch09.qmd
+        - ch10.qmd
     - part: "Applications"
       chapters:
-        - 10-network-data.qmd
-        - 11-image-data.qmd
-        - 12-nlp.qmd
-    - 13-conclusion.qmd
+        - ch11.qmd
+        - ch12.qmd
+        - ch13.qmd
+    - ch14.qmd
     - references.qmd
+  appendices:
+    - resources.qmd
 
 bibliography: references.bib
 
