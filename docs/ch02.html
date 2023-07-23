@@ -100,13 +100,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -322,34 +320,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#operating-systems" id="toc-operating-systems" class="nav-link active" data-scroll-target="#operating-systems"><span class="header-section-number">2.1</span> Operating Systems</a></li>
-  <li><a href="#git-vs.-github" id="toc-git-vs.-github" class="nav-link" data-scroll-target="#git-vs.-github"><span class="header-section-number">2.2</span> Git vs.&nbsp;GitHub</a></li>
-  <li><a href="#git-diagram" id="toc-git-diagram" class="nav-link" data-scroll-target="#git-diagram"><span class="header-section-number">2.3</span> Git Diagram</a></li>
-  <li><a href="#initializing-a-repo" id="toc-initializing-a-repo" class="nav-link" data-scroll-target="#initializing-a-repo"><span class="header-section-number">2.4</span> Initializing a Repo</a></li>
-  <li><a href="#adding-and-committing-a-file" id="toc-adding-and-committing-a-file" class="nav-link" data-scroll-target="#adding-and-committing-a-file"><span class="header-section-number">2.5</span> Adding and Committing a File</a></li>
-  <li><a href="#the-commit-log" id="toc-the-commit-log" class="nav-link" data-scroll-target="#the-commit-log"><span class="header-section-number">2.6</span> The Commit Log</a></li>
-  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes"><span class="header-section-number">2.7</span> Making Changes</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.8</span> </a></li>
-  <li><a href="#more-changes" id="toc-more-changes" class="nav-link" data-scroll-target="#more-changes"><span class="header-section-number">2.9</span> More Changes</a></li>
-  <li><a href="#and-the-git-log" id="toc-and-the-git-log" class="nav-link" data-scroll-target="#and-the-git-log"><span class="header-section-number">2.10</span> And the <code>git log</code></a></li>
-  <li><a href="#undoing-a-commit-i" id="toc-undoing-a-commit-i" class="nav-link" data-scroll-target="#undoing-a-commit-i"><span class="header-section-number">2.11</span> Undoing a Commit I</a></li>
-  <li><a href="#undoing-a-commit-ii" id="toc-undoing-a-commit-ii" class="nav-link" data-scroll-target="#undoing-a-commit-ii"><span class="header-section-number">2.12</span> Undoing a Commit II</a></li>
-  <li><a href="#onwards-and-upwards" id="toc-onwards-and-upwards" class="nav-link" data-scroll-target="#onwards-and-upwards"><span class="header-section-number">2.13</span> Onwards and Upwards</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.14</span> </a></li>
-  <li><a href="#but-why-these-diagrams" id="toc-but-why-these-diagrams" class="nav-link" data-scroll-target="#but-why-these-diagrams"><span class="header-section-number">2.15</span> But Why These Diagrams?</a></li>
-  <li><a href="#the-github-side-remote" id="toc-the-github-side-remote" class="nav-link" data-scroll-target="#the-github-side-remote"><span class="header-section-number">2.16</span> The GitHub Side: Remote</a></li>
-  <li><a href="#an-empty-repo" id="toc-an-empty-repo" class="nav-link" data-scroll-target="#an-empty-repo"><span class="header-section-number">2.17</span> An Empty Repo</a></li>
-  <li><a href="#refresh-after-git-push" id="toc-refresh-after-git-push" class="nav-link" data-scroll-target="#refresh-after-git-push"><span class="header-section-number">2.18</span> Refresh after <code>git push</code></a></li>
-  <li><a href="#commit-history" id="toc-commit-history" class="nav-link" data-scroll-target="#commit-history"><span class="header-section-number">2.19</span> Commit History</a></li>
-  <li><a href="#checking-the-diff" id="toc-checking-the-diff" class="nav-link" data-scroll-target="#checking-the-diff"><span class="header-section-number">2.20</span> Checking the <code>diff</code></a></li>
-  <li><a href="#web-development" id="toc-web-development" class="nav-link" data-scroll-target="#web-development"><span class="header-section-number">2.21</span> Web Development</a></li>
-  <li><a href="#getting-content-onto-the-internet" id="toc-getting-content-onto-the-internet" class="nav-link" data-scroll-target="#getting-content-onto-the-internet"><span class="header-section-number">2.22</span> Getting Content onto the Internet</a></li>
-  <li><a href="#deploying-from-a-branchfolder" id="toc-deploying-from-a-branchfolder" class="nav-link" data-scroll-target="#deploying-from-a-branchfolder"><span class="header-section-number">2.23</span> Deploying from a Branch/Folder</a></li>
-  <li><a href="#r-vs.-rstudio-vs.-quarto" id="toc-r-vs.-rstudio-vs.-quarto" class="nav-link" data-scroll-target="#r-vs.-rstudio-vs.-quarto"><span class="header-section-number">2.24</span> R vs.&nbsp;RStudio vs.&nbsp;Quarto</a></li>
-  <li><a href="#getting-r-onto-your-computer" id="toc-getting-r-onto-your-computer" class="nav-link" data-scroll-target="#getting-r-onto-your-computer"><span class="header-section-number">2.25</span> Getting R Onto Your Computer</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python"><span class="header-section-number">2.26</span> Python</a></li>
-  <li><a href="#google-colab" id="toc-google-colab" class="nav-link" data-scroll-target="#google-colab"><span class="header-section-number">2.27</span> Google Colab</a></li>
-  <li><a href="#colab-runtime-options" id="toc-colab-runtime-options" class="nav-link" data-scroll-target="#colab-runtime-options"><span class="header-section-number">2.28</span> Colab Runtime Options</a></li>
+  <li><a href="#first-things-first-shell-commands" id="toc-first-things-first-shell-commands" class="nav-link active" data-scroll-target="#first-things-first-shell-commands"><span class="header-section-number">2.1</span> First Things First: Shell Commands</a></li>
+  <li><a href="#r-and-python-for-data-science" id="toc-r-and-python-for-data-science" class="nav-link" data-scroll-target="#r-and-python-for-data-science"><span class="header-section-number">2.2</span> <code>R</code> and Python for Data Science</a></li>
+  <li><a href="#pandas-and-numpy" id="toc-pandas-and-numpy" class="nav-link" data-scroll-target="#pandas-and-numpy"><span class="header-section-number">2.3</span> Pandas and NumPy</a></li>
+  <li><a href="#dataframes-vs.-views-of-dataframes" id="toc-dataframes-vs.-views-of-dataframes" class="nav-link" data-scroll-target="#dataframes-vs.-views-of-dataframes"><span class="header-section-number">2.4</span> DataFrames vs.&nbsp;Views of DataFrames</a>
+  <ul class="collapse">
+  <li><a href="#the-stack-and-the-heap" id="toc-the-stack-and-the-heap" class="nav-link" data-scroll-target="#the-stack-and-the-heap"><span class="header-section-number">2.4.1</span> The Stack and the Heap</a></li>
+  </ul></li>
+  <li><a href="#manipulating-a-dataframe" id="toc-manipulating-a-dataframe" class="nav-link" data-scroll-target="#manipulating-a-dataframe"><span class="header-section-number">2.5</span> Manipulating a DataFrame</a></li>
   </ul>
 </nav>
     </div>
@@ -394,528 +372,524 @@ Note
 ```{=html}
 <iframe src="./ch02.slides.html" width="100%" height="400"></iframe>
 ``` -->
-<section id="operating-systems" class="level2 smaller" data-name="Workflow" data-number="2.1">
-<h2 class="smaller anchored" data-name="Workflow" data-number="2.1" data-anchor-id="operating-systems"><span class="header-section-number">2.1</span> Operating Systems</h2>
+<p>At the end of the previous chapter we learned how to install <code>R</code> and Python. <strong>Both</strong> of these languages are central pieces of the data scientist’s toolkit, so throughout this book we will aim to build your skills in both, while highlighting tasks that may be easier to carry out in one language relative to the other.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="first-things-first-shell-commands" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="first-things-first-shell-commands"><span class="header-section-number">2.1</span> First Things First: Shell Commands</h2>
+<p>Oftentimes, given the association of data science with programming languages, your first instinct when starting a data science project will be to create an <code>R</code> or Python file. For the sake of building effective data science habits, however, you should ask yourself if the task you’re trying to accomplish could be done more simply using shell commands. <span class="citation" data-cites="jurafsky_speech_2023">(<a href="references.html#ref-jurafsky_speech_2023" role="doc-biblioref"><strong>jurafsky_speech_2023?</strong></a>)</span>, for example, one of the most widely-used Natural Language Processing textbooks, introduces the concept of text normalization using Unix commands rather than Python or <code>R</code>. Demonstrating how Unix can quickly (usually far more quickly than <code>R</code> or Python, for simpler tasks like this) process text corpora, they take a text file <code>sh.txt</code> containing the complete works of Shakespeare and use the following Unix command</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="at">-sc</span> <span class="st">'A-Za-z'</span> <span class="st">'\n'</span> <span class="op">&lt;</span> sh.txt <span class="kw">|</span> <span class="fu">tr</span> A-Z a-z <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-n</span> <span class="at">-r</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to discover the ten most frequently-occurring words across Shakespeare’s works:</p>
+<pre><code>27378 the
+26084 and
+22538 i
+19771 to
+17481 of
+14725 a
+13826 you
+12489 my
+11318 that
+11112 in</code></pre>
+<p>In the case of data science in general, simple operations like <strong>creating, moving, and copying files</strong>, <strong>downloading files from the internet</strong>, and <strong>searching for particular phrases or expressions</strong> across your entire disk or within a particular directory are all tasks that can be carried out easily and effectively using a small set of Unix commands.</p>
+</section>
+<section id="r-and-python-for-data-science" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="r-and-python-for-data-science"><span class="header-section-number">2.2</span> <code>R</code> and Python for Data Science</h2>
+<p>When it comes to learning the basics of <code>R</code>, Python, or any other programming language, we believe that there’s no need for us to reinvent the wheel—there are thousands of incredible resources available for free on the internet that can do a better job of teaching the fundamentals of these languages better than we ever could. If you don’t feel comfortable in terms of programming experience, we recommend the following resources in particular (which you can work through and then return to the book!):</p>
 <ul>
-<li><p><strong>Linux</strong>: <i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> (<strong>Free!</strong>)</p>
-<ul>
-<li>The “standard” OS for developers! You can expect instructions to use Linux commands: <code>ls</code>, <code>cd</code>, <code>touch</code>, <code>mv</code> …</li>
-</ul></li>
-<li><p><strong>Windows</strong>: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> <strong>BUT</strong>, proprietary shell (constantly googling “PowerShell equivalent”)</p>
-<table class="table">
+<li><a href="https://www.datacamp.com/" target="_blank">DataCamp</a></li>
+<li><a href="https://www.codecademy.com/" target="_blank">Codecademy</a></li>
+</ul>
+<p>Whether or not you have this background knowledge, don’t worry! We will still work to make sure that we explain new concepts with as little technical jargon as possible throughout.</p>
+</section>
+<section id="pandas-and-numpy" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="pandas-and-numpy"><span class="header-section-number">2.3</span> Pandas and NumPy</h2>
+<p>While <code>R</code> has a range of libraries that are helpful for reading, manipulating, and analyzing data, in Python two particular libraries stand above the rest: Pandas and NumPy. After installing them on the command-line using</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>you’ll be able to import and start using them by including the following at the top of your code:</p>
+<div id="22b9c14e" class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Note that the syntax here, <code>import &lt;x&gt; as &lt;y&gt;</code>, tells Python that you want to import the library whose full name is <code>&lt;x&gt;</code>, but that in your code you’d like to <strong>reference</strong> this imported library using the shorthand <code>&lt;y&gt;</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Importing Pandas and NumPy">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importing Pandas and NumPy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is standard practice in data science to use this shorthand—<code>pd</code> to refer to <code>pandas</code> and <code>np</code> to refer to <code>numpy</code>—when importing the two libraries. This practice will help immensely when e.g.&nbsp;searching the web for errors in the functions you’re using (since those functions will be written as <code>pd.&lt;function&gt;</code>)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Once you have imported these libraries, a standard data science workflow for opening a data file and viewing its contents looks like:</p>
+<div id="2249e0d2" class="cell" data-execution_count="2">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"./assets/data/ch02/mydata.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th>Linux</th>
-<th>PowerShell</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">index</th>
+<th data-quarto-table-cell-role="th">var_1</th>
+<th data-quarto-table-cell-role="th">var_2</th>
+<th data-quarto-table-cell-role="th">var_3</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>ls</code></td>
-<td><code>Get-ChildItem</code></td>
+<td data-quarto-table-cell-role="th">0</td>
+<td>A</td>
+<td>val_A1</td>
+<td>val_A2</td>
+<td>val_A3</td>
 </tr>
 <tr class="even">
-<td><code>cd</code></td>
-<td><code>Set-Location</code></td>
+<td data-quarto-table-cell-role="th">1</td>
+<td>B</td>
+<td>val_B1</td>
+<td>val_B2</td>
+<td>val_B3</td>
 </tr>
 <tr class="odd">
-<td><code>touch</code></td>
-<td><code>New-Item</code></td>
-</tr>
-<tr class="even">
-<td><code>mv</code></td>
-<td><code>Move-Item</code></td>
-</tr>
-</tbody>
-</table></li>
-<li><p><strong>OSX</strong>: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i> <strong>BUT</strong>, OSX and Linux both built on Unix</p>
-<p><span class="math inline">\(\implies\)</span> if you know Terminal you know Linux!</p></li>
-</ul>
-</section>
-<section id="git-vs.-github" class="level2" data-name="Git" data-number="2.2">
-<h2 data-name="Git" data-number="2.2" class="anchored" data-anchor-id="git-vs.-github"><span class="header-section-number">2.2</span> Git vs.&nbsp;GitHub</h2>
-<p>(Important distinction!)</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong><a href="https://git-scm.com/" target="_blank">Git <i class="bi bi-git" style="margin-left: 5px !important;"></i></a></strong></p>
-<ul>
-<li>Command-line program</li>
-<li><code>git init</code> in shell to create</li>
-<li><code>git add</code> to track files</li>
-<li><code>git commit</code> to commit changes to tracked files</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong><a href="https://github.com/" target="_blank">GitHub <i class="bi bi-github" style="margin-left: 5px !important;"></i></a></strong></p>
-<ul>
-<li>Code hosting website</li>
-<li>Create a <strong>repository</strong> (repo) for each project</li>
-<li>Can <strong>clone</strong> repos onto your local machine</li>
-</ul>
-</div>
-</div>
-<center style="border: 2px solid black !important; padding: 5px !important;">
-<strong><code>git push</code>/<code>git pull</code></strong>: The link between the two!
-</center>
-</section>
-<section id="git-diagram" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="git-diagram"><span class="header-section-number">2.3</span> Git Diagram</h2>
-<p><img src="https://mermaid.ink/svg/pako:eNp9j70KAjEQhF8lbH1PkFqwsrJNsyZ7STB_rBtBjnt34x0IitgNM9_AzAK2OgINPsqRsQVTlFK25hzlW14Yiw3K0Z1SbXsayF5rl0_zZ_uNZoxlczKxp_9NmGBQo-HGxOUVGJBAmQzoIR3N2JMYMGUdKHap50exoIU7TdCbQ6FDRM-YQc-YbsMlF6Xyab-9vV-fAwFZpw" class="quarto-figure quarto-figure-center"></p>
-</section>
-<section id="initializing-a-repo" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="initializing-a-repo"><span class="header-section-number">2.4</span> Initializing a Repo</h2>
-<ul>
-<li>Let’s make a directory for our project called <code>cool-project</code>, and initialize a Git repo for it</li>
-</ul>
-<!-- ```{.bash code-line-numbers="|3|4|"} -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~$</span> mkdir cool-project</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~$</span> cd cool-project</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git init</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Initialized</span> empty Git repository in /home/user/cool-project/.git/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>This creates a hidden folder, <code>.git</code>, in the directory:</li>
-</ul>
-<!-- ```bash{.bash code-line-numbers="|3-5"} -->
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> ls <span class="at">-lah</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">total</span> 12K</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>  3 user user 4.0K May 28 00:53 .</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span> 12 user user 4.0K May 28 00:53 ..</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">drwxr-xr-x</span>  7 user user 4.0K May 28 00:53 .git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="footer footersmall">
-<p>The Git Side: Local I</p>
-</div>
-</section>
-<section id="adding-and-committing-a-file" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="adding-and-committing-a-file"><span class="header-section-number">2.5</span> Adding and Committing a File</h2>
-<p>We’re writing Python code, so let’s create and track <code>cool_code.py</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> touch cool_code.py</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">No</span> commits yet</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">new</span> file:   cool_code.py</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Initial version of cool_code.py"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> <span class="er">(</span><span class="ex">root-commit</span><span class="kw">)</span> <span class="ex">b40dc25]</span> Initial version of cool_code.py</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 0 insertions<span class="er">(</span><span class="ex">+</span><span class="kw">)</span><span class="ex">,</span> 0 deletions<span class="er">(</span><span class="ex">-</span><span class="kw">)</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">create</span> mode 100644 cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="the-commit-log" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="the-commit-log"><span class="header-section-number">2.6</span> The Commit Log</h2>
-<ul>
-<li>View the commit log using <code>git log</code>:</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc252a3b7355cc4c28397fefe7911ff3c94b9 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:57:16 2023 +0000</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> version of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="hidden">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">gitGraph
-   commit id: "b40dc25"
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<p><img class="r-stretch center" src="https://mermaid.ink/svg/pako:eNpdjjELwjAUhP9KOOjWQYoumQUnJzfJ8sx7bQNNUuLLIKX_3VZxcb37vuMW-MwCiyHopdA8umSM8TnGoCawNQ6P44F9d3JwqWn-y84BLaKUSIG3mWX3HXSUKA47wdJTnXTX1w2lqvn2Sh5WS5UWdWZSOQcaCkXYnqbnlgoHzeX6vfZ52GKmdM_5x6xvd4Y8pg"></p>
-</div>
-</section>
-<section id="making-changes" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="making-changes"><span class="header-section-number">2.7</span> Making Changes</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">nothing</span> to commit, working tree clean</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"1 + 1"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> more cool_code.py</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> + 1</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Added code to cool_code.py"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> e3bc497] Added code to cool_code.py</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="section" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="section"><span class="header-section-number">2.8</span> </h2>
-<p>The <code>git log</code> will show the new version:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> version of cool_code.py</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNpljrEKwjAURX8l3LmDaEXMLDg5uUmW17zXNtA0Jb4MUvrvtoqT672Hw5nhEwssuqDXTFPvRmOMTzEGNYGtcWjqHfv90eH_kkPj6_PJARWi5EiBV9W8gQ7aSxSHjWNpqQy6KZYVpaLp_ho9rOYiFcrEpHIJ1GWKsC0Nz3UVDpry7Zv3qaww0fhI6ccsb4kvPis"></p>
-</section>
-<section id="more-changes" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="more-changes"><span class="header-section-number">2.9</span> More Changes</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"2 + 2"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> more cool_code.py</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">1</span> + 1</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">2</span> + 2</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Second version of cool_code.py"</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> 4007db9] Second version of cool_code.py</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="and-the-git-log" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="and-the-git-log"><span class="header-section-number">2.10</span> And the <code>git log</code></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 4007db9a031ca134fe09eab840b2bc845366a9c1 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:39:28 2023 +0000</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Second</span> version of cool_code.py</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="undoing-a-commit-i" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="undoing-a-commit-i"><span class="header-section-number">2.11</span> Undoing a Commit I</h2>
-<p>First check the <code>git log</code> to find the <strong>hash</strong> for the commit you want to revert back to:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNptjz8PgjAQxb9KczNDoxhCZxMnJzfT5do7oAmlpF4HQ_jugsZJ1_d-eX8W8IkYDPRBLhnnwU5KKZ9iDKICGWXB1Zr84WTh1-Kj83Xb_LNqrRtyrQWoIHKOGGhrWXbQggwc2cLOEXdYRtkj1g3FIun2nDwYyYUrKDOh8DlgnzGC6XB8bCpTkJSvn-XvAxXMON1T-jLrC-H5Res"></p>
-</section>
-<section id="undoing-a-commit-ii" class="level2" data-number="2.12">
-<h2 data-number="2.12" class="anchored" data-anchor-id="undoing-a-commit-ii"><span class="header-section-number">2.12</span> Undoing a Commit II</h2>
-<ul>
-<li><i class="bi bi-exclamation-triangle"></i> <strong>This is irreversable!</strong> <i class="bi bi-exclamation-triangle"></i></li>
-</ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git reset <span class="at">--hard</span> e3bc497ac</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HEAD</span> is now at e3bc497 Added code to cool_code.py</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="onwards-and-upwards" class="level2" data-number="2.13">
-<h2 data-number="2.13" class="anchored" data-anchor-id="onwards-and-upwards"><span class="header-section-number">2.13</span> Onwards and Upwards</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> echo <span class="st">"3 + 3"</span> <span class="op">&gt;&gt;</span> cool_code.py</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git add cool_code.py</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git status</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">On</span> branch main</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Changes</span> to be committed:</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">use</span> <span class="st">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="kw">)</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="ex">modified:</span>   cool_code.py</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git commit <span class="at">-m</span> <span class="st">"Added different code to cool_code.py"</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[main</span> 700d955] Added different code to cool_code.py</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">1</span> file changed, 1 insertion<span class="er">(</span><span class="ex">+</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="https://mermaid.ink/svg/pako:eNptz7EOgkAMBuBXuXRmuCiGcLPEyQUSB3NLuVa4xOPIWQZDeHdB46Rr_y9t_xlcJAYDnZdTwrG3g1LKxRC8KE9GWWhzTW53sPAb8b51eVn8i3KtC2pLC0qeIxtVV5eqbqpfWGhN5WFdDxkETgE9re_MG7QgPQe2sDniG0532W4tK8VJYvMcHBhJE2cwjYTCR49dwgDmhvfHOmXyEtP5U_HdNIMRh2uMX7O8ADEKUdc"></p>
-</section>
-<section id="section-1" class="level2" data-number="2.14">
-<h2 data-number="2.14" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.14</span> </h2>
-<p>The final <code>git log</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">user@hostname:~/cool-project$</span> git log</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> 700d955faacb27d7b8bc464b9451851b5e319f20 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main<span class="kw">)</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:44:49 2023 +0000</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> different code to cool_code.py</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> e3bc497acbb5a487566ff2014dcd7b83d0c75224</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:38:05 2023 +0000</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Added</span> code to cool_code.py</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">commit</span> b40dc25b14c0426b06c8d182184e147853f3c12e</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Author:</span> Jeff Jacobs <span class="op">&lt;</span>jjacobs3@cs.stanford.edu<span class="op">&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span>   Sun May 28 00:37:02 2023 +0000</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Initial</span> <span class="er">(</span><span class="ex">empty</span><span class="kw">)</span> <span class="ex">version</span> of cool_code.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="but-why-these-diagrams" class="level2" data-number="2.15">
-<h2 data-number="2.15" class="anchored" data-anchor-id="but-why-these-diagrams"><span class="header-section-number">2.15</span> But Why These Diagrams?</h2>
-<p>Even the simplest projects can start to look like:</p>
-<div class="hidden">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">gitGraph
-       commit id: "537dd67"
-       commit id: "6639143"
-       branch nice_feature
-       checkout nice_feature
-       commit id: "937ded8"
-       checkout main
-       commit id: "9e6679c"
-       checkout nice_feature
-       branch very_nice_feature
-       checkout very_nice_feature
-       commit id: "7f4de03"
-       checkout main
-       commit id: "6df80c1"
-       checkout nice_feature
-       commit id: "bd0ebb8"
-       checkout main
-       merge nice_feature id: "9ff61cc" tag: "V 1.0.0" type: HIGHLIGHT
-       checkout very_nice_feature
-       commit id: "370613b"
-       checkout main
-       commit id: "9a07a97"
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p><img src="https://mermaid.ink/svg/pako:eNqdU8FqwzAM_RWjcykO6Zwm50E72E4bO4xAUWw5MWvi4DmDUPrvc9aFpdB27Qy-SO9JjydpB9IqggxK41cO2ypv2OFJW9fGM6MylsNdnCglkhxOp4WI02gRT9KFw0ZWrDGSNprQd45-qRXJd9v5M9lp4TT0JbWc9h3JNZrmDImESFJ5inSy44_WT3L95rLgC5CpgEQvFPH4NtVC6SWX0dWqj8iF4lQUf_tUkyvpqN7omdYiksEz5rEcAq8smvM5HwJ9SxlbP6zWj-G__NuVOOEiiosbZ4k8wTQsHswgiA9AFZZ1N4Bz8BXVlMOAU6Sx2_qh-D5AsfP2uW8kZN51NIOuVejp3mDpsIZM4_YjREkZb93T4QC-72AGLTZv1o6Y_RdGMfVs"></p>
-</section>
-<section id="the-github-side-remote" class="level2" data-number="2.16">
-<h2 data-number="2.16" class="anchored" data-anchor-id="the-github-side-remote"><span class="header-section-number">2.16</span> The GitHub Side: Remote</h2>
-<p><img src=".\assets/img/github_repo.png" class="img-fluid"></p>
-</section>
-<section id="an-empty-repo" class="level2" data-number="2.17">
-<h2 data-number="2.17" class="anchored" data-anchor-id="an-empty-repo"><span class="header-section-number">2.17</span> An Empty Repo</h2>
-<p><img src=".\assets/img/github_empty_repo.png" class="img-fluid"></p>
-</section>
-<section id="refresh-after-git-push" class="level2" data-number="2.18">
-<h2 data-number="2.18" class="anchored" data-anchor-id="refresh-after-git-push"><span class="header-section-number">2.18</span> Refresh after <code>git push</code></h2>
-<p><img src=".\assets/img/github_push.png" class="img-fluid"></p>
-</section>
-<section id="commit-history" class="level2" data-number="2.19">
-<h2 data-number="2.19" class="anchored" data-anchor-id="commit-history"><span class="header-section-number">2.19</span> Commit History</h2>
-<p><img src=".\assets/img/gh_history.png" class="img-fluid"></p>
-</section>
-<section id="checking-the-diff" class="level2" data-number="2.20">
-<h2 data-number="2.20" class="anchored" data-anchor-id="checking-the-diff"><span class="header-section-number">2.20</span> Checking the <code>diff</code></h2>
-<p><img src=".\assets/img/gh_diff.png" class="img-fluid"></p>
-</section>
-<section id="web-development" class="level2" data-name="Web Dev" data-number="2.21">
-<h2 data-name="Web Dev" data-number="2.21" class="anchored" data-anchor-id="web-development"><span class="header-section-number">2.21</span> Web Development</h2>
-<table class="table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Frontend<br><i class="bi bi-layout-text-window-reverse"></i> <i class="bi bi-display"></i> <i class="bi bi-graph-up"></i> <i class="bi bi-ui-checks"></i></th>
-<th>Backend<br><i class="bi bi-database"></i> <i class="bi bi-terminal"></i> <i class="bi bi-table"></i> <i class="bi bi-key"></i></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Low Level</strong></td>
-<td>HTML/CSS/JavaScript</td>
-<td>GitHub Pages</td>
-</tr>
-<tr class="even">
-<td><strong>Middle Level</strong></td>
-<td>JS Libraries</td>
-<td>PHP, SQL</td>
-</tr>
-<tr class="odd">
-<td><strong>High Level</strong></td>
-<td>React, Next.js</td>
-<td>Node.js, Vercel</td>
+<td data-quarto-table-cell-role="th">2</td>
+<td>C</td>
+<td>val_C1</td>
+<td>val_C2</td>
+<td>val_C3</td>
 </tr>
 </tbody>
 </table>
-<div class="notes">
-<p>Frontend icons: UI+UI elements, what the user sees (on the screen), user experience (UX), data visualization Backend icons: Databases, Security</p>
+
+</div>
+</div>
+</div>
+<p>We can then perform an operation on our data, like dropping the first row, and use <code>head()</code> again to make sure the code did what we expected it to do to our DataFrame:</p>
+<div id="24a4a0c2" class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.iloc[<span class="dv">1</span>:].copy()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">index</th>
+<th data-quarto-table-cell-role="th">var_1</th>
+<th data-quarto-table-cell-role="th">var_2</th>
+<th data-quarto-table-cell-role="th">var_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>B</td>
+<td>val_B1</td>
+<td>val_B2</td>
+<td>val_B3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>C</td>
+<td>val_C1</td>
+<td>val_C2</td>
+<td>val_C3</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </section>
-<section id="getting-content-onto-the-internet" class="level2 nostretch" data-number="2.22">
-<h2 class="nostretch anchored" data-number="2.22" data-anchor-id="getting-content-onto-the-internet"><span class="header-section-number">2.22</span> Getting Content onto the Internet</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>
-Step 1: <code>index.html</code>
-</li>
-<li>
-Step 2: Create GitHub repository
-</li>
-<li>
-Step 3: <code>git init</code>, <code>git add -A .</code>, <code>git push</code>
-</li>
-<li style="border: 2px solid black !important; padding: 4px !important;">
-<span>Step 4: Enable GitHub Pages in repo settings</span>
-</li>
-<li>
-Step 5: <code>&lt;username&gt;.github.io</code>!
-</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src=".\assets/img/gh_pages.png" class="img-fluid figure-img" style="width:70.0%"></p>
-</figure>
+<section id="dataframes-vs.-views-of-dataframes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="dataframes-vs.-views-of-dataframes"><span class="header-section-number">2.4</span> DataFrames vs.&nbsp;Views of DataFrames</h2>
+<p>Probably the most frequent source of errors, over all of the data science couses we’ve taught, has been Pandas’ distinction between a DataFrame itself and a <strong>view</strong> of a DataFrame. There is a good reason for the distinction, but it is typically a baffling concept for anyone just starting to work with DataFrames. To understand this distinction, we first need to quickly look at the structure of how <strong>objects</strong> are stored in memory (this is how storage works in general—in Python, <code>R</code>, or any other programming language—so it’s useful knowledge regardless of what particular corner of the data science world you occupy!).</p>
+<section id="the-stack-and-the-heap" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="the-stack-and-the-heap"><span class="header-section-number">2.4.1</span> The Stack and the Heap</h3>
+<p>Let’s look at what happens, in the computer’s memory, when we run the following code:</p>
+<div id="48a2f147" class="cell" data-execution_count="4">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>country_df <span class="op">=</span> pd.read_csv(<span class="st">"./assets/data/ch02/country_pop.csv"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pop_col <span class="op">=</span> country_df[<span class="st">'pop'</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>num_rows <span class="op">=</span> <span class="bu">len</span>(country_df)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>filled <span class="op">=</span> <span class="bu">all</span>(<span class="op">~</span>pd.isna(country_df))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>alg_row <span class="op">=</span> country_df.loc[country_df[<span class="st">'name'</span>] <span class="op">==</span> <span class="st">"Algeria"</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> <span class="bu">len</span>(country_df.columns)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> <span class="st">"Jeff"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>cur_date <span class="op">=</span> datetime.datetime.now()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>j <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="dv">314</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>And let’s look at the values Python prints out when we ask it to print some of these variables. First, the whole DataFrame, <code>country_df</code>:</p>
+<div id="8a57e789" class="cell" data-execution_count="5">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>country_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Albania</td>
+<td>2.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Algeria</td>
+<td>44.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Angola</td>
+<td>34.5</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
+<p>Next, <code>pop_col</code>:</p>
+<div id="f2f79992" class="cell" data-execution_count="6">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pop_col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>0     2.8
+1    44.2
+2    34.5
+Name: pop, dtype: float64</code></pre>
+</div>
+</div>
+<p>How about <code>alg_row</code>?</p>
+<div id="3abd7c25" class="cell" data-execution_count="7">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alg_row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Algeria</td>
+<td>44.2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>These three variables <code>country_df</code>, <code>pop_col</code>, and <code>alg_row</code> may seem like they are three separate, entirely distinct entities in the computer’s memory. After all, we gave them three different names, right? Let’s look at how this situation would be represented <strong>in the computer’s memory</strong>, however:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 499.54 380.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 376)">
+<title>g</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-376 495.54,-376 495.54,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>clusterG0</title>
+<polygon fill="none" stroke="black" points="8,-8 8,-364 483.54,-364 483.54,-8 8,-8"></polygon>
+<text text-anchor="middle" x="245.77" y="-347.4" font-family="Times,serif" font-size="14.00">Memory (After Code Execution)</text>
+</g>
+<g id="clust3" class="cluster">
+<title>clusterG2</title>
+<polygon fill="none" stroke="black" points="252.03,-18 252.03,-331 475.54,-331 475.54,-18 252.03,-18"></polygon>
+<text text-anchor="middle" x="363.79" y="-314.4" font-family="Times,serif" font-size="14.00">Heap</text>
+</g>
+<g id="clust4" class="cluster">
+<title>clusterG20</title>
+<polygon fill="none" stroke="black" points="293.88,-126 293.88,-298 433.69,-298 433.69,-126 293.88,-126"></polygon>
+</g>
+<g id="clust2" class="cluster">
+<title>clusterG1</title>
+<polygon fill="none" stroke="black" points="16,-16 16,-331 232.03,-331 232.03,-16 16,-16"></polygon>
+<text text-anchor="middle" x="124.01" y="-314.4" font-family="Times,serif" font-size="14.00">Stack</text>
+</g>
+<!-- stvars -->
+<g id="node1" class="node">
+<title>stvars</title>
+<polygon fill="none" stroke="black" points="24,-24.6 24,-297.4 224.03,-297.4 224.03,-24.6 24,-24.6"></polygon>
+<text text-anchor="middle" x="74.01" y="-280.8" font-family="Courier,monospace" font-size="14.00">country_df</text>
+<polyline fill="none" stroke="black" points="24,-272.6 124.01,-272.6 "></polyline>
+<text text-anchor="middle" x="74.01" y="-256" font-family="Courier,monospace" font-size="14.00">pop_col</text>
+<polyline fill="none" stroke="black" points="24,-247.8 124.01,-247.8 "></polyline>
+<text text-anchor="middle" x="74.01" y="-231.2" font-family="Courier,monospace" font-size="14.00">num_rows</text>
+<polyline fill="none" stroke="black" points="24,-223 124.01,-223 "></polyline>
+<text text-anchor="middle" x="74.01" y="-206.4" font-family="Courier,monospace" font-size="14.00">filled</text>
+<polyline fill="none" stroke="black" points="24,-198.2 124.01,-198.2 "></polyline>
+<text text-anchor="middle" x="74.01" y="-181.6" font-family="Courier,monospace" font-size="14.00">alg_row</text>
+<polyline fill="none" stroke="black" points="24,-173.4 124.01,-173.4 "></polyline>
+<text text-anchor="middle" x="74.01" y="-156.8" font-family="Courier,monospace" font-size="14.00">num_cols</text>
+<polyline fill="none" stroke="black" points="24,-148.6 124.01,-148.6 "></polyline>
+<text text-anchor="middle" x="74.01" y="-132" font-family="Courier,monospace" font-size="14.00">username</text>
+<polyline fill="none" stroke="black" points="24,-123.8 124.01,-123.8 "></polyline>
+<text text-anchor="middle" x="74.01" y="-107.2" font-family="Courier,monospace" font-size="14.00">cur_date</text>
+<polyline fill="none" stroke="black" points="24,-99 124.01,-99 "></polyline>
+<text text-anchor="middle" x="74.01" y="-82.4" font-family="Courier,monospace" font-size="14.00">i</text>
+<polyline fill="none" stroke="black" points="24,-74.2 124.01,-74.2 "></polyline>
+<text text-anchor="middle" x="74.01" y="-57.6" font-family="Courier,monospace" font-size="14.00">j</text>
+<polyline fill="none" stroke="black" points="24,-49.4 124.01,-49.4 "></polyline>
+<text text-anchor="middle" x="74.01" y="-32.8" font-family="Courier,monospace" font-size="14.00">z</text>
+<polyline fill="none" stroke="black" points="124.01,-24.6 124.01,-297.4 "></polyline>
+<text text-anchor="middle" x="174.02" y="-280.8" font-family="Courier,monospace" font-size="14.00">0x03a80afc</text>
+<polyline fill="none" stroke="black" points="124.01,-272.6 224.03,-272.6 "></polyline>
+<text text-anchor="middle" x="174.02" y="-256" font-family="Courier,monospace" font-size="14.00">0x10ba8</text>
+<polyline fill="none" stroke="black" points="124.01,-247.8 224.03,-247.8 "></polyline>
+<text text-anchor="middle" x="174.02" y="-231.2" font-family="Courier,monospace" font-size="14.00">13</text>
+<polyline fill="none" stroke="black" points="124.01,-223 224.03,-223 "></polyline>
+<text text-anchor="middle" x="174.02" y="-206.4" font-family="Courier,monospace" font-size="14.00">TRUE</text>
+<polyline fill="none" stroke="black" points="124.01,-198.2 224.03,-198.2 "></polyline>
+<text text-anchor="middle" x="174.02" y="-181.6" font-family="Courier,monospace" font-size="14.00">0xf7fc4380</text>
+<polyline fill="none" stroke="black" points="124.01,-173.4 224.03,-173.4 "></polyline>
+<text text-anchor="middle" x="174.02" y="-156.8" font-family="Courier,monospace" font-size="14.00">2</text>
+<polyline fill="none" stroke="black" points="124.01,-148.6 224.03,-148.6 "></polyline>
+<text text-anchor="middle" x="174.02" y="-132" font-family="Courier,monospace" font-size="14.00">0xf7fc43e0</text>
+<polyline fill="none" stroke="black" points="124.01,-123.8 224.03,-123.8 "></polyline>
+<text text-anchor="middle" x="174.02" y="-107.2" font-family="Courier,monospace" font-size="14.00">8ec3d9889</text>
+<polyline fill="none" stroke="black" points="124.01,-99 224.03,-99 "></polyline>
+<text text-anchor="middle" x="174.02" y="-82.4" font-family="Courier,monospace" font-size="14.00">0</text>
+<polyline fill="none" stroke="black" points="124.01,-74.2 224.03,-74.2 "></polyline>
+<text text-anchor="middle" x="174.02" y="-57.6" font-family="Courier,monospace" font-size="14.00">NULL</text>
+<polyline fill="none" stroke="black" points="124.01,-49.4 224.03,-49.4 "></polyline>
+<text text-anchor="middle" x="174.02" y="-32.8" font-family="Courier,monospace" font-size="14.00">314</text>
+</g>
+<!-- h0 -->
+<g id="node2" class="node">
+<title>h0</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="305.84,-253 305.84,-289 421.74,-289 421.74,-253 305.84,-253"></polygon>
+<text text-anchor="middle" x="363.79" y="-266.9" font-family="Times,serif" font-size="14.00">DataFrame object</text>
+</g>
+<!-- stvars&#45;&gt;h0 -->
+<g id="edge1" class="edge">
+<title>stvars:addr0-&gt;h0:d0</title>
+<path fill="none" stroke="black" d="M225.01,-285C248.01,-285 273.04,-283.07 295.43,-280.65"></path>
+<polygon fill="black" stroke="black" points="295.97,-284.11 305.51,-279.51 295.18,-277.16 295.97,-284.11"></polygon>
+</g>
+<!-- h1 -->
+<g id="node3" class="node">
+<title>h1</title>
+<polygon fill="none" stroke="black" points="301.88,-134.4 301.88,-233.6 425.69,-233.6 425.69,-134.4 301.88,-134.4"></polygon>
+<text text-anchor="middle" x="313.38" y="-217" font-family="Times,serif" font-size="14.00"> </text>
+<polyline fill="none" stroke="black" points="301.88,-208.8 324.88,-208.8 "></polyline>
+<text text-anchor="middle" x="313.38" y="-192.2" font-family="Times,serif" font-size="14.00">0</text>
+<polyline fill="none" stroke="black" points="301.88,-184 324.88,-184 "></polyline>
+<text text-anchor="middle" x="313.38" y="-167.4" font-family="Times,serif" font-size="14.00">1</text>
+<polyline fill="none" stroke="black" points="301.88,-159.2 324.88,-159.2 "></polyline>
+<text text-anchor="middle" x="313.38" y="-142.6" font-family="Times,serif" font-size="14.00">2</text>
+<polyline fill="none" stroke="black" points="324.88,-134.4 324.88,-233.6 "></polyline>
+<text text-anchor="middle" x="355.04" y="-217" font-family="Times,serif" font-size="14.00">name</text>
+<polyline fill="none" stroke="black" points="324.88,-208.8 385.19,-208.8 "></polyline>
+<text text-anchor="middle" x="355.04" y="-192.2" font-family="Times,serif" font-size="14.00">Albania</text>
+<polyline fill="none" stroke="black" points="324.88,-184 385.19,-184 "></polyline>
+<text text-anchor="middle" x="355.04" y="-167.4" font-family="Times,serif" font-size="14.00">Algeria</text>
+<polyline fill="none" stroke="black" points="324.88,-159.2 385.19,-159.2 "></polyline>
+<text text-anchor="middle" x="355.04" y="-142.6" font-family="Times,serif" font-size="14.00">Angola</text>
+<polyline fill="none" stroke="black" points="385.19,-134.4 385.19,-233.6 "></polyline>
+<text text-anchor="middle" x="405.44" y="-217" font-family="Times,serif" font-size="14.00">pop</text>
+<polyline fill="none" stroke="black" points="385.19,-208.8 425.69,-208.8 "></polyline>
+<text text-anchor="middle" x="405.44" y="-192.2" font-family="Times,serif" font-size="14.00">2.8</text>
+<polyline fill="none" stroke="black" points="385.19,-184 425.69,-184 "></polyline>
+<text text-anchor="middle" x="405.44" y="-167.4" font-family="Times,serif" font-size="14.00">44.2</text>
+<polyline fill="none" stroke="black" points="385.19,-159.2 425.69,-159.2 "></polyline>
+<text text-anchor="middle" x="405.44" y="-142.6" font-family="Times,serif" font-size="14.00">34.5</text>
+</g>
+<!-- stvars&#45;&gt;h1 -->
+<g id="edge2" class="edge">
+<title>stvars:addr1-&gt;h1:g5</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M225.01,-260C238.97,-260 238.68,-248.08 252.03,-244 258.93,-241.89 363.65,-243.03 396.2,-238.29"></path>
+<polygon fill="black" stroke="black" points="397.46,-241.56 405.79,-235 395.19,-234.94 397.46,-241.56"></polygon>
+</g>
+<!-- stvars&#45;&gt;h1 -->
+<g id="edge3" class="edge">
+<title>stvars:f4-&gt;h1:g2</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M225.01,-186C255.65,-186 264.7,-174.8 290.79,-172.43"></path>
+<polygon fill="black" stroke="black" points="290.95,-175.93 300.79,-172 290.64,-168.94 290.95,-175.93"></polygon>
+</g>
+<!-- h3 -->
+<g id="node4" class="node">
+<title>h3</title>
+<ellipse fill="none" stroke="black" stroke-width="0" cx="363.79" cy="-98" rx="45.62" ry="18"></ellipse>
+<text text-anchor="middle" x="363.79" y="-93.8" font-family="Courier,monospace" font-size="14.00">"Jeff"</text>
+</g>
+<!-- stvars&#45;&gt;h3 -->
+<g id="edge4" class="edge">
+<title>stvars:f6-&gt;h3</title>
+<path fill="none" stroke="black" d="M225.01,-136C238.54,-136 239.31,-126.58 252.03,-122 270.78,-115.25 292.03,-110.08 310.87,-106.3"></path>
+<polygon fill="black" stroke="black" points="311.61,-109.72 320.77,-104.4 310.28,-102.85 311.61,-109.72"></polygon>
+</g>
+<!-- h4 -->
+<g id="node5" class="node">
+<title>h4</title>
+<ellipse fill="none" stroke="black" stroke-width="0" cx="363.79" cy="-44" rx="103.52" ry="18"></ellipse>
+<text text-anchor="middle" x="363.79" y="-39.8" font-family="Courier,monospace" font-size="14.00">Date[2023-07-22]</text>
+</g>
+<!-- stvars&#45;&gt;h4 -->
+<g id="edge5" class="edge">
+<title>stvars:f7-&gt;h4</title>
+<path fill="none" stroke="black" d="M225.01,-111C246.47,-111 234.42,-83.25 252.03,-71 258.92,-66.21 266.56,-62.26 274.53,-59.01"></path>
+<polygon fill="black" stroke="black" points="275.83,-62.26 283.99,-55.51 273.4,-55.7 275.83,-62.26"></polygon>
+</g>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<p>The Python interpreter did something smart: when we asked it to create a variable called <code>pop_col</code> containing just that column of the full DataFrame, and a variable called <code>alg_row</code> for just one row of the full DataFrame, it knew that it didn’t have to construct two entirely new objects in its memory. Instead, since it knows that <code>country_df</code> contains all of the data that <code>pop_col</code> and <code>alg_row</code> are subsetting, in its box for <code>pop_col</code> it just stored a <strong>pointer</strong>, pointing to that particular column, rather than an entirely new object built from scratch (in other words, an object for which we’d have to ask the computer to allocate more storage space for us). And similarly, its box for <code>alg_row</code> just contains a pointer to that particular row.</p>
+<p>Disaster strikes, however, if we modify <code>country_df</code> without realizing that this will therefore also modify <code>pop_col</code> and <code>alg_row</code>, since these simply point to specific pieces of <code>country_df</code>.</p>
+<p>A straightforward and effective way to avoid this disaster is by thinking about whether or not you need to <strong>persist</strong> a particular variable in memory, and whether you’d like to manipulate it <strong>separately from</strong> the main DataFrame you’re working with. So in our case, if we knew that we wanted to do something to <code>pop_col</code> (say, rescale all the populations to be in units of people rather than millions of people), we could save ourselves a huge headache by writing</p>
+<div id="d791befb" class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pop_col <span class="op">=</span> country_df[<span class="st">'pop'</span>].copy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now that we’ve told Python that we want a <strong>copy</strong> of the column, not just a pointer to a piece of <code>country_df</code>, we can do whatever we want to <code>country_df</code> and/or <code>pop_col</code> without having to worry about whether changes to one will affect the other.</p>
+<p>Most commonly, however, this issue comes about in the following way: when we ask Pandas to perform some <strong>operation</strong> on our DataFrame, typically we glance at the resulting output from the code, see that it looks correct, and move on. You need to train your brain to intervene when you fall into this habit! Instead, you also need to check that the operation was <strong>permanent</strong>—i.e., that it was performed <strong>in-place</strong> rather than <strong>as a copy</strong>. To see what we mean, let’s try sorting the values in <code>country_df</code> by population, instead of alphabetically:</p>
+<div id="974772e0" class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>country_df.sort_values(by<span class="op">=</span><span class="st">'pop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Albania</td>
+<td>2.8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Angola</td>
+<td>34.5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Algeria</td>
+<td>44.2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>All good, right? No! Stop yourself here! Our brains naturally want to move on once we’ve visually observed the above output: cool, we’re good, I see it and it’s sorted, onto the next task. But the issue is that, <strong>by default</strong>, Pandas shows us the result of an operation by returning a <strong>copy</strong> of the original DataFrame with the operation performed, <strong>not</strong> the original DataFrame itself. Basically, you can think of this like when you make a change to some file and your computer asks you “would you like to save these changes?” <strong>By default, Pandas is showing you the changes, and it is your job to SAVE these changes</strong> if you want to use the post-operation DataFrame later on in your code.</p>
+<p>Like the <code>.copy()</code> function above, the most straightforward way to avoid this issue is by using the argument that is included in most Pandas functions: <code>inplace</code>. As discussed above, the default value is <code>False</code>: the changes are <strong>not</strong> made to the original DataFrame, but to a copy of it. If you specify <code>inplace=True</code>, however, your problem is solved: this tells Pandas that you’d like the operation to be <strong>permanent</strong>, so that e.g., using our <code>sort_values()</code> example from above, <code>country_df</code> will now be sorted by population when subsequent lines of code are executed! Since this is the behavior most students/data scientists intuitively expect anyways, you will eventually get in the habit of adding <code>inplace=True</code> to most of your calls to Pandas functions, but it’s good to take a moment to think about this—for example, imagining some cases where you <strong>wouldn’t</strong> want Pandas to perform the operation in-place.</p>
 </section>
-<section id="deploying-from-a-branchfolder" class="level2" data-number="2.23">
-<h2 data-number="2.23" class="anchored" data-anchor-id="deploying-from-a-branchfolder"><span class="header-section-number">2.23</span> Deploying from a Branch/Folder</h2>
-<p><img src=".\assets/img/gh_pages_2.png" class="img-fluid"></p>
 </section>
-<section id="r-vs.-rstudio-vs.-quarto" class="level2 smaller" data-name="R" data-number="2.24">
-<h2 class="smaller anchored" data-name="R" data-number="2.24" data-anchor-id="r-vs.-rstudio-vs.-quarto"><span class="header-section-number">2.24</span> R vs.&nbsp;RStudio vs.&nbsp;Quarto</h2>
-<!-- (Another important distinction!) -->
-<!-- start Quarto box -->
-<div style="border: 2px solid black; padding: 10px;">
-<center>
-<img src="./assets/img/quarto_logo.svg" width="20%">
-</center>
-<!-- start columns -->
-<div class="columns">
-<!-- start RStudio column --><div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
-<center style="margin: 0px !important;">
-<img src="./assets/img/RStudio_logo.svg" width="25%">
-</center>
-<ul>
-<li>GUI wrapper around R (Integrated Development Environment = IDE)</li>
-<li>Run <strong>blocks</strong> of R code (<code>.qmd</code> <strong>chunks</strong>)</li>
-</ul>
-<!-- start R box inside RStudio box -->
-<div style="border: 2px solid black; width: 98%; margin: auto; padding: 2px;">
-<p><strong><a href="https://www.r-project.org/" target="_blank">The R Language <i class="fa-brands fa-r-project"></i></a></strong></p>
-<ul>
-<li>Programming language</li>
-<li>Runs scripts via <code>Rscript &lt;script&gt;.r</code> <!-- * Comes with a basic GUI (R-GUI) --></li>
-</ul>
+<section id="manipulating-a-dataframe" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="manipulating-a-dataframe"><span class="header-section-number">2.5</span> Manipulating a DataFrame</h2>
+<div id="43bdccf5" class="cell" data-execution_count="10">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>country_df[<span class="st">'pop'</span>] <span class="op">=</span> country_df[<span class="st">'pop'</span>] <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>country_df[<span class="st">'name'</span>] <span class="op">=</span> country_df[<span class="st">'name'</span>].<span class="bu">str</span>.lower()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>country_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>albania</td>
+<td>5.6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>algeria</td>
+<td>88.4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>angola</td>
+<td>69.0</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<!-- end R box -->
-</div><!-- end RStudio column --><!-- start + column --><div class="column" style="width: 5%; padding: 5px;">
-<div class="center r-stretch" style="margin-top: auto;">
-<h3 style="text-align: center;" class="anchored">
-+
-</h3>
 </div>
-</div><!-- end + column --><!-- start Jupyter column --><div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
-<center style="margin: 0px !important;">
-<img src="./assets/img/jupyter_logo.svg" width="50%" style="margin: 0px;">
-</center>
-<ul>
-<li>GUI wrapper around Python (IDE)</li>
-<li>Run <strong>blocks</strong> of Python code (<code>.ipynb</code> <strong>cells</strong>)</li>
-</ul>
-<!-- start python box inside Jupyter column -->
-<div class="column" style="width: 98%; border: 2px solid black; margin: auto; padding: 2px;">
-<!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
-<p><a href="https://www.python.org/" target="_blank">The Python Language <i class="fa-brands fa-python"></i></a></p>
-<ul>
-<li>Scripting language</li>
-<li>On its own, just runs scripts via <code>python &lt;script&gt;.py</code></li>
-</ul>
 </div>
-<!-- end Python column -->
-</div><!-- end Jupyter column -->
-</div>
-<!-- end columns -->
-</div>
-<!-- end quarto box -->
+
+
 </section>
-<section id="getting-r-onto-your-computer" class="level2" data-number="2.25">
-<h2 data-number="2.25" class="anchored" data-anchor-id="getting-r-onto-your-computer"><span class="header-section-number">2.25</span> Getting R Onto Your Computer</h2>
-<ol type="1">
-<li>Download the <code>R</code> <strong>language</strong>: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a></li>
+<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>A third language that is increasingly being used by data scientists is JavaScript/TypeScript, which is especially nice to know since it is the canonical language for <strong>web development</strong> as well. For examples of beautiful data visualizations using the d3.js library, see <a href="https://d3-graph-gallery.com/" target="_blank">The D3 Graph Gallery</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>VSCode</strong> (recommended)</p>
-<ul>
-<li><p><a href="https://code.visualstudio.com/docs/setup/linux" target="_blank">Linux</a> | <a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">Windows</a> | <a href="https://code.visualstudio.com/docs/setup/mac" target="_blank">OSX</a></p></li>
-<li>Install the <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto" target="_blank">Quarto Extension for VSCode</a> (more info from Quarto <a href="https://quarto.org/docs/tools/vscode.html" target="_blank">here</a>)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong>RStudio</strong></p>
-<ul>
-<li><a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="python" class="level2" data-name="Python" data-number="2.26">
-<h2 data-name="Python" data-number="2.26" class="anchored" data-anchor-id="python"><span class="header-section-number">2.26</span> Python</h2>
-<ul>
-<li><p>The Python interpreter: <a href="https://www.python.org/downloads/source/" target="_blank">Linux</a> | <a href="https://www.python.org/downloads/windows/" target="_blank">Windows</a> | <a href="https://www.python.org/downloads/macos/" target="_blank">OSX</a></p></li>
-<li><p>With <strong>VSCode</strong> (recommended): you can start coding!</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>my_python_code.qmd</strong></pre>
-</div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode markdown quarto code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>With <strong>Jupyter</strong> there are two options:</p>
-<ul>
-<li><strong>JupyterLab</strong> (recommended) vs.&nbsp;<strong>Jupyter</strong></li>
-<li>Main difference (imo): JupyterLab has a tabbed interface</li>
-</ul></li>
-</ul>
-</section>
-<section id="google-colab" class="level2" data-number="2.27">
-<h2 data-number="2.27" class="anchored" data-anchor-id="google-colab"><span class="header-section-number">2.27</span> Google Colab</h2>
-<p>Alternative when all else fails! <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a></p>
-<ul>
-<li>Fully web-based Jupyter editing/execution (import/export <code>.ipynb</code> files)</li>
-<li>Can persist code/data to Google Drive</li>
-<li>Drawback: RAM limitations, have to activate GPU mode (pretty much required for any AI work), idle time limitation</li>
-</ul>
-</section>
-<section id="colab-runtime-options" class="level2" data-number="2.28">
-<h2 data-number="2.28" class="anchored" data-anchor-id="colab-runtime-options"><span class="header-section-number">2.28</span> Colab Runtime Options</h2>
-<center>
-<img src="./assets/img/colab_language.png" width="68%" style="margin: 0px;"> <img src="./assets/img/colab_runtime.png" width="68%" style="margin: 0px;">
-</center>
-
-
-</section>
+</aside>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1248,6 +1222,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2023 Jeff Jacobs</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

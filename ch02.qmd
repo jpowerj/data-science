@@ -1,12 +1,12 @@
 ---
-title: "Data Science Workflow"
-#subtitle: "*DSAN 5000: Data Science and Analytics*"
 format:
   html:
     include-in-header: {"text": "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous' referrerpolicy='no-referrer' />"}
 metadata-files: 
   - "_bookdown.globals.yml"
 ---
+
+# Data Science Workflow
 
 {{< include _draft-notice.qmd >}}
 
@@ -16,514 +16,194 @@ metadata-files:
 <iframe src="./ch02.slides.html" width="100%" height="400"></iframe>
 ``` -->
 
-## Operating Systems {.smaller data-name="Workflow"}
+At the end of the previous chapter we learned how to install `R` and Python. **Both** of these languages are central pieces of the data scientist's toolkit, so throughout this book we will aim to build your skills in both, while highlighting tasks that may be easier to carry out in one language relative to the other.[^js]
 
-* **Linux**: <i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> (**Free!**)
-  * The "standard" OS for developers! You can expect instructions to use Linux commands: `ls`, `cd`, `touch`, `mv` ...
-* **Windows**: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i><i class="bi bi-currency-dollar" style="color: lightgrey !important;"></i> **BUT**, proprietary shell (constantly googling "PowerShell equivalent")
-  
-  | Linux | PowerShell |
-  | - | - |
-  | `ls` | `Get-ChildItem` |
-    | `cd` | `Set-Location` |
-    | `touch` | `New-Item` |
-    | `mv` | `Move-Item` |
-* **OSX**: <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar"></i> **BUT**, OSX and Linux both built on Unix
-  
-  $\implies$ if you know Terminal you know Linux!
+[^js]: A third language that is increasingly being used by data scientists is JavaScript/TypeScript, which is especially nice to know since it is the canonical language for **web development** as well. For examples of beautiful data visualizations using the d3.js library, see <a href="https://d3-graph-gallery.com/" target="_blank">The D3 Graph Gallery</a>.
 
-## Git vs. GitHub {data-name="Git"}
+## First Things First: Shell Commands
 
-(Important distinction!)
-
-::: columns
-::: {.column width="50%"}
-
-**<a href="https://git-scm.com/" target="_blank">Git <i class="bi bi-git" style="margin-left: 5px !important;"></i></a>**
-
-* Command-line program
-* `git init` in shell to create
-* `git add` to track files
-* `git commit` to commit changes to tracked files
-
-:::
-::: {.column width="50%"}
-
-**<a href="https://github.com/" target="_blank">GitHub <i class="bi bi-github"style="margin-left: 5px !important;"></i></a>**
-
-* Code hosting website
-* Create a **repository** (repo) for each project
-* Can **clone** repos onto your local machine
-
-:::
-:::
-
-<center style="border: 2px solid black !important; padding: 5px !important;">
-**`git push`/`git pull`**: The link between the two!
-</center>
-
-## Git Diagram
-
-<img src="https://mermaid.ink/svg/pako:eNp9j70KAjEQhF8lbH1PkFqwsrJNsyZ7STB_rBtBjnt34x0IitgNM9_AzAK2OgINPsqRsQVTlFK25hzlW14Yiw3K0Z1SbXsayF5rl0_zZ_uNZoxlczKxp_9NmGBQo-HGxOUVGJBAmQzoIR3N2JMYMGUdKHap50exoIU7TdCbQ6FDRM-YQc-YbsMlF6Xyab-9vV-fAwFZpw" class="quarto-figure quarto-figure-center"></img>
-
-## Initializing a Repo
-
-* Let's make a directory for our project called `cool-project`, and initialize a Git repo for it
-
-<!-- ```{.bash code-line-numbers="|3|4|"} -->
-```bash
-user@hostname:~$ mkdir cool-project
-user@hostname:~$ cd cool-project
-user@hostname:~/cool-project$ git init
-Initialized empty Git repository in /home/user/cool-project/.git/
-```
-
-* This creates a hidden folder, `.git`, in the directory:
-
-<!-- ```bash{.bash code-line-numbers="|3-5"} -->
-```bash
-user@hostname:~/cool-project$ ls -lah
-total 12K
-drwxr-xr-x  3 user user 4.0K May 28 00:53 .
-drwxr-xr-x 12 user user 4.0K May 28 00:53 ..
-drwxr-xr-x  7 user user 4.0K May 28 00:53 .git
-```
-
-::: {.footer .footersmall}
-The Git Side: Local I
-:::
-
-## Adding and Committing a File
-
-We're writing Python code, so let's create and track `cool_code.py`:
+Oftentimes, given the association of data science with programming languages, your first instinct when starting a data science project will be to create an `R` or Python file. For the sake of building effective data science habits, however, you should ask yourself if the task you're trying to accomplish could be done more simply using shell commands. @jurafsky_speech_2023, for example, one of the most widely-used Natural Language Processing textbooks, introduces the concept of text normalization using Unix commands rather than Python or `R`. Demonstrating how Unix can quickly (usually far more quickly than `R` or Python, for simpler tasks like this) process text corpora, they take a text file `sh.txt` containing the complete works of Shakespeare and use the following Unix command
 
 ```bash
-user@hostname:~/cool-project$ touch cool_code.py
-user@hostname:~/cool-project$ git add cool_code.py
-user@hostname:~/cool-project$ git status
-On branch main
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-        new file:   cool_code.py
-
-user@hostname:~/cool-project$ git commit -m "Initial version of cool_code.py"
-[main (root-commit) b40dc25] Initial version of cool_code.py
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 cool_code.py
+tr -sc 'A-Za-z' '\n' < sh.txt | tr A-Z a-z | sort | uniq -c | sort -n -r
 ```
 
-## The Commit Log
+to discover the ten most frequently-occurring words across Shakespeare's works:
 
-* View the commit log using `git log`:
+```
+27378 the
+26084 and
+22538 i
+19771 to
+17481 of
+14725 a
+13826 you
+12489 my
+11318 that
+11112 in
+```
+
+In the case of data science in general, simple operations like **creating, moving, and copying files**, **downloading files from the internet**, and **searching for particular phrases or expressions** across your entire disk or within a particular directory are all tasks that can be carried out easily and effectively using a small set of Unix commands.
+
+## `R` and Python for Data Science
+
+When it comes to learning the basics of `R`, Python, or any other programming language, we believe that there's no need for us to reinvent the wheel---there are thousands of incredible resources available for free on the internet that can do a better job of teaching the fundamentals of these languages better than we ever could. If you don't feel comfortable in terms of programming experience, we recommend the following resources in particular (which you can work through and then return to the book!):
+
+* <a href="https://www.datacamp.com/" target="_blank">DataCamp</a>
+* <a href="https://www.codecademy.com/" target="_blank">Codecademy</a>
+
+Whether or not you have this background knowledge, don't worry! We will still work to make sure that we explain new concepts with as little technical jargon as possible throughout.
+
+## Pandas and NumPy
+
+While `R` has a range of libraries that are helpful for reading, manipulating, and analyzing data, in Python two particular libraries stand above the rest: Pandas and NumPy. After installing them on the command-line using
 
 ```bash
-user@hostname:~/cool-project$ git log
-commit b40dc252a3b7355cc4c28397fefe7911ff3c94b9 (HEAD -> main)
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:57:16 2023 +0000
-
-    Initial version of cool_code.py
+pip install pandas
+pip install numpy
 ```
 
-::: {.hidden}
-```{mermaid}
-gitGraph
-   commit id: "b40dc25"
-```
-:::
+you'll be able to import and start using them by including the following at the top of your code:
 
-<div class="quarto-figure quarto-figure-center">
-<img class="r-stretch center" src="https://mermaid.ink/svg/pako:eNpdjjELwjAUhP9KOOjWQYoumQUnJzfJ8sx7bQNNUuLLIKX_3VZxcb37vuMW-MwCiyHopdA8umSM8TnGoCawNQ6P44F9d3JwqWn-y84BLaKUSIG3mWX3HXSUKA47wdJTnXTX1w2lqvn2Sh5WS5UWdWZSOQcaCkXYnqbnlgoHzeX6vfZ52GKmdM_5x6xvd4Y8pg"></img>
-</div>
-
-## Making Changes
-
-```bash
-user@hostname:~/cool-project$ git status
-On branch main
-nothing to commit, working tree clean
-user@hostname:~/cool-project$ echo "1 + 1" >> cool_code.py
-user@hostname:~/cool-project$ more cool_code.py
-1 + 1
-user@hostname:~/cool-project$ git add cool_code.py
-user@hostname:~/cool-project$ git status
-On branch main
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   cool_code.py
-
-user@hostname:~/cool-project$ git commit -m "Added code to cool_code.py"
-[main e3bc497] Added code to cool_code.py
- 1 file changed, 1 insertion(+)
+```{python}
+import pandas as pd
+import numpy as np
 ```
 
-##
+Note that the syntax here, `import <x> as <y>`, tells Python that you want to import the library whose full name is `<x>`, but that in your code you'd like to **reference** this imported library using the shorthand `<y>`.
 
-The `git log` will show the new version:
+::: {.callout-tip title="Importing Pandas and NumPy"}
 
-```bash
-user@hostname:~/cool-project$ git log
-commit e3bc497acbb5a487566ff2014dcd7b83d0c75224 (HEAD -> main)
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:38:05 2023 +0000
+It is standard practice in data science to use this shorthand---`pd` to refer to `pandas` and `np` to refer to `numpy`---when importing the two libraries. This practice will help immensely when e.g. searching the web for errors in the functions you're using (since those functions will be written as `pd.<function>`)
 
-    Added code to cool_code.py
-
-commit b40dc25b14c0426b06c8d182184e147853f3c12e
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:37:02 2023 +0000
-
-    Initial version of cool_code.py
-
-
+```python
+import pandas as pd
+import numpy as np
 ```
 
-<img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNpljrEKwjAURX8l3LmDaEXMLDg5uUmW17zXNtA0Jb4MUvrvtoqT672Hw5nhEwssuqDXTFPvRmOMTzEGNYGtcWjqHfv90eH_kkPj6_PJARWi5EiBV9W8gQ7aSxSHjWNpqQy6KZYVpaLp_ho9rOYiFcrEpHIJ1GWKsC0Nz3UVDpry7Zv3qaww0fhI6ccsb4kvPis"></img>
+:::
 
-## More Changes
+Once you have imported these libraries, a standard data science workflow for opening a data file and viewing its contents looks like:
 
-```bash
-user@hostname:~/cool-project$ echo "2 + 2" >> cool_code.py
-user@hostname:~/cool-project$ more cool_code.py
-1 + 1
-2 + 2
-user@hostname:~/cool-project$ git add cool_code.py
-user@hostname:~/cool-project$ git status
-On branch main
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   cool_code.py
-
-user@hostname:~/cool-project$ git commit -m "Second version of cool_code.py"
-[main 4007db9] Second version of cool_code.py
- 1 file changed, 1 insertion(+)
+```{python}
+#| code-fold: show
+df = pd.read_csv("./assets/data/ch02/mydata.csv")
+df.head()
 ```
 
-## And the `git log`
+We can then perform an operation on our data, like dropping the first row, and use `head()` again to make sure the code did what we expected it to do to our DataFrame:
 
-```bash
-user@hostname:~/cool-project$ git log
-commit 4007db9a031ca134fe09eab840b2bc845366a9c1 (HEAD -> main)
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:39:28 2023 +0000
-
-    Second version of cool_code.py
-
-commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:38:05 2023 +0000
-
-    Added code to cool_code.py
-
-commit b40dc25b14c0426b06c8d182184e147853f3c12e
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:37:02 2023 +0000
-
-    Initial (empty) version of cool_code.py
+```{python}
+df = df.iloc[1:].copy()
+df.head()
 ```
 
-## Undoing a Commit I
+## DataFrames vs. Views of DataFrames
 
-First check the `git log` to find the **hash** for the commit you want to revert back to:
+Probably the most frequent source of errors, over all of the data science couses we've taught, has been Pandas' distinction between a DataFrame itself and a **view** of a DataFrame. There is a good reason for the distinction, but it is typically a baffling concept for anyone just starting to work with DataFrames. To understand this distinction, we first need to quickly look at the structure of how **objects** are stored in memory (this is how storage works in general---in Python, `R`, or any other programming language---so it's useful knowledge regardless of what particular corner of the data science world you occupy!).
 
-```{.bash}
-commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:38:05 2023 +0000
+### The Stack and the Heap
 
-    Added code to cool_code.py
+Let's look at what happens, in the computer's memory, when we run the following code:
+
+```{python}
+#| code-fold: show
+import datetime
+country_df = pd.read_csv("./assets/data/ch02/country_pop.csv")
+pop_col = country_df['pop']
+num_rows = len(country_df)
+filled = all(~pd.isna(country_df))
+alg_row = country_df.loc[country_df['name'] == "Algeria"]
+num_cols = len(country_df.columns)
+username = "Jeff"
+cur_date = datetime.datetime.now()
+i = 0
+j = None
+z = 314
 ```
 
-<img class="quarto-figure quarto-figure-center" src="https://mermaid.ink/svg/pako:eNptjz8PgjAQxb9KczNDoxhCZxMnJzfT5do7oAmlpF4HQ_jugsZJ1_d-eX8W8IkYDPRBLhnnwU5KKZ9iDKICGWXB1Zr84WTh1-Kj83Xb_LNqrRtyrQWoIHKOGGhrWXbQggwc2cLOEXdYRtkj1g3FIun2nDwYyYUrKDOh8DlgnzGC6XB8bCpTkJSvn-XvAxXMON1T-jLrC-H5Res"></img>
+And let's look at the values Python prints out when we ask it to print some of these variables. First, the whole DataFrame, `country_df`:
 
-## Undoing a Commit II
-
-* <i class="bi bi-exclamation-triangle"></i> **This is irreversable!** <i class="bi bi-exclamation-triangle"></i>
-
-```bash
-user@hostname:~/cool-project$ git reset --hard e3bc497ac
-HEAD is now at e3bc497 Added code to cool_code.py
-user@hostname:~/cool-project$ git log
-commit e3bc497acbb5a487566ff2014dcd7b83d0c75224 (HEAD -> main)
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:38:05 2023 +0000
-
-    Added code to cool_code.py
-
-commit b40dc25b14c0426b06c8d182184e147853f3c12e
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:37:02 2023 +0000
-
-    Initial (empty) version of cool_code.py
+```{python}
+#| code-fold: show
+country_df
 ```
 
-## Onwards and Upwards
+Next, `pop_col`:
 
-```bash
-user@hostname:~/cool-project$ echo "3 + 3" >> cool_code.py
-user@hostname:~/cool-project$ git add cool_code.py
-user@hostname:~/cool-project$ git status
-On branch main
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   cool_code.py
-
-user@hostname:~/cool-project$ git commit -m "Added different code to cool_code.py"
-[main 700d955] Added different code to cool_code.py
- 1 file changed, 1 insertion(+)
+```{python}
+#| code-fold: show
+pop_col
 ```
 
-<img src="https://mermaid.ink/svg/pako:eNptz7EOgkAMBuBXuXRmuCiGcLPEyQUSB3NLuVa4xOPIWQZDeHdB46Rr_y9t_xlcJAYDnZdTwrG3g1LKxRC8KE9GWWhzTW53sPAb8b51eVn8i3KtC2pLC0qeIxtVV5eqbqpfWGhN5WFdDxkETgE9re_MG7QgPQe2sDniG0532W4tK8VJYvMcHBhJE2cwjYTCR49dwgDmhvfHOmXyEtP5U_HdNIMRh2uMX7O8ADEKUdc"></img>
+How about `alg_row`?
 
-##
-
-The final `git log`:
-
-```bash
-user@hostname:~/cool-project$ git log
-commit 700d955faacb27d7b8bc464b9451851b5e319f20 (HEAD -> main)
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:44:49 2023 +0000
-
-    Added different code to cool_code.py
-
-commit e3bc497acbb5a487566ff2014dcd7b83d0c75224
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:38:05 2023 +0000
-
-    Added code to cool_code.py
-
-commit b40dc25b14c0426b06c8d182184e147853f3c12e
-Author: Jeff Jacobs <jjacobs3@cs.stanford.edu>
-Date:   Sun May 28 00:37:02 2023 +0000
-
-    Initial (empty) version of cool_code.py
-
+```{python}
+#| code-fold: show
+alg_row
 ```
 
-## But Why These Diagrams?
+These three variables `country_df`, `pop_col`, and `alg_row` may seem like they are three separate, entirely distinct entities in the computer's memory. After all, we gave them three different names, right? Let's look at how this situation would be represented **in the computer's memory**, however:
 
-Even the simplest projects can start to look like:
-
-::: {.hidden}
-```{mermaid}
-gitGraph
-       commit id: "537dd67"
-       commit id: "6639143"
-       branch nice_feature
-       checkout nice_feature
-       commit id: "937ded8"
-       checkout main
-       commit id: "9e6679c"
-       checkout nice_feature
-       branch very_nice_feature
-       checkout very_nice_feature
-       commit id: "7f4de03"
-       checkout main
-       commit id: "6df80c1"
-       checkout nice_feature
-       commit id: "bd0ebb8"
-       checkout main
-       merge nice_feature id: "9ff61cc" tag: "V 1.0.0" type: HIGHLIGHT
-       checkout very_nice_feature
-       commit id: "370613b"
-       checkout main
-       commit id: "9a07a97"
+```{dot, out.width="20%"}
+#| fig-align: center
+digraph g {
+    rankdir=LR
+    concentrate=True
+	subgraph clusterG0 {
+		label="Memory (After Code Execution)"
+		subgraph clusterG1 {
+				label="Stack"
+                stvars[label = "{{<name0>country_df|<name1>pop_col|num_rows|filled|alg_row|num_cols|username|cur_date|i|j|z}|{<addr0>0x03a80afc|<addr1>0x10ba8|<f1>13|<f2>TRUE|<f4>0xf7fc4380|<f5>2|<f6>0xf7fc43e0|<f7>8ec3d9889|<f8>0|<f9>NULL|<f10>314}}",shape = "record",fontname="Courier"]
+		}
+		subgraph clusterG2 {
+				label="Heap"
+                subgraph clusterG20 {
+                    #label="DataFrame object"
+                    label=""
+                    nodesep=0.002
+                    h0[label="<d0>DataFrame object",penwidth=0,shape="record"]
+                    h1[label="{{<g0>|0|<g2>1|<g3>2}|{<g1>name|Albania|Algeria|<g4>Angola}|{<g5>pop|2.8|44.2|34.5}}",shape="record"]
+                }
+    	    h3 [label="\"Jeff\"",fontname="Courier",penwidth=0]
+	        h4 [label="Date[2023-07-22]",fontname="Courier",penwidth=0]
+		}
+        "stvars":addr0 -> "h0":d0[constraint=True]
+        "stvars":addr1 -> "h1":g5[style="dashed",constraint=True] #,xlabel="View"]
+        "stvars":f4 -> "h1":g2[style="dashed",constraint=True] #,xlabel="View"]
+        "stvars":f6 -> h3
+        "stvars":f7 -> h4
+	}
+}
 ```
-:::
 
-<img src="https://mermaid.ink/svg/pako:eNqdU8FqwzAM_RWjcykO6Zwm50E72E4bO4xAUWw5MWvi4DmDUPrvc9aFpdB27Qy-SO9JjydpB9IqggxK41cO2ypv2OFJW9fGM6MylsNdnCglkhxOp4WI02gRT9KFw0ZWrDGSNprQd45-qRXJd9v5M9lp4TT0JbWc9h3JNZrmDImESFJ5inSy44_WT3L95rLgC5CpgEQvFPH4NtVC6SWX0dWqj8iF4lQUf_tUkyvpqN7omdYiksEz5rEcAq8smvM5HwJ9SxlbP6zWj-G__NuVOOEiiosbZ4k8wTQsHswgiA9AFZZ1N4Bz8BXVlMOAU6Sx2_qh-D5AsfP2uW8kZN51NIOuVejp3mDpsIZM4_YjREkZb93T4QC-72AGLTZv1o6Y_RdGMfVs"></img>
+The Python interpreter did something smart: when we asked it to create a variable called `pop_col` containing just that column of the full DataFrame, and a variable called `alg_row` for just one row of the full DataFrame, it knew that it didn't have to construct two entirely new objects in its memory. Instead, since it knows that `country_df` contains all of the data that `pop_col` and `alg_row` are subsetting, in its box for `pop_col` it just stored a **pointer**, pointing to that particular column, rather than an entirely new object built from scratch (in other words, an object for which we'd have to ask the computer to allocate more storage space for us). And similarly, its box for `alg_row` just contains a pointer to that particular row.
 
-## The GitHub Side: Remote
+Disaster strikes, however, if we modify `country_df` without realizing that this will therefore also modify `pop_col` and `alg_row`, since these simply point to specific pieces of `country_df`.
 
-![](/assets/img/github_repo.png)
+A straightforward and effective way to avoid this disaster is by thinking about whether or not you need to **persist** a particular variable in memory, and whether you'd like to manipulate it **separately from** the main DataFrame you're working with. So in our case, if we knew that we wanted to do something to `pop_col` (say, rescale all the populations to be in units of people rather than millions of people), we could save ourselves a huge headache by writing
 
-## An Empty Repo
+```{python}
+pop_col = country_df['pop'].copy()
+```
 
-![](/assets/img/github_empty_repo.png)
+Now that we've told Python that we want a **copy** of the column, not just a pointer to a piece of `country_df`, we can do whatever we want to `country_df` and/or `pop_col` without having to worry about whether changes to one will affect the other.
 
-## Refresh after `git push`
+Most commonly, however, this issue comes about in the following way: when we ask Pandas to perform some **operation** on our DataFrame, typically we glance at the resulting output from the code, see that it looks correct, and move on. You need to train your brain to intervene when you fall into this habit! Instead, you also need to check that the operation was **permanent**---i.e., that it was performed **in-place** rather than **as a copy**. To see what we mean, let's try sorting the values in `country_df` by population, instead of alphabetically:
 
-![](/assets/img/github_push.png)
+```{python}
+country_df.sort_values(by='pop')
+```
 
-## Commit History
+All good, right? No! Stop yourself here! Our brains naturally want to move on once we've visually observed the above output: cool, we're good, I see it and it's sorted, onto the next task. But the issue is that, **by default**, Pandas shows us the result of an operation by returning a **copy** of the original DataFrame with the operation performed, **not** the original DataFrame itself. Basically, you can think of this like when you make a change to some file and your computer asks you "would you like to save these changes?" **By default, Pandas is showing you the changes, and it is your job to SAVE these changes** if you want to use the post-operation DataFrame later on in your code.
 
-![](/assets/img/gh_history.png)
+Like the `.copy()` function above, the most straightforward way to avoid this issue is by using the argument that is included in most Pandas functions: `inplace`. As discussed above, the default value is `False`: the changes are **not** made to the original DataFrame, but to a copy of it. If you specify `inplace=True`, however, your problem is solved: this tells Pandas that you'd like the operation to be **permanent**, so that e.g., using our `sort_values()` example from above, `country_df` will now be sorted by population when subsequent lines of code are executed! Since this is the behavior most students/data scientists intuitively expect anyways, you will eventually get in the habit of adding `inplace=True` to most of your calls to Pandas functions, but it's good to take a moment to think about this---for example, imagining some cases where you **wouldn't** want Pandas to perform the operation in-place.
 
-## Checking the `diff`
+## Manipulating a DataFrame
 
-![](/assets/img/gh_diff.png)
-
-## Web Development {data-name="Web Dev"}
-
-| | Frontend<br><i class="bi bi-layout-text-window-reverse"></i> <i class="bi bi-display"></i> <i class="bi bi-graph-up"></i> <i class="bi bi-ui-checks"></i> | Backend<br><i class="bi bi-database"></i> <i class="bi bi-terminal"></i> <i class="bi bi-table"></i> <i class="bi bi-key"></i> |
-| - | - | - |
-| **Low Level** | HTML/CSS/JavaScript | GitHub Pages
-| **Middle Level** | JS Libraries | PHP, SQL |
-| **High Level** | React, Next.js | Node.js, Vercel |
-
-::: {.notes}
-Frontend icons: UI+UI elements, what the user sees (on the screen), user experience (UX), data visualization
-Backend icons: Databases, Security
-:::
-
-## Getting Content onto the Internet {.nostretch}
-
-::: columns
-::: {.column width="50%"}
-
-<ul>
-<li>Step 1: `index.html`</li>
-<li>Step 2: Create GitHub repository</li>
-<li>Step 3: `git init`, `git add -A .`, `git push`</li>
-<li style="border: 2px solid black !important; padding: 4px !important;"><span>Step 4: Enable GitHub Pages in repo settings</span></li>
-<li>Step 5: `<username>.github.io`!</li>
-</ul>
-
-:::
-::: {.column width="50%"}
-
-![](/assets/img/gh_pages.png){fig-align="center" width=70%}
-
-:::
-:::
-
-## Deploying from a Branch/Folder
-
-![](/assets/img/gh_pages_2.png)
-
-## R vs. RStudio vs. Quarto {.smaller data-name="R"}
-
-<!-- (Another important distinction!) -->
-
-<!-- start Quarto box -->
-
-:::::: {style="border: 2px solid black; padding: 10px;"}
-
-<center>
-<img src="/assets/img/quarto_logo.svg" width="20%"></img>
-</center>
-
-<!-- start columns -->
-::::: columns
-
-<!-- start RStudio column -->
-<div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
-
-<center style="margin: 0px !important;">
-<img src="/assets/img/RStudio_logo.svg" width="25%"></img>
-</center>
-
-* GUI wrapper around R (Integrated Development Environment = IDE)
-* Run **blocks** of R code (`.qmd` **chunks**)
-
-<!-- start R box inside RStudio box -->
-
-::: {style="border: 2px solid black; width: 98%; margin: auto; padding: 2px;"}
-
-**<a href="https://www.r-project.org/" target="_blank">The R Language <i class="fa-brands fa-r-project"></i></a>**
-
-* Programming language
-* Runs scripts via `Rscript <script>.r`
-<!-- * Comes with a basic GUI (R-GUI) -->
-
-:::
-<!-- end R box -->
-
-</div>
-<!-- end RStudio column -->
-
-<!-- start + column -->
-<div class="column" style="width: 5%; padding: 5px;">
-
-<div class="center r-stretch" style="margin-top: auto;">
-<h3 style="text-align: center;">\+</h3>
-</div>
-
-</div>
-<!-- end + column -->
-
-<!-- start Jupyter column -->
-<div class="column" style="width: 45%; border: 2px solid black; padding: 8px;">
-
-<center style="margin: 0px !important;">
-<img src="/assets/img/jupyter_logo.svg" width="50%" style="margin: 0px;"></img></span>
-</center>
-
-* GUI wrapper around Python (IDE)
-* Run **blocks** of Python code (`.ipynb` **cells**)
-
-<!-- start python box inside Jupyter column -->
-::: {.column style="width: 98%; border: 2px solid black; margin: auto; padding: 2px;"}
-
-<!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
-<a href="https://www.python.org/" target="_blank">The Python Language <i class="fa-brands fa-python"></i></a>
-
-* Scripting language
-* On its own, just runs scripts via `python <script>.py`
-
-:::
-<!-- end Python column -->
-
-</div>
-<!-- end Jupyter column -->
-
-:::::
-<!-- end columns -->
-
-::::::
-<!-- end quarto box -->
-
-## Getting R Onto Your Computer
-
-1. Download the `R` **language**: [https://cran.r-project.org/](https://cran.r-project.org/)
-
-::: columns
-::: {.column width="50%"}
-
-**VSCode** (recommended)
-
-* | <a href="https://code.visualstudio.com/docs/setup/linux" target="_blank">Linux</a> | <a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">Windows</a> | <a href="https://code.visualstudio.com/docs/setup/mac" target="_blank">OSX</a>
-* Install the <a href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto" target="_blank">Quarto Extension for VSCode</a> (more info from Quarto <a href="https://quarto.org/docs/tools/vscode.html" target="_blank">here</a>)
-
-:::
-::: {.column width="50%"}
-
-**RStudio**
-
-* <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a>
-
-:::
-:::
-
-## Python {data-name="Python"}
-
-* The Python interpreter: <a href="https://www.python.org/downloads/source/" target="_blank">Linux</a> | <a href="https://www.python.org/downloads/windows/" target="_blank">Windows</a> | <a href="https://www.python.org/downloads/macos/" target="_blank">OSX</a>
-* With **VSCode** (recommended): you can start coding!
-  ````{.quarto filename="my_python_code.qmd"}
-  ```{{python}}
-  1 + 1
-  ```
-  ````
-
-* With **Jupyter** there are two options:
-  * **JupyterLab** (recommended) vs. **Jupyter**
-  * Main difference (imo): JupyterLab has a tabbed interface
-
-## Google Colab
-
-Alternative when all else fails! <a href="https://colab.research.google.com/" target="_blank">https://colab.research.google.com/</a>
-
-* Fully web-based Jupyter editing/execution (import/export `.ipynb` files)
-* Can persist code/data to Google Drive
-* Drawback: RAM limitations, have to activate GPU mode (pretty much required for any AI work), idle time limitation
-
-## Colab Runtime Options
-
-<center>
-<img src="/assets/img/colab_language.png" width="68%" style="margin: 0px;"></img>
-<img src="/assets/img/colab_runtime.png" width="68%" style="margin: 0px;"></img>
-</center>
+```{python}
+#| code-fold: show
+country_df['pop'] = country_df['pop'] * 2
+country_df['name'] = country_df['name'].str.lower()
+country_df
+```
