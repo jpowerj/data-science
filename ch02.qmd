@@ -10,13 +10,50 @@ metadata-files:
 
 {{< include _draft-notice.qmd >}}
 
+{{< include _r.globals.qmd >}}
+{{< include _gg.globals.qmd >}}
+
 <!-- <a href="./ch02.slides.html" target="_blank" class="h3">Open slides for chapter in new window &rarr;</a>
 
 ```{=html}
 <iframe src="./ch02.slides.html" width="100%" height="400"></iframe>
 ``` -->
 
-At the end of the previous chapter we learned how to install `R` and Python. **Both** of these languages are central pieces of the data scientist's toolkit, so throughout this book we will aim to build your skills in both, while highlighting tasks that may be easier to carry out in one language relative to the other.[^js]
+At the end of the previous chapter we learned how to install `R` and Python. **Both** of these languages are central pieces of the data scientist's toolkit, so throughout this book we will aim to build your skills in both, while highlighting tasks that may be easier to carry out in one language relative to the other.[^js] Therefore, while we will mark sections with <i class="fa-brands fa-python"></i> if they contain details specific to Python and with <i class="fa-brands fa-r-project"></i> if they contain details specific to `R`, throughout the book we will include both `R` and Python versions of each main topic's code examples, separated using tabs like:
+
+::: {.panel-tabset}
+
+## Python
+
+```{python}
+#| label: py-tabset-example
+#| code-fold: show
+import pandas as pd
+import numpy as np
+import seaborn as sns
+rng = np.random.default_rng(seed=1948)
+x = rng.normal(0, 1, 10)
+y = rng.normal(0, 1, 10)
+df = pd.DataFrame({'x': x, 'y': y})
+sns.scatterplot(x='x', y='y', data=df)
+```
+
+## R
+
+```{r}
+#| label: r-tabset-example
+#| code-fold: show
+library(ggplot2)
+library(tibble)
+x <- rnorm(10, 0, 1)
+y <- rnorm(10, 0, 1)
+df <- tibble(x=x, y=y)
+ggplot(df, aes(x=x, y=y)) +
+  geom_point(size = g_pointsize) +
+  dsan_theme("full")
+```
+
+:::
 
 [^js]: A third language that is increasingly being used by data scientists is JavaScript/TypeScript, which is especially nice to know since it is the canonical language for **web development** as well. For examples of beautiful data visualizations using the d3.js library, see <a href="https://d3-graph-gallery.com/" target="_blank">The D3 Graph Gallery</a>.
 
@@ -54,7 +91,7 @@ When it comes to learning the basics of `R`, Python, or any other programming la
 
 Whether or not you have this background knowledge, don't worry! We will still work to make sure that we explain new concepts with as little technical jargon as possible throughout.
 
-## Pandas and NumPy
+## Python: Pandas and NumPy
 
 While `R` has a range of libraries that are helpful for reading, manipulating, and analyzing data, in Python two particular libraries stand above the rest: Pandas and NumPy. After installing them on the command-line using
 
@@ -66,6 +103,7 @@ pip install numpy
 you'll be able to import and start using them by including the following at the top of your code:
 
 ```{python}
+#| label: pandas-import
 import pandas as pd
 import numpy as np
 ```
@@ -87,6 +125,7 @@ Once you have imported these libraries, a standard data science workflow for ope
 
 ```{python}
 #| code-fold: show
+#| label: load-csv
 df = pd.read_csv("./assets/data/ch02/mydata.csv")
 df.head()
 ```
@@ -94,11 +133,12 @@ df.head()
 We can then perform an operation on our data, like dropping the first row, and use `head()` again to make sure the code did what we expected it to do to our DataFrame:
 
 ```{python}
+#| label: remove-first-row
 df = df.iloc[1:].copy()
 df.head()
 ```
 
-## DataFrames vs. Views of DataFrames
+### DataFrames vs. Views of DataFrames
 
 Probably the most frequent source of errors, over all of the data science couses we've taught, has been Pandas' distinction between a DataFrame itself and a **view** of a DataFrame. There is a good reason for the distinction, but it is typically a baffling concept for anyone just starting to work with DataFrames. To understand this distinction, we first need to quickly look at the structure of how **objects** are stored in memory (this is how storage works in general---in Python, `R`, or any other programming language---so it's useful knowledge regardless of what particular corner of the data science world you occupy!).
 
@@ -108,6 +148,7 @@ Let's look at what happens, in the computer's memory, when we run the following 
 
 ```{python}
 #| code-fold: show
+#| label: py-memory-example
 import datetime
 country_df = pd.read_csv("./assets/data/ch02/country_pop.csv")
 pop_col = country_df['pop']
@@ -126,6 +167,7 @@ And let's look at the values Python prints out when we ask it to print some of t
 
 ```{python}
 #| code-fold: show
+#| label: print-whole-df
 country_df
 ```
 
@@ -133,6 +175,7 @@ Next, `pop_col`:
 
 ```{python}
 #| code-fold: show
+#| label: print-df-column
 pop_col
 ```
 
@@ -140,6 +183,7 @@ How about `alg_row`?
 
 ```{python}
 #| code-fold: show
+#| label: print-df-row
 alg_row
 ```
 
@@ -184,6 +228,8 @@ Disaster strikes, however, if we modify `country_df` without realizing that this
 A straightforward and effective way to avoid this disaster is by thinking about whether or not you need to **persist** a particular variable in memory, and whether you'd like to manipulate it **separately from** the main DataFrame you're working with. So in our case, if we knew that we wanted to do something to `pop_col` (say, rescale all the populations to be in units of people rather than millions of people), we could save ourselves a huge headache by writing
 
 ```{python}
+#| code-fold: show
+#| label: pandas-copy
 pop_col = country_df['pop'].copy()
 ```
 
@@ -192,14 +238,27 @@ Now that we've told Python that we want a **copy** of the column, not just a poi
 Most commonly, however, this issue comes about in the following way: when we ask Pandas to perform some **operation** on our DataFrame, typically we glance at the resulting output from the code, see that it looks correct, and move on. You need to train your brain to intervene when you fall into this habit! Instead, you also need to check that the operation was **permanent**---i.e., that it was performed **in-place** rather than **as a copy**. To see what we mean, let's try sorting the values in `country_df` by population, instead of alphabetically:
 
 ```{python}
+#| label: pandas-sort-temporary
 country_df.sort_values(by='pop')
 ```
 
-All good, right? No! Stop yourself here! Our brains naturally want to move on once we've visually observed the above output: cool, we're good, I see it and it's sorted, onto the next task. But the issue is that, **by default**, Pandas shows us the result of an operation by returning a **copy** of the original DataFrame with the operation performed, **not** the original DataFrame itself. Basically, you can think of this like when you make a change to some file and your computer asks you "would you like to save these changes?" **By default, Pandas is showing you the changes, and it is your job to SAVE these changes** if you want to use the post-operation DataFrame later on in your code.
+All good, right? No! Stop yourself here! Our brains naturally want to move on once we've visually observed the above output: cool, we're good, I see it and it's sorted, onto the next task. But the issue is that, **by default**, Pandas shows us the result of an operation by returning a **copy** of the original DataFrame with the operation performed, **not** the original DataFrame itself. Basically, you can think of this like when you make a change to some file and your computer asks you "would you like to save these changes?" **By default, Pandas is showing you the changes, and it is your job to SAVE these changes** if you want to use the post-operation DataFrame later on in your code. If you don't, then despite the output of the above code *looking* correct, the DataFrame will revert to its previous, non-sorted state from the next line of code onwards:
 
-Like the `.copy()` function above, the most straightforward way to avoid this issue is by using the argument that is included in most Pandas functions: `inplace`. As discussed above, the default value is `False`: the changes are **not** made to the original DataFrame, but to a copy of it. If you specify `inplace=True`, however, your problem is solved: this tells Pandas that you'd like the operation to be **permanent**, so that e.g., using our `sort_values()` example from above, `country_df` will now be sorted by population when subsequent lines of code are executed! Since this is the behavior most students/data scientists intuitively expect anyways, you will eventually get in the habit of adding `inplace=True` to most of your calls to Pandas functions, but it's good to take a moment to think about this---for example, imagining some cases where you **wouldn't** want Pandas to perform the operation in-place.
+```{python}
+#| label: pandas-not-sorted
+country_df
+```
 
-## Manipulating a DataFrame
+Like the `.copy()` function above, the most straightforward way to avoid this issue is by using the argument that can be passed to most Pandas functions: `inplace`. As discussed above, the default value is `False`: the changes are **not** made to the original DataFrame, but to a copy of it. If you specify `inplace=True`, however, your problem is solved: this tells Pandas that you'd like the operation to be **permanent**, so that e.g., using our `sort_values()` example from above, `country_df` will now be sorted by population when subsequent lines of code are executed! Let's look at the difference, examining not the output of `sort_values()` itself but the state of the DataFrame `country_df` after `sort_values()` has been run with the `inplace=True` argument:
+
+```{python}
+country_df.sort_values(by='pop', inplace=True)
+country_df
+```
+
+Since this is the behavior most students/data scientists intuitively expect anyways, you will eventually get in the habit of adding `inplace=True` to most of your calls to Pandas functions, but it's good to take a moment to think about this---for example, imagining some cases where you **wouldn't** want Pandas to perform the operation in-place.
+
+### Manipulating a DataFrame
 
 ```{python}
 #| code-fold: show
@@ -207,3 +266,62 @@ country_df['pop'] = country_df['pop'] * 2
 country_df['name'] = country_df['name'].str.lower()
 country_df
 ```
+
+To understand why these two operations did **not** require us to use the `inplace=True` argument we discussed in the previous section, it's important to note how the `=` operator works in Python:
+
+::: {.callout-tip title="The Assignment Operator"}
+
+One good thing about `R` is the fact that it uses the syntax `my_var <- value` to represent assigning `value` to the variable `my_var`. Python, on the other hand, uses the single equals sign, like `my_var = value`. Thus, when using Python, it's important to keep in mind the different uses of the equals sign:
+
+* `=` is the **assignment operator**: it assigns the value on its right-hand side to the variable name on its left hand side
+* `==` is the **equality** operator: it checks whether the value before it is equal to the value after it, returning `True` if they're equal and `False` otherwise.
+
+:::
+
+Keep in mind that this assignment operator is evaluated from **right to left**: when we tell Python e.g. `x = y + 3`, we are telling it, "first add `3` to the value of the variable `y`, then store the result of that addition as the variable `x`." Therefore, when we write something like `x = x + 3`, that may be confusing at first glance since `x` appears on both the left and right sides, keeping this order in mind helps clarify what's going on: Python **first** adds `3` to the current value of the variable `x`, **then** stores the result of this addition as the variable `x` (thus overwriting the original value that it used when computing the addition).
+
+So, in the case of the two operations we performed on `country_df` above---multiplying the values in the `pop` column by 2 and lowercasing all of the values in the `name` column---we don't need to specify `inplace=True` anywhere since we're **explicitly** overwriting the values in the columns using the `=` operator.
+
+Now, looking at the details of how we performed these operations, note the two ways we've now seen to access or update **rows** and **columns** of a DataFrame:
+
+::: {.callout-tip title="Pandas Syntax: Accessing Columns"}
+
+In Pandas, accessing **columns** is the "default" way to access pieces of a DataFrame, so that all you need to do is specify the name of the DataFrame you want to access a column from, and then include the name of the column surrounded by **square brackets**:
+
+```python
+df['col_name']
+```
+
+:::
+
+::: {.callout-tip title="Pandas Syntax: Accessing Rows"}
+
+Unlike the default column-selection operator, where we just use `[]` to specify the column we want, accessing **rows** in Pandas requires us to use a special `.loc[]` operator, providing a **boolean expression** within the square brackets which it will use to select only the rows for which the boolean expression evaluates to `True`. For example, to select only the rows of our `country_df` DataFrame where the `name` value is `"Algeria"`, we write
+
+```python
+country_df.loc[country_df['name'] == "algeria"]
+```
+
+Take a minute to look at how exactly this works, early on, and it will save you lots of headaches in the long run: zooming in on the expression inside the square brackets after `.loc`, we see
+
+```python
+country_df['name'] == "algeria"
+```
+
+This expression, on its own, goes through each row of `country_df` and checks if its `name` value is equal to `"algeria"`. If it is, the expression stores a value of `True` at that row's index, and `False` otherwise. Therefore, since the full `name` column consists of the values `["albania","algeria","angola"]`, the result of the above boolean expression will be `[False, False, True]`. Our original, full expression:
+
+```python
+country_df[country_df['name'] == "algeria"]
+```
+
+will therefore know (by looking at the `[False, False, True]` result of the expression inside the square brackets after `.loc`) to only include the third row, giving us the following result:
+
+```{python}
+#| label: pandas-select-row
+country_df.loc[country_df['name'] == "algeria"]
+```
+
+:::
+
+## `R`: `readr`, Tibbles, and `dplyr`
+
