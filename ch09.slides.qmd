@@ -1,5 +1,5 @@
 ---
-title: "Lecture 8: Neural Networks"
+title: "Chapter 9: Neural Networks"
 subtitle: "*DSAN 5000: Data Science and Analytics*"
 date: last-modified
 institute: "<a href=\"mailto:jj1088@georgetown.edu\">`jj1088@georgetown.edu`</a>"

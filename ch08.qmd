@@ -1,2 +1,12 @@
+---
+format:
+  html:
+    cache: true
+metadata-files: 
+  - "_bookdown.globals.yml"
+---
+
 # Classification Algorithms
 
+* Decision Trees and Random Forests
+* Support Vector Machines

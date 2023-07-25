@@ -1,3 +1,548 @@
+---
+date: last-modified
+format:
+  html:
+    cache: true
+    include-in-header: {"text": "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css\">"}
+metadata-files: 
+  - "_bookdown.globals.yml"
+---
+
 # Data Cleaning and Tidy Data
 
-Data cleaning
+## Data Cleaning {data-name="Data Cleaning" .nostretch}
+
+{{< include _r.globals.qmd >}}
+{{< include _gg.globals.qmd >}}
+{{< include _tex.globals.qmd >}}
+
+* **The most undervalued skill in data science!**
+* Regardless of industry, absurd variety of data formats
+
+::: {.fig-half .smallish-caption .crunch-caption}
+![Source: <a href="https://xkcd.com/927/" target="_blank">XKCD #927</a>](/assets/img/ch03/standards.png){fig-align="center"}
+:::
+
+::: {.aside}
+
+To fully appreciate the importance of standards in the modern industrial/technology-driven world, see Chapter 18: "The Empire of the Red Octagon" (referring to the US's octagonal stop sign), in @immerwahr_how_2019.
+
+:::
+
+### The Data Cleaning Toolbox
+
+* Text Editors
+* Regular Expressions
+* Conversion Tools
+* HTML Parsers
+
+### Text Editors
+
+* "Broken" data can often be fixed by manually examining it in a text editor!
+
+::: {.fw-block}
+
+```csv {filename="my_data.csv"}
+id,var_A,var_B,var_C\n
+1,val_1A,val_1B,val_1C\r\n
+2,val_2A,val_2B,val_2C\n
+3,val_3A,val_3B,val_3C\n
+```
+
+:::
+
+```{r}
+#| label: r-read-csv
+#| warning: false
+library(readr)
+data <- read_csv("./assets/data/mydata.csv")
+data
+```
+
+## Regular Expressions
+
+* **The** language for turning unstructured data into structured data
+* In Computer Science, a <a href="https://www.cs.umd.edu/class/spring2022/cmsc330/" target="_blank">whole course</a>, if not <a href="https://www.cs.umd.edu/class/spring2022/cmsc430/" target="_blank">two</a>...
+* tldr: a regular expression, or a RegEx string, represents a **machine** that either **accepts** or **rejects** input strings
+
+::: {.coef-table style="font-size: 1.55rem !important;"}
+
+| | | | | | | |
+|-:|:-:|:-|:-:|:-:|:-:|:-|
+| **RegEx** | [A-Za-z0-9]+ | @ | [A-Za-z0-9.-]+ | \\. | (com\|org\|edu) | [**Result:**]{style="font-family: var(--r-main-font); vertical-align: middle;"} |
+| **String A** | [jj1088]{.green-bg} | [@]{.green-bg} | [georgetown]{.green-bg} | [.]{.green-bg} | [edu]{.green-bg} | [Accept]{style="color: green; font-family: var(--r-main-font);"}✅ |
+| **String B** | [spammer]{.green-bg} | [@]{.green-bg} | [fakesite!!]{.red-bg} | [.]{.green-bg} | [coolio]{.red-bg} | [Reject]{style="color: red; font-family: var(--r-main-font);"} |
+
+: {tbl-colwidths="[22,34,1,32,1,5,5]"}
+
+:::
+
+### Regular Expressions: Intuition
+
+* The guiding principle: think of the types of strings you want to **match**:
+  * What kinds of **characters** do they contain? (and, what kinds of characters should they **not** contain?)
+  * What is the **pattern** in which these characters appear: is there a **character limit**? Which characters/patterns are **optional**, which are **required**?
+* You can then use the RegEx syntax to encode the answers to these questions!
+
+### RegEx Syntax: Single Characters
+
+* `z`: Match lowercase `z`, a **single** time
+* `zz`: Match two lowercase `z`s in a row
+* `z{n}`: Match $n$ lowercase `z`s in a row
+* `[abc]`: Match `a`, `b`, or `c`, a **single** time
+* `[A-Z]`: Match one **uppercase** letter
+* `[0-9]`: Match one numeric **digit**
+* `[A-Za-z0-9]`: Match a single **alphanumeric** character
+* `[A-Za-z0-9]{n}`: Match $n$ alphanumeric characters
+
+### RegEx Syntax: Repeating Patterns
+
+* `z*`: Match lowercase `z` **zero or more times**
+* `z+`: Match lowercase `z` **one or more times**
+* `z?`: Match **zero or one** lowercase `z`s
+
+<!-- I have no idea why I need to make .fullsize-th, but quarto is making just the header small font size ???  -->
+
+| | [`z*`]{.fullsize-th} | [`z+`]{.fullsize-th} | [`z?`]{.fullsize-th} | [`z{3}`]{.fullsize-th} |
+|:-|:-:|:-:|:-:|:-:|
+| **`""`** | ✅ | <i class="bi bi-x-lg grayed"></i> | ✅ | <i class="bi bi-x-lg grayed"></i> |
+| **`"z"`** | ✅ | ✅ | ✅ | <i class="bi bi-x-lg grayed"></i> |
+| **`"zzz"`** | ✅ | ✅ | <i class="bi bi-x-lg grayed"></i> | ✅ |
+
+### Example: US Phone Numbers
+
+* Area code sometimes surrounded by parentheses:
+  * 202-687-1587 and (202) 687-1587 both valid!
+* Which **repeating pattern** syntax (from the previous slide) helps us here?
+
+::: {.coef-table style="font-size: 1.55rem !important;"}
+
+| | | | | | | |
+|-:|:-:|:-:|:-:|:-:|:-:|:-|
+| [**RegEx**]{style="font-family: var(--r-main-font);"} | [(]? | [0-9]{3} | [)]? | [ -] | [0-9]{3}-[0-9]{4} | [**Result**]{style="font-family: var(--r-main-font);"} |
+| [**`"202-687-1587"`**]{style="font-family: var(--r-main-font);"} | [$\varepsilon$]{.green-bg} | [202]{.green-bg} | [$\varepsilon$]{.green-bg} | [-]{.green-bg} | [687-1587]{.green-bg} | [Accept]{.green style="font-family: var(--r-main-font);"} |
+| [**`"(202) 687-1587"`**]{style="font-family: var(--r-main-font);"} | [(]{.green-bg} | [202]{.green-bg} | [)]{.green-bg} | [&nbsp;]{.green-bg} | [687-1587]{.green-bg} | [Accept]{.green style="font-family: var(--r-main-font)"} |
+| [**`"2020687-1587"`**]{style="font-family: var(--r-main-font)"} | [$\varepsilon$]{.green-bg} | [202]{.green-bg} | [$\varepsilon$]{.green-bg} | [0]{.red-bg} | [687-1587]{.green-bg} | [Reject]{.red style="font-family: var(--r-main-font);"} |
+
+: {tbl-colwidths="[25,5,15,5,10,30,10]"}
+
+:::
+
+### Building Regular Expressions
+
+```{=html}
+<iframe src="https://regex101.com/" height="70%" width="100%"></iframe>
+```
+
+## Tidy Data {.smaller data-name="Tidy Data"}
+
+<a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Overview</a> | <a href="https://doi.org/10.18637/jss.v059.i10" target="_blank">In-Depth</a>
+
+The **tidy data** paradigm is a standard for how datasets should be structured so as to enable libraries like Pandas and the Tidyverse to easily parse and analyze them. It boils down to three principles of data organization:
+
+* Every **column** is a <span class="cb1">**variable**</span>
+* Every **row** is an <span class="cb2">**observation**</span>
+* Every **cell** is a <span class="cb3">**value**</span>
+
+| | [Var1]{.cb1} | [Var 2]{.cb1} |
+| - | - | - |
+| [**Obs 1**]{.cb2} | [Val 1]{.cb3} | [Val 2]{.cb3} |
+| [**Obs 2**]{.cb2} | [Val 3]{.cb3} | [Val 4]{.cb3} |
+
+Under these constraints, the following dataset **is** tidy:
+
+```{r}
+#| label: tidy-data1
+#| warning: false
+library(tidyverse)
+disp(table1, obs_per_page=3)
+```
+
+whereas this dataset is **not**:
+
+```{r}
+#| label: tidy-data2
+#table2 %>% head()
+disp(table2, obs_per_page=3)
+```
+
+Can you explain why?
+
+### R: The Tidyverse {data-name="The Tidyverse"}
+
+::: columns
+::: {.column width="50%"}
+
+<a href="https://www.tidyverse.org/" target="_blank">https://www.tidyverse.org/</a>
+
+<img src="/assets/img/ch04/tidyverse_half.png"></img>
+:::
+::: {.column width="50%"}
+
+* <a href="https://dplyr.tidyverse.org/" target="_blank">`dplyr` &rarr;</a>
+* <a href="https://ggplot2.tidyverse.org/" target="_blank">`ggplot2` &rarr;</a>
+* <a href="https://forcats.tidyverse.org/" target="_blank">`forcats` &rarr;</a>
+* <a href="https://tibble.tidyverse.org/" target="_blank">`tibble` &rarr;</a>
+* <a href="https://readr.tidyverse.org/" target="_blank">`readr` &rarr;</a>
+* <a href="https://stringr.tidyverse.org/" target="_blank">`stringr` &rarr;</a>
+* <a href="https://tidyr.tidyverse.org/" target="_blank">`tidyr` &rarr;</a>
+* <a href="https://purrr.tidyverse.org/" target="_blank">`purrr` &rarr;</a>
+
+:::
+:::
+
+### `tibble`
+
+<a href="https://tibble.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tibbles.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf" target="_blank">Cheatsheet</a>
+
+* Replaces `R`'s built-in `data.frame` objects
+
+### `dplyr`
+
+<a href="https://dplyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" target="_blank">Cheatsheet</a>
+
+::: columns
+::: {.column width="45%"}
+
+**Grammar** of data manipulation (think **verbs**):
+
+* `filter()`
+* `select()`
+* `arrange()`
+* `mutate()`
+* `summarize()`
+
+:::
+::: {.column .smallertext width="55%"}
+
+`filter()`:
+
+```{r}
+#| label: dplyr-filter
+#| echo: true
+#| code-fold: show
+disp(table1 |> filter(year == 2000))
+```
+
+:::
+:::
+
+### `select()` and `arrange()` {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+`select()`:
+
+```{r}
+#| label: dplyr-select
+#| echo: true
+#| code-fold: show
+disp(table1 |> select(country))
+```
+
+:::
+::: {.column width="50%"}
+
+`arrange()`:
+
+```{r}
+#| label: dplyr-arrange
+#| echo: true
+#| code-fold: show
+disp(table1 |> arrange(population))
+```
+
+:::
+:::
+
+### `mutate()` {.smaller}
+
+`mutate()`:
+
+```{r}
+#| label: dplyr-mutate
+#| echo: true
+#| code-fold: show
+disp(table1 |> mutate(newvar = 300))
+```
+
+### `summarize()` {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+`summarize()`:
+
+```{r}
+#| label: dplyr-summarize
+#| echo: true
+#| code-fold: show
+disp(
+table1 |> 
+  summarize(
+    avg_cases = mean(cases),
+    avg_pop = mean(population)
+  )
+)
+```
+
+:::
+::: {.column width="50%"}
+
+`summarize()` with **grouping**:
+
+```{r}
+#| label: dplyr-summarize-group
+#| echo: true
+#| code-fold: show
+disp(
+table1 |>
+  group_by(country) |>
+  summarize(
+    avg_cases = mean(cases),
+    avg_pop = mean(population)
+  )
+)
+```
+
+:::
+:::
+
+### `ggplot2`
+
+<a href="https://ggplot2.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-visualisation.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf" target="_blank">Cheatsheet</a>
+
+* A **grammar** for graphics
+
+### The Rest of the Tidyverse
+
+* `forcats`
+* `readr`
+* `stringr`
+* `tidyr`
+* `purrr`
+* `lubridate`*
+
+### `forcats`
+
+<a href="https://forcats.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/factors.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf" target="_blank">Cheatsheet</a>
+
+* Utilities for working with **factor** variables (`R`'s data structure for **categorical variables**)
+* **factors** = **data** + **levels**:
+
+```{r}
+#| label: forcats
+month_levels <- c(
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+data <- c("Jan","Jan","Feb","Dec")
+print(data)
+dataf <- parse_factor(data, levels=month_levels)
+print(dataf)
+```
+
+### Factors for Ordering Plot Elements {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| label: relig-data
+relig_summary <- gss_cat %>%
+  group_by(relig) %>%
+  summarise(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
+relig_labs <- labs(
+  x = "TV Hours / Day",
+  y = "Religion"
+)
+```
+
+Without `forcats`:
+
+```{r}
+#| label: relig-plot
+#| fig-height: 7
+#| echo: true
+#| code-fold: show
+relig_summary |>
+  ggplot(aes(tvhours, relig)) +
+  geom_point(size=g_pointsize) +
+  geom_segment(aes(yend = relig, x=0, xend = tvhours)) +
+  dsan_theme("half") +
+  relig_labs
+```
+:::
+::: {.column width="50%"}
+
+With `forcats`:
+
+```{r}
+#| label: relig-plot-factors
+#| fig-height: 7
+#| echo: true
+#| code-fold: show
+relig_summary |>
+  mutate(relig = fct_reorder(relig, tvhours)) |>
+  ggplot(aes(x=tvhours, y=relig)) +
+    geom_point(size=g_pointsize) +
+    geom_segment(aes(yend = relig, x=0, xend = tvhours)) +
+    dsan_theme("half") +
+    relig_labs
+```
+:::
+:::
+
+### Sorting Barplots with `fct_infreq()`
+
+```{r}
+#| label: sorting-barplots-labs
+barplot_labs <- labs(
+  title = "Respondents by Marital Status",
+  x = "Marital Status",
+  y = "Count"
+)
+```
+
+```{r}
+#| label: sorting-barplots
+#| echo: true
+#| code-fold: show
+gss_cat |>
+  mutate(marital = marital |> fct_infreq() |> fct_rev()) |>
+  ggplot(aes(marital)) + geom_bar() + barplot_labs +
+  dsan_theme("full")
+```
+
+### Recoding/Combining Categories
+
+::: columns
+::: {.column width="50%"}
+
+Automatically combining using `fct_lump()`:
+
+```{r}
+#| label: fct-lump
+#| echo: true
+#| code-fold: show
+disp(
+gss_cat %>%
+    mutate(relig = fct_lump(relig)) %>%
+    count(relig)
+)
+```
+
+:::
+::: {.column width="50%"}
+
+Manually Combining using `fct_recode()`:
+
+```{r}
+#| label: fct-recode
+#| echo: true
+#| code-fold: true
+disp(
+gss_cat %>%
+    mutate(partyid = fct_recode(partyid,
+    "Republican"    = "Strong republican",
+    "Republican"      = "Not str republican",
+    "Independent" = "Ind,near rep",
+    "Independent" = "Ind,near dem",
+    "Democrat"        = "Not str democrat",
+    "Democrat"      = "Strong democrat",
+    "Other"                 = "No answer",
+    "Other"                 = "Don't know",
+    "Other"                 = "Other party"
+  )) %>%
+  count(partyid)
+)
+```
+
+:::
+:::
+
+### `readr`
+
+<a href="https://readr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf" target="_blank">Cheatsheet</a>
+
+* Two key functions: `read_csv()`, `write_csv()`
+  
+  ::: {.callout-warning title="Warning! `read_csv()` vs. `read.csv()`"}
+Note that these are **not the same** as `R`'s built-in `read.csv()` and `write.csv()`! The built-in `R` functions will produce a plain `data.frame` object, when in this class we want to work with `tibble` objects.
+:::
+
+* Plus a bonus: `read_delim()`
+
+### `stringr`
+
+<a href="https://stringr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/strings.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf" target="_blank">Cheatsheet</a>
+
+### `tidyr`
+
+<a href="https://tidyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" target="_blank">Cheatsheet</a>
+
+### `purrr`: Functional Programming {.smaller}
+
+<a href="https://purrr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf" target="_blank">Cheatsheet</a> | <a href="https://jennybc.github.io/purrr-tutorial/index.html" target="_blank">Tutorials, with Applications</a>
+
+::: columns
+::: {.column width="50%"}
+
+Provides an **anonymous function** operator `~`, arguments get named `.x`, `.y`:
+
+```{r}
+#| label: purrr-map
+#| echo: true
+#| code-fold: show
+my_points <- c("Midterm"=18, "Final"=300)
+total_points <- c("Midterm"=20, "Final"=400)
+(avg_score <- map2(my_points, total_points,
+  ~ list(frac=.x / .y, pct=(.x/.y)*100)))
+```
+
+:::
+::: {.column width="50%"}
+
+Along with helpful functions for transforming the output
+
+```{r}
+#| label: purrr-flatten
+#| echo: true
+#| code-fold: show
+list_flatten(avg_score)
+```
+
+```{r}
+#| label: purrr-every
+#| echo: true
+#| code-fold: show
+every(avg_score, ~ .x$frac > 0.5)
+```
+
+:::
+:::
+
+### `lubridate`*
+
+<a href="https://lubridate.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/dates-and-times.html" target="_blank">Overview</a> | <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank">Cheatsheet</a>
+
+::: {.callout-caution title="Caution: Importing `lubridate`"}
+Note that `lubridate` **does not** get loaded with the other packages in the `tidyverse` when you call `library(tidyverse)`. It needs to be imported explicitly:
+
+```r
+library(tidyverse)
+library(lubridate)
+```
+
+:::
+
+## Looking Forward {data-state="hide-menubar"}
+
+* Exploratory Data Analysis
+* We've got our data in a format where we can start **exploring** it...
+* Set of **tools** and **principles** for understanding "what's going on" in the data, **before** we carry out formal hypothesis testing

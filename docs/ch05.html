@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-07-25">
 
 <title>Data Science Without Fear - 5&nbsp; Exploratory Data Analysis</title>
 <style>
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -278,7 +313,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#recap" id="toc-recap" class="nav-link active" data-scroll-target="#recap"><span class="header-section-number">5.1</span> Recap</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda"><span class="header-section-number">5.2</span> Exploratory Data Analysis (EDA)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -293,6 +335,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 25, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -301,8 +349,227 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="recap" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="recap"><span class="header-section-number">5.1</span> Recap</h2>
+<div class="hidden">
+<div class="cell" data-hash="ch05_cache/html/r-globals_91c483d99761f16e5b181efd7d2207a0">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1948</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_template<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">tikz_settings =</span> <span class="fu">list</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.ext =</span> <span class="st">"svg"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">dvisvgm.opts =</span> <span class="st">"--font-format=woff"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">tikz_settings_fancy =</span> <span class="fu">list</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.ext =</span> <span class="st">"svg"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">engine.opts =</span> <span class="fu">list</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">dvisvgm.opts =</span> <span class="st">"--font-format=woff"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">template =</span> <span class="st">"./assets/code/tikz2pdf.tex"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>disp <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">obs_per_page =</span> <span class="dv">6</span>, <span class="at">custom_callback =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If length of df is less than obs_per_page, disable pagination</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    dom_str <span class="ot">&lt;-</span> <span class="st">"tp"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(df) <span class="sc">&lt;=</span> obs_per_page) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        dom_str <span class="ot">&lt;-</span> <span class="st">"t"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        df,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">"FixedColumns"</span>, <span class="st">"FixedHeader"</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">pageLength =</span> obs_per_page,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">scrollX =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">paging =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">dom =</span> dom_str,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">fixedHeader =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">filter =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordering =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">language =</span> <span class="fu">list</span>(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                <span class="st">"paginate"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"previous"</span> <span class="ot">=</span> <span class="st">"&lt;i class='bi bi-chevron-left'&gt;&lt;/i&gt;"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"next"</span> <span class="ot">=</span> <span class="st">"&lt;i class='bi bi-chevron-right'&gt;&lt;/i&gt;"</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">callback =</span> custom_callback</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># library(knitr)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="do">## define a method for objects of the class data.frame</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># knit_print.data.frame &lt;- function(x, ...) {</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">#    #res &lt;- paste(c("", "", disp(x)), collapse = "\n")</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">#    asis_output(disp(x))</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="do">## register the method</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># registerS3method("knit_print", "data.frame", knit_print.data.frame)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="hidden">
+<div class="cell" data-hash="ch05_cache/html/source-gg-globals_9772cac25c2ea116696c06d6bfc68b36">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For slides</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cbPalette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">ggplot2.discrete.colour =</span> cbPalette)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme generator, for given sizes</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dsan_theme <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">plot_type =</span> <span class="st">"full"</span>) {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"full"</span>) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"half"</span>) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"quarter"</span>) {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot_type == "col"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    theme <span class="ot">&lt;-</span> <span class="fu">theme_classic</span>(<span class="at">base_size =</span> custom_base_size) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.box.background =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">"black"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(theme)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.align =</span> <span class="st">"center"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>g_pointsize <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>g_linesize <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Technically it should always be linewidth</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>g_linewidth <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>g_textsize <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>remove_legend_title <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">theme</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.spacing.y =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"mm"</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<ul>
+<li>Data Cleaning</li>
+<li>Tidyverse</li>
+</ul>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="exploratory-data-analysis-eda"><span class="header-section-number">5.2</span> Exploratory Data Analysis (EDA)</h2>
+<ul>
+<li>In contrast to <strong>confirmatory</strong> data analysis</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 598.64 234.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 230)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-230 594.64,-230 594.64,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>cluster_2</title>
+<polygon fill="none" stroke="black" points="179.19,-8 179.19,-218 450.22,-218 450.22,-8 179.19,-8"></polygon>
+<text text-anchor="middle" x="314.71" y="-201.4" font-family="Times,serif" font-size="14.00">Understand</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_0</title>
+<polygon fill="none" stroke="black" points="187.19,-16 187.19,-185 318.2,-185 318.2,-16 187.19,-16"></polygon>
+<text text-anchor="middle" x="252.69" y="-168.4" font-family="Times,serif" font-size="14.00">Exploratory</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_1</title>
+<polygon fill="none" stroke="black" points="326.2,-16 326.2,-185 442.22,-185 442.22,-16 326.2,-16"></polygon>
+<text text-anchor="middle" x="384.21" y="-168.4" font-family="Times,serif" font-size="14.00">Confirmatory</text>
+</g>
+<!-- Import -->
+<g id="node1" class="node">
+<title>Import</title>
+<ellipse fill="none" stroke="black" cx="37.32" cy="-124" rx="37.14" ry="18"></ellipse>
+<text text-anchor="middle" x="37.32" y="-119.8" font-family="Times,serif" font-size="14.00">Import</text>
+</g>
+<!-- Tidy -->
+<g id="node2" class="node">
+<title>Tidy</title>
+<ellipse fill="none" stroke="black" cx="139.91" cy="-124" rx="29.05" ry="18"></ellipse>
+<text text-anchor="middle" x="139.91" y="-119.8" font-family="Times,serif" font-size="14.00">Tidy</text>
+</g>
+<!-- Import&#45;&gt;Tidy -->
+<g id="edge1" class="edge">
+<title>Import-&gt;Tidy</title>
+<path fill="none" stroke="black" d="M74.92,-124C83.14,-124 91.88,-124 100.18,-124"></path>
+<polygon fill="black" stroke="black" points="100.38,-127.5 110.38,-124 100.38,-120.5 100.38,-127.5"></polygon>
+</g>
+<!-- V -->
+<g id="node3" class="node">
+<title>V</title>
+<ellipse fill="none" stroke="black" cx="252.69" cy="-124" rx="47.51" ry="18"></ellipse>
+<text text-anchor="middle" x="252.69" y="-119.8" font-family="Times,serif" font-size="14.00">Visualize</text>
+</g>
+<!-- Tidy&#45;&gt;V -->
+<g id="edge2" class="edge">
+<title>Tidy-&gt;V</title>
+<path fill="none" stroke="black" d="M169.44,-124C177.18,-124 185.85,-124 194.57,-124"></path>
+<polygon fill="black" stroke="black" points="194.78,-127.5 204.78,-124 194.78,-120.5 194.78,-127.5"></polygon>
+</g>
+<!-- Model -->
+<g id="node5" class="node">
+<title>Model</title>
+<ellipse fill="none" stroke="black" cx="384.21" cy="-124" rx="36.5" ry="18"></ellipse>
+<text text-anchor="middle" x="384.21" y="-119.8" font-family="Times,serif" font-size="14.00">Model</text>
+</g>
+<!-- V&#45;&gt;Model -->
+<g id="edge3" class="edge">
+<title>V-&gt;Model</title>
+<path fill="none" stroke="black" d="M288.06,-136.08C305.81,-137.87 327.5,-137.97 345.68,-136.38"></path>
+<polygon fill="black" stroke="black" points="346.09,-139.85 355.65,-135.28 345.33,-132.9 346.09,-139.85"></polygon>
+</g>
+<!-- gg -->
+<g id="node4" class="node">
+<title>gg</title>
+<ellipse fill="none" stroke="black" stroke-width="0" cx="252.69" cy="-52" rx="45.62" ry="18"></ellipse>
+<text text-anchor="middle" x="252.69" y="-47.8" font-family="Courier New" font-size="14.00">ggplot</text>
+</g>
+<!-- Model&#45;&gt;V -->
+<g id="edge4" class="edge">
+<title>Model-&gt;V</title>
+<path fill="none" stroke="black" d="M355.65,-112.72C338.92,-110.46 317.17,-109.93 298.07,-111.11"></path>
+<polygon fill="black" stroke="black" points="297.75,-107.63 288.06,-111.92 298.31,-114.6 297.75,-107.63"></polygon>
+</g>
+<!-- Communicate -->
+<g id="node7" class="node">
+<title>Communicate</title>
+<ellipse fill="none" stroke="black" cx="525.43" cy="-124" rx="65.42" ry="18"></ellipse>
+<text text-anchor="middle" x="525.43" y="-119.8" font-family="Times,serif" font-size="14.00">Communicate</text>
+</g>
+<!-- Model&#45;&gt;Communicate -->
+<g id="edge5" class="edge">
+<title>Model-&gt;Communicate</title>
+<path fill="none" stroke="black" d="M420.7,-124C429.71,-124 439.72,-124 449.88,-124"></path>
+<polygon fill="black" stroke="black" points="450.05,-127.5 460.05,-124 450.05,-120.5 450.05,-127.5"></polygon>
+</g>
+<!-- e10 -->
+<g id="node6" class="node">
+<title>e10</title>
+<ellipse fill="none" stroke="black" stroke-width="0" cx="384.21" cy="-52" rx="40.02" ry="18"></ellipse>
+<text text-anchor="middle" x="384.21" y="-47.8" font-family="Courier New" font-size="14.00">e1071</text>
+</g>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

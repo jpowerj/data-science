@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-07-25">
 
 <title>Data Science Without Fear - 4&nbsp; Data Cleaning and Tidy Data</title>
 <style>
@@ -20,7 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -66,11 +120,27 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="site_libs/datatables-binding-0.28/datatables.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/dt-ext-fixedcolumns-1.13.4/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<script src="site_libs/dt-ext-fixedcolumns-1.13.4/js/dataTables.fixedColumns.min.js"></script>
+<link href="site_libs/dt-ext-fixedheader-1.13.4/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+<script src="site_libs/dt-ext-fixedheader-1.13.4/js/dataTables.fixedHeader.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -278,10 +348,49 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link active" data-scroll-target="#data-cleaning"><span class="header-section-number">4.1</span> Data Cleaning</a>
+  <ul class="collapse">
+  <li><a href="#the-data-cleaning-toolbox" id="toc-the-data-cleaning-toolbox" class="nav-link" data-scroll-target="#the-data-cleaning-toolbox"><span class="header-section-number">4.1.1</span> The Data Cleaning Toolbox</a></li>
+  <li><a href="#text-editors" id="toc-text-editors" class="nav-link" data-scroll-target="#text-editors"><span class="header-section-number">4.1.2</span> Text Editors</a></li>
+  </ul></li>
+  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">4.2</span> Regular Expressions</a>
+  <ul class="collapse">
+  <li><a href="#regular-expressions-intuition" id="toc-regular-expressions-intuition" class="nav-link" data-scroll-target="#regular-expressions-intuition"><span class="header-section-number">4.2.1</span> Regular Expressions: Intuition</a></li>
+  <li><a href="#regex-syntax-single-characters" id="toc-regex-syntax-single-characters" class="nav-link" data-scroll-target="#regex-syntax-single-characters"><span class="header-section-number">4.2.2</span> RegEx Syntax: Single Characters</a></li>
+  <li><a href="#regex-syntax-repeating-patterns" id="toc-regex-syntax-repeating-patterns" class="nav-link" data-scroll-target="#regex-syntax-repeating-patterns"><span class="header-section-number">4.2.3</span> RegEx Syntax: Repeating Patterns</a></li>
+  <li><a href="#example-us-phone-numbers" id="toc-example-us-phone-numbers" class="nav-link" data-scroll-target="#example-us-phone-numbers"><span class="header-section-number">4.2.4</span> Example: US Phone Numbers</a></li>
+  <li><a href="#building-regular-expressions" id="toc-building-regular-expressions" class="nav-link" data-scroll-target="#building-regular-expressions"><span class="header-section-number">4.2.5</span> Building Regular Expressions</a></li>
+  </ul></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">4.3</span> Tidy Data</a>
+  <ul class="collapse">
+  <li><a href="#r-the-tidyverse" id="toc-r-the-tidyverse" class="nav-link" data-scroll-target="#r-the-tidyverse"><span class="header-section-number">4.3.1</span> R: The Tidyverse</a></li>
+  <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble"><span class="header-section-number">4.3.2</span> <code>tibble</code></a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr"><span class="header-section-number">4.3.3</span> <code>dplyr</code></a></li>
+  <li><a href="#select-and-arrange" id="toc-select-and-arrange" class="nav-link" data-scroll-target="#select-and-arrange"><span class="header-section-number">4.3.4</span> <code>select()</code> and <code>arrange()</code></a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">4.3.5</span> <code>mutate()</code></a></li>
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize"><span class="header-section-number">4.3.6</span> <code>summarize()</code></a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><span class="header-section-number">4.3.7</span> <code>ggplot2</code></a></li>
+  <li><a href="#the-rest-of-the-tidyverse" id="toc-the-rest-of-the-tidyverse" class="nav-link" data-scroll-target="#the-rest-of-the-tidyverse"><span class="header-section-number">4.3.8</span> The Rest of the Tidyverse</a></li>
+  <li><a href="#forcats" id="toc-forcats" class="nav-link" data-scroll-target="#forcats"><span class="header-section-number">4.3.9</span> <code>forcats</code></a></li>
+  <li><a href="#factors-for-ordering-plot-elements" id="toc-factors-for-ordering-plot-elements" class="nav-link" data-scroll-target="#factors-for-ordering-plot-elements"><span class="header-section-number">4.3.10</span> Factors for Ordering Plot Elements</a></li>
+  <li><a href="#sorting-barplots-with-fct_infreq" id="toc-sorting-barplots-with-fct_infreq" class="nav-link" data-scroll-target="#sorting-barplots-with-fct_infreq"><span class="header-section-number">4.3.11</span> Sorting Barplots with <code>fct_infreq()</code></a></li>
+  <li><a href="#recodingcombining-categories" id="toc-recodingcombining-categories" class="nav-link" data-scroll-target="#recodingcombining-categories"><span class="header-section-number">4.3.12</span> Recoding/Combining Categories</a></li>
+  <li><a href="#readr" id="toc-readr" class="nav-link" data-scroll-target="#readr"><span class="header-section-number">4.3.13</span> <code>readr</code></a></li>
+  <li><a href="#stringr" id="toc-stringr" class="nav-link" data-scroll-target="#stringr"><span class="header-section-number">4.3.14</span> <code>stringr</code></a></li>
+  <li><a href="#tidyr" id="toc-tidyr" class="nav-link" data-scroll-target="#tidyr"><span class="header-section-number">4.3.15</span> <code>tidyr</code></a></li>
+  <li><a href="#purrr-functional-programming" id="toc-purrr-functional-programming" class="nav-link" data-scroll-target="#purrr-functional-programming"><span class="header-section-number">4.3.16</span> <code>purrr</code>: Functional Programming</a></li>
+  <li><a href="#lubridate" id="toc-lubridate" class="nav-link" data-scroll-target="#lubridate"><span class="header-section-number">4.3.17</span> <code>lubridate</code>*</a></li>
+  </ul></li>
+  <li><a href="#looking-forward" id="toc-looking-forward" class="nav-link" data-scroll-target="#looking-forward"><span class="header-section-number">4.4</span> Looking Forward</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch04.html">Data Cleaning and Analysis</a></li><li class="breadcrumb-item"><a href="./ch04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Cleaning and Tidy Data</span></a></li></ol></nav>
 <div class="quarto-title">
@@ -293,6 +402,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 25, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -301,9 +416,891 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Data cleaning</p>
+<section id="data-cleaning" class="level2 nostretch page-columns page-full" data-name="Data Cleaning" data-number="4.1">
+<h2 class="nostretch anchored" data-name="Data Cleaning" data-number="4.1" data-anchor-id="data-cleaning"><span class="header-section-number">4.1</span> Data Cleaning</h2>
+<div class="hidden">
+<div class="cell" data-hash="ch04_cache/html/r-globals_16a5d542449f00aa15467e980d7c2ba0">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1948</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_template<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">tikz_settings =</span> <span class="fu">list</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.ext =</span> <span class="st">"svg"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">dvisvgm.opts =</span> <span class="st">"--font-format=woff"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">tikz_settings_fancy =</span> <span class="fu">list</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.ext =</span> <span class="st">"svg"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">engine.opts =</span> <span class="fu">list</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">dvisvgm.opts =</span> <span class="st">"--font-format=woff"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">template =</span> <span class="st">"./assets/code/tikz2pdf.tex"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>disp <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">obs_per_page =</span> <span class="dv">6</span>, <span class="at">custom_callback =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If length of df is less than obs_per_page, disable pagination</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    dom_str <span class="ot">&lt;-</span> <span class="st">"tp"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(df) <span class="sc">&lt;=</span> obs_per_page) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        dom_str <span class="ot">&lt;-</span> <span class="st">"t"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        df,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">extensions =</span> <span class="fu">c</span>(<span class="st">"FixedColumns"</span>, <span class="st">"FixedHeader"</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">pageLength =</span> obs_per_page,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">scrollX =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">paging =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">dom =</span> dom_str,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">fixedHeader =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">filter =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">ordering =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="at">language =</span> <span class="fu">list</span>(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                <span class="st">"paginate"</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"previous"</span> <span class="ot">=</span> <span class="st">"&lt;i class='bi bi-chevron-left'&gt;&lt;/i&gt;"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"next"</span> <span class="ot">=</span> <span class="st">"&lt;i class='bi bi-chevron-right'&gt;&lt;/i&gt;"</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">callback =</span> custom_callback</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># library(knitr)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="do">## define a method for objects of the class data.frame</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># knit_print.data.frame &lt;- function(x, ...) {</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">#    #res &lt;- paste(c("", "", disp(x)), collapse = "\n")</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">#    asis_output(disp(x))</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="do">## register the method</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># registerS3method("knit_print", "data.frame", knit_print.data.frame)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="hidden">
+<div class="cell" data-hash="ch04_cache/html/source-gg-globals_351d3f0d7cddb05f93b280f97b4688f6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For slides</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cbPalette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">ggplot2.discrete.colour =</span> cbPalette)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Theme generator, for given sizes</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dsan_theme <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">plot_type =</span> <span class="st">"full"</span>) {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"full"</span>) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"half"</span>) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (plot_type <span class="sc">==</span> <span class="st">"quarter"</span>) {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># plot_type == "col"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        custom_base_size <span class="ot">&lt;-</span> <span class="dv">22</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    theme <span class="ot">&lt;-</span> <span class="fu">theme_classic</span>(<span class="at">base_size =</span> custom_base_size) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.box.background =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">"black"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(theme)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.align =</span> <span class="st">"center"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>g_pointsize <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>g_linesize <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Technically it should always be linewidth</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>g_linewidth <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>g_textsize <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>remove_legend_title <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">theme</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.spacing.y =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"mm"</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+<div class="hidden">
+<p><span class="math display">\[
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\newcommand{\bigexpect}[1]{\mathbb{E}\mkern-4mu \left[ #1 \right]}
+\newcommand{\definedas}{\overset{\text{defn}}{=}}
+\newcommand{\definedalign}{\overset{\phantom{\text{defn}}}{=}}
+\newcommand{\eqeventual}{\overset{\text{eventually}}{=}}
+\newcommand{\expect}[1]{\mathbb{E}[#1]}
+\newcommand{\expectsq}[1]{\mathbb{E}^2[#1]}
+\newcommand{\fw}[1]{\texttt{#1}}
+\newcommand{\given}{\mid}
+\newcommand{\green}[1]{\color{green}{#1}}
+\newcommand{\heads}{\outcome{heads}}
+\newcommand{\lik}{\mathcal{L}}
+\newcommand{\mle}{\textsf{ML}}
+\newcommand{\orange}[1]{\color{orange}{#1}}
+\newcommand{\outcome}[1]{\textsf{#1}}
+\newcommand{\param}[1]{{\color{purple} #1}}
+\newcommand{\pgsamplespace}{\{\green{1},\green{2},\green{3},\purp{4},\purp{5},\purp{6}\}}
+\newcommand{\prob}[1]{P\left( #1 \right)}
+\newcommand{\purp}[1]{\color{purple}{#1}}
+\newcommand{\spacecap}{\; \cap \;}
+\newcommand{\spacewedge}{\; \wedge \;}
+\newcommand{\tails}{\outcome{tails}}
+\newcommand{\Var}[1]{\text{Var}[#1]}
+\newcommand{\bigVar}[1]{\text{Var}\mkern-4mu \left[ #1 \right]}
+\]</span></p>
+</div>
+<ul>
+<li><strong>The most undervalued skill in data science!</strong></li>
+<li>Regardless of industry, absurd variety of data formats</li>
+</ul>
+<div class="fig-half smallish-caption crunch-caption">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".\assets/img/ch03/standards.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Source: <a href="https://xkcd.com/927/" target="_blank">XKCD #927</a></figcaption>
+</figure>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>To fully appreciate the importance of standards in the modern industrial/technology-driven world, see Chapter 18: “The Empire of the Red Octagon” (referring to the US’s octagonal stop sign), in <span class="citation" data-cites="immerwahr_how_2019">Immerwahr (<a href="references.html#ref-immerwahr_how_2019" role="doc-biblioref">2019</a>)</span>.</p>
+</div></div><section id="the-data-cleaning-toolbox" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="the-data-cleaning-toolbox"><span class="header-section-number">4.1.1</span> The Data Cleaning Toolbox</h3>
+<ul>
+<li>Text Editors</li>
+<li>Regular Expressions</li>
+<li>Conversion Tools</li>
+<li>HTML Parsers</li>
+</ul>
+</section>
+<section id="text-editors" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="text-editors"><span class="header-section-number">4.1.2</span> Text Editors</h3>
+<ul>
+<li>“Broken” data can often be fixed by manually examining it in a text editor!</li>
+</ul>
+<div class="fw-block">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>my_data.csv</strong></pre>
+</div>
+<pre class="csv"><code>id,var_A,var_B,var_C\n
+1,val_1A,val_1B,val_1C\r\n
+2,val_2A,val_2B,val_2C\n
+3,val_3A,val_3B,val_3C\n</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="ch04_cache/html/r-read-csv_6973b982100d19a84f67035e69695a9f">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./assets/data/mydata.csv"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  index var_1  var_2  var_3 
+  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+1 A     val_A1 val_A2 val_A3
+2 B     val_B1 val_B2 val_B3
+3 C     val_C1 val_C2 val_C3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="regular-expressions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">4.2</span> Regular Expressions</h2>
+<ul>
+<li><strong>The</strong> language for turning unstructured data into structured data</li>
+<li>In Computer Science, a <a href="https://www.cs.umd.edu/class/spring2022/cmsc330/" target="_blank">whole course</a>, if not <a href="https://www.cs.umd.edu/class/spring2022/cmsc430/" target="_blank">two</a>…</li>
+<li>tldr: a regular expression, or a RegEx string, represents a <strong>machine</strong> that either <strong>accepts</strong> or <strong>rejects</strong> input strings</li>
+</ul>
+<div class="coef-table" style="font-size: 1.55rem !important;">
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 34%">
+<col style="width: 1%">
+<col style="width: 32%">
+<col style="width: 1%">
+<col style="width: 5%">
+<col style="width: 5%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><strong>RegEx</strong></td>
+<td style="text-align: center;">[A-Za-z0-9]+</td>
+<td style="text-align: left;">@</td>
+<td style="text-align: center;">[A-Za-z0-9.-]+</td>
+<td style="text-align: center;">\.</td>
+<td style="text-align: center;">(com|org|edu)</td>
+<td style="text-align: left;"><span style="font-family: var(--r-main-font); vertical-align: middle;"><strong>Result:</strong></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><strong>String A</strong></td>
+<td style="text-align: center;"><span class="green-bg">jj1088</span></td>
+<td style="text-align: left;"><span class="green-bg">@</span></td>
+<td style="text-align: center;"><span class="green-bg">georgetown</span></td>
+<td style="text-align: center;"><span class="green-bg">.</span></td>
+<td style="text-align: center;"><span class="green-bg">edu</span></td>
+<td style="text-align: left;"><span style="color: green; font-family: var(--r-main-font);">Accept</span>✅</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><strong>String B</strong></td>
+<td style="text-align: center;"><span class="green-bg">spammer</span></td>
+<td style="text-align: left;"><span class="green-bg">@</span></td>
+<td style="text-align: center;"><span class="red-bg">fakesite!!</span></td>
+<td style="text-align: center;"><span class="green-bg">.</span></td>
+<td style="text-align: center;"><span class="red-bg">coolio</span></td>
+<td style="text-align: left;"><span style="color: red; font-family: var(--r-main-font);">Reject</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="regular-expressions-intuition" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="regular-expressions-intuition"><span class="header-section-number">4.2.1</span> Regular Expressions: Intuition</h3>
+<ul>
+<li>The guiding principle: think of the types of strings you want to <strong>match</strong>:
+<ul>
+<li>What kinds of <strong>characters</strong> do they contain? (and, what kinds of characters should they <strong>not</strong> contain?)</li>
+<li>What is the <strong>pattern</strong> in which these characters appear: is there a <strong>character limit</strong>? Which characters/patterns are <strong>optional</strong>, which are <strong>required</strong>?</li>
+</ul></li>
+<li>You can then use the RegEx syntax to encode the answers to these questions!</li>
+</ul>
+</section>
+<section id="regex-syntax-single-characters" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="regex-syntax-single-characters"><span class="header-section-number">4.2.2</span> RegEx Syntax: Single Characters</h3>
+<ul>
+<li><code>z</code>: Match lowercase <code>z</code>, a <strong>single</strong> time</li>
+<li><code>zz</code>: Match two lowercase <code>z</code>s in a row</li>
+<li><code>z{n}</code>: Match <span class="math inline">\(n\)</span> lowercase <code>z</code>s in a row</li>
+<li><code>[abc]</code>: Match <code>a</code>, <code>b</code>, or <code>c</code>, a <strong>single</strong> time</li>
+<li><code>[A-Z]</code>: Match one <strong>uppercase</strong> letter</li>
+<li><code>[0-9]</code>: Match one numeric <strong>digit</strong></li>
+<li><code>[A-Za-z0-9]</code>: Match a single <strong>alphanumeric</strong> character</li>
+<li><code>[A-Za-z0-9]{n}</code>: Match <span class="math inline">\(n\)</span> alphanumeric characters</li>
+</ul>
+</section>
+<section id="regex-syntax-repeating-patterns" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="regex-syntax-repeating-patterns"><span class="header-section-number">4.2.3</span> RegEx Syntax: Repeating Patterns</h3>
+<ul>
+<li><code>z*</code>: Match lowercase <code>z</code> <strong>zero or more times</strong></li>
+<li><code>z+</code>: Match lowercase <code>z</code> <strong>one or more times</strong></li>
+<li><code>z?</code>: Match <strong>zero or one</strong> lowercase <code>z</code>s</li>
+</ul>
+<!-- I have no idea why I need to make .fullsize-th, but quarto is making just the header small font size ???  -->
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="fullsize-th"><code>z*</code></span></th>
+<th style="text-align: center;"><span class="fullsize-th"><code>z+</code></span></th>
+<th style="text-align: center;"><span class="fullsize-th"><code>z?</code></span></th>
+<th style="text-align: center;"><span class="fullsize-th"><code>z{3}</code></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>""</code></strong></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;"><i class="bi bi-x-lg grayed"></i></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;"><i class="bi bi-x-lg grayed"></i></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><code>"z"</code></strong></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;"><i class="bi bi-x-lg grayed"></i></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>"zzz"</code></strong></td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;"><i class="bi bi-x-lg grayed"></i></td>
+<td style="text-align: center;">✅</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-us-phone-numbers" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="example-us-phone-numbers"><span class="header-section-number">4.2.4</span> Example: US Phone Numbers</h3>
+<ul>
+<li>Area code sometimes surrounded by parentheses:
+<ul>
+<li>202-687-1587 and (202) 687-1587 both valid!</li>
+</ul></li>
+<li>Which <strong>repeating pattern</strong> syntax (from the previous slide) helps us here?</li>
+</ul>
+<div class="coef-table" style="font-size: 1.55rem !important;">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 5%">
+<col style="width: 15%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 30%">
+<col style="width: 10%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span style="font-family: var(--r-main-font);"><strong>RegEx</strong></span></td>
+<td style="text-align: center;">[(]?</td>
+<td style="text-align: center;">[0-9]{3}</td>
+<td style="text-align: center;">[)]?</td>
+<td style="text-align: center;">[ -]</td>
+<td style="text-align: center;">[0-9]{3}-[0-9]{4}</td>
+<td style="text-align: left;"><span style="font-family: var(--r-main-font);"><strong>Result</strong></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span style="font-family: var(--r-main-font);"><strong><code>"202-687-1587"</code></strong></span></td>
+<td style="text-align: center;"><span class="green-bg"><span class="math inline">\(\varepsilon\)</span></span></td>
+<td style="text-align: center;"><span class="green-bg">202</span></td>
+<td style="text-align: center;"><span class="green-bg"><span class="math inline">\(\varepsilon\)</span></span></td>
+<td style="text-align: center;"><span class="green-bg">-</span></td>
+<td style="text-align: center;"><span class="green-bg">687-1587</span></td>
+<td style="text-align: left;"><span class="green" style="font-family: var(--r-main-font);">Accept</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span style="font-family: var(--r-main-font);"><strong><code>"(202) 687-1587"</code></strong></span></td>
+<td style="text-align: center;"><span class="green-bg">(</span></td>
+<td style="text-align: center;"><span class="green-bg">202</span></td>
+<td style="text-align: center;"><span class="green-bg">)</span></td>
+<td style="text-align: center;"><span class="green-bg">&nbsp;</span></td>
+<td style="text-align: center;"><span class="green-bg">687-1587</span></td>
+<td style="text-align: left;"><span class="green" style="font-family: var(--r-main-font)">Accept</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span style="font-family: var(--r-main-font)"><strong><code>"2020687-1587"</code></strong></span></td>
+<td style="text-align: center;"><span class="green-bg"><span class="math inline">\(\varepsilon\)</span></span></td>
+<td style="text-align: center;"><span class="green-bg">202</span></td>
+<td style="text-align: center;"><span class="green-bg"><span class="math inline">\(\varepsilon\)</span></span></td>
+<td style="text-align: center;"><span class="red-bg">0</span></td>
+<td style="text-align: center;"><span class="green-bg">687-1587</span></td>
+<td style="text-align: left;"><span class="red" style="font-family: var(--r-main-font);">Reject</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="building-regular-expressions" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="building-regular-expressions"><span class="header-section-number">4.2.5</span> Building Regular Expressions</h3>
+<iframe src="https://regex101.com/" height="70%" width="100%"></iframe>
+</section>
+</section>
+<section id="tidy-data" class="level2 smaller" data-name="Tidy Data" data-number="4.3">
+<h2 class="smaller anchored" data-name="Tidy Data" data-number="4.3" data-anchor-id="tidy-data"><span class="header-section-number">4.3</span> Tidy Data</h2>
+<p><a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Overview</a> | <a href="https://doi.org/10.18637/jss.v059.i10" target="_blank">In-Depth</a></p>
+<p>The <strong>tidy data</strong> paradigm is a standard for how datasets should be structured so as to enable libraries like Pandas and the Tidyverse to easily parse and analyze them. It boils down to three principles of data organization:</p>
+<ul>
+<li>Every <strong>column</strong> is a <span class="cb1"><strong>variable</strong></span></li>
+<li>Every <strong>row</strong> is an <span class="cb2"><strong>observation</strong></span></li>
+<li>Every <strong>cell</strong> is a <span class="cb3"><strong>value</strong></span></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="cb1">Var1</span></th>
+<th><span class="cb1">Var 2</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="cb2"><strong>Obs 1</strong></span></td>
+<td><span class="cb3">Val 1</span></td>
+<td><span class="cb3">Val 2</span></td>
+</tr>
+<tr class="even">
+<td><span class="cb2"><strong>Obs 2</strong></span></td>
+<td><span class="cb3">Val 3</span></td>
+<td><span class="cb3">Val 4</span></td>
+</tr>
+</tbody>
+</table>
+<p>Under these constraints, the following dataset <strong>is</strong> tidy:</p>
+<div class="cell" data-hash="ch04_cache/html/tidy-data1_7c8741660d3854ddd91d1ad14f04c519">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table1, <span class="at">obs_per_page=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-638e02fc234535cd5702" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-638e02fc234535cd5702">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4","5","6"],["Afghanistan","Afghanistan","Brazil","Brazil","China","China"],[1999,2000,1999,2000,1999,2000],[745,2666,37737,80488,212258,213766],[19987071,20595360,172006362,174504898,1272915272,1280428583]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>year<\/th>\n      <th>cases<\/th>\n      <th>population<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"scrollX":true,"paging":true,"dom":"tp","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>whereas this dataset is <strong>not</strong>:</p>
+<div class="cell" data-hash="ch04_cache/html/tidy-data2_8a27729488c8d6b046936d3c17757d06">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table2 %&gt;% head()</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table2, <span class="at">obs_per_page=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-579d60953c4e4f1e02d9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-579d60953c4e4f1e02d9">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12"],["Afghanistan","Afghanistan","Afghanistan","Afghanistan","Brazil","Brazil","Brazil","Brazil","China","China","China","China"],[1999,1999,2000,2000,1999,1999,2000,2000,1999,1999,2000,2000],["cases","population","cases","population","cases","population","cases","population","cases","population","cases","population"],[745,19987071,2666,20595360,37737,172006362,80488,174504898,212258,1272915272,213766,1280428583]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>year<\/th>\n      <th>type<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"scrollX":true,"paging":true,"dom":"tp","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Can you explain why?</p>
+<section id="r-the-tidyverse" class="level3" data-name="The Tidyverse" data-number="4.3.1">
+<h3 data-name="The Tidyverse" data-number="4.3.1" class="anchored" data-anchor-id="r-the-tidyverse"><span class="header-section-number">4.3.1</span> R: The Tidyverse</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://www.tidyverse.org/" target="_blank">https://www.tidyverse.org/</a></p>
+<p><img src="./assets/img/ch04/tidyverse_half.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><a href="https://dplyr.tidyverse.org/" target="_blank"><code>dplyr</code> →</a></li>
+<li><a href="https://ggplot2.tidyverse.org/" target="_blank"><code>ggplot2</code> →</a></li>
+<li><a href="https://forcats.tidyverse.org/" target="_blank"><code>forcats</code> →</a></li>
+<li><a href="https://tibble.tidyverse.org/" target="_blank"><code>tibble</code> →</a></li>
+<li><a href="https://readr.tidyverse.org/" target="_blank"><code>readr</code> →</a></li>
+<li><a href="https://stringr.tidyverse.org/" target="_blank"><code>stringr</code> →</a></li>
+<li><a href="https://tidyr.tidyverse.org/" target="_blank"><code>tidyr</code> →</a></li>
+<li><a href="https://purrr.tidyverse.org/" target="_blank"><code>purrr</code> →</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="tibble" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="tibble"><span class="header-section-number">4.3.2</span> <code>tibble</code></h3>
+<p><a href="https://tibble.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tibbles.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li>Replaces <code>R</code>’s built-in <code>data.frame</code> objects</li>
+</ul>
+</section>
+<section id="dplyr" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="dplyr"><span class="header-section-number">4.3.3</span> <code>dplyr</code></h3>
+<p><a href="https://dplyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" target="_blank">Cheatsheet</a></p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Grammar</strong> of data manipulation (think <strong>verbs</strong>):</p>
+<ul>
+<li><code>filter()</code></li>
+<li><code>select()</code></li>
+<li><code>arrange()</code></li>
+<li><code>mutate()</code></li>
+<li><code>summarize()</code></li>
+</ul>
+</div><div class="column smallertext" style="width:55%;">
+<p><code>filter()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-filter_c0e1da9b043e4df9ebfb82164bc241b7">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1f0be227a2e029b7b6ac" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1f0be227a2e029b7b6ac">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3"],["Afghanistan","Brazil","China"],[2000,2000,2000],[2666,80488,213766],[20595360,174504898,1280428583]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>year<\/th>\n      <th>cases<\/th>\n      <th>population<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="select-and-arrange" class="level3 smaller" data-number="4.3.4">
+<h3 class="smaller anchored" data-number="4.3.4" data-anchor-id="select-and-arrange"><span class="header-section-number">4.3.4</span> <code>select()</code> and <code>arrange()</code></h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>select()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-select_83f6b0ef8ffd174504c097e14070e413">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table1 <span class="sc">|&gt;</span> <span class="fu">select</span>(country))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-644e5fa8eaca128a029a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-644e5fa8eaca128a029a">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4","5","6"],["Afghanistan","Afghanistan","Brazil","Brazil","China","China"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>arrange()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-arrange_b4c42b96136d47d271ae137443391af0">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table1 <span class="sc">|&gt;</span> <span class="fu">arrange</span>(population))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f51de4383c9d88ed63da" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f51de4383c9d88ed63da">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4","5","6"],["Afghanistan","Afghanistan","Brazil","Brazil","China","China"],[1999,2000,1999,2000,1999,2000],[745,2666,37737,80488,212258,213766],[19987071,20595360,172006362,174504898,1272915272,1280428583]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>year<\/th>\n      <th>cases<\/th>\n      <th>population<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="mutate" class="level3 smaller" data-number="4.3.5">
+<h3 class="smaller anchored" data-number="4.3.5" data-anchor-id="mutate"><span class="header-section-number">4.3.5</span> <code>mutate()</code></h3>
+<p><code>mutate()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-mutate_e2990328ab7455ff685c29fb3f7d23c1">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(table1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">newvar =</span> <span class="dv">300</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-992ad565635c592dbe3c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-992ad565635c592dbe3c">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4","5","6"],["Afghanistan","Afghanistan","Brazil","Brazil","China","China"],[1999,2000,1999,2000,1999,2000],[745,2666,37737,80488,212258,213766],[19987071,20595360,172006362,174504898,1272915272,1280428583],[300,300,300,300,300,300]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>year<\/th>\n      <th>cases<\/th>\n      <th>population<\/th>\n      <th>newvar<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="summarize" class="level3 smaller" data-number="4.3.6">
+<h3 class="smaller anchored" data-number="4.3.6" data-anchor-id="summarize"><span class="header-section-number">4.3.6</span> <code>summarize()</code></h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>summarize()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-summarize_c6b09b6de683c58b8dfb62d5e30d83eb">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_cases =</span> <span class="fu">mean</span>(cases),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_pop =</span> <span class="fu">mean</span>(population)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e1031b8235f1b350bcb6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e1031b8235f1b350bcb6">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1"],[91276.6666666667],[490072924.333333]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>avg_cases<\/th>\n      <th>avg_pop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>summarize()</code> with <strong>grouping</strong>:</p>
+<div class="cell" data-hash="ch04_cache/html/dplyr-summarize-group_e0827a6cdd8ee7ef51e221315dc85c12">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_cases =</span> <span class="fu">mean</span>(cases),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_pop =</span> <span class="fu">mean</span>(population)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1446e29010372d8b0cb0" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1446e29010372d8b0cb0">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3"],["Afghanistan","Brazil","China"],[1705.5,59112.5,213012],[20291215.5,173255630,1276671927.5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>avg_cases<\/th>\n      <th>avg_pop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot2" class="level3" data-number="4.3.7">
+<h3 data-number="4.3.7" class="anchored" data-anchor-id="ggplot2"><span class="header-section-number">4.3.7</span> <code>ggplot2</code></h3>
+<p><a href="https://ggplot2.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-visualisation.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li>A <strong>grammar</strong> for graphics</li>
+</ul>
+</section>
+<section id="the-rest-of-the-tidyverse" class="level3" data-number="4.3.8">
+<h3 data-number="4.3.8" class="anchored" data-anchor-id="the-rest-of-the-tidyverse"><span class="header-section-number">4.3.8</span> The Rest of the Tidyverse</h3>
+<ul>
+<li><code>forcats</code></li>
+<li><code>readr</code></li>
+<li><code>stringr</code></li>
+<li><code>tidyr</code></li>
+<li><code>purrr</code></li>
+<li><code>lubridate</code>*</li>
+</ul>
+</section>
+<section id="forcats" class="level3" data-number="4.3.9">
+<h3 data-number="4.3.9" class="anchored" data-anchor-id="forcats"><span class="header-section-number">4.3.9</span> <code>forcats</code></h3>
+<p><a href="https://forcats.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/factors.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li>Utilities for working with <strong>factor</strong> variables (<code>R</code>’s data structure for <strong>categorical variables</strong>)</li>
+<li><strong>factors</strong> = <strong>data</strong> + <strong>levels</strong>:</li>
+</ul>
+<div class="cell" data-hash="ch04_cache/html/forcats_7b6b73b1fd879d4db7b4d88b83a7666c">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>month_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>,<span class="st">"Jan"</span>,<span class="st">"Feb"</span>,<span class="st">"Dec"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Jan" "Jan" "Feb" "Dec"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dataf <span class="ot">&lt;-</span> <span class="fu">parse_factor</span>(data, <span class="at">levels=</span>month_levels)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dataf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Jan Jan Feb Dec
+Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
+</div>
+</div>
+</section>
+<section id="factors-for-ordering-plot-elements" class="level3 smaller" data-number="4.3.10">
+<h3 class="smaller anchored" data-number="4.3.10" data-anchor-id="factors-for-ordering-plot-elements"><span class="header-section-number">4.3.10</span> Factors for Ordering Plot Elements</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-hash="ch04_cache/html/relig-data_ed276c1824e327dd0f0ac9842e2af533">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="ot">&lt;-</span> gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(relig) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tvhours =</span> <span class="fu">mean</span>(tvhours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>relig_labs <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"TV Hours / Day"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Religion"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Without <code>forcats</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/relig-plot_e9584c961a3dadc0c8b563a0dc773455">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tvhours, relig)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> relig, <span class="at">x=</span><span class="dv">0</span>, <span class="at">xend =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  relig_labs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="ch04_files/figure-html/relig-plot-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>With <code>forcats</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/relig-plot-factors_450fc63ce9cee726bbf12b93024551b0">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">relig =</span> <span class="fu">fct_reorder</span>(relig, tvhours)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tvhours, <span class="at">y=</span>relig)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> relig, <span class="at">x=</span><span class="dv">0</span>, <span class="at">xend =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    relig_labs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="ch04_files/figure-html/relig-plot-factors-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sorting-barplots-with-fct_infreq" class="level3" data-number="4.3.11">
+<h3 data-number="4.3.11" class="anchored" data-anchor-id="sorting-barplots-with-fct_infreq"><span class="header-section-number">4.3.11</span> Sorting Barplots with <code>fct_infreq()</code></h3>
+<div class="cell" data-hash="ch04_cache/html/sorting-barplots-labs_cc07824d734c5f1d4a12fad103ac7b6d">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>barplot_labs <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Respondents by Marital Status"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-hash="ch04_cache/html/sorting-barplots_efb645b7a5b17f8a50d9e71dbc11b3bf">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">marital =</span> marital <span class="sc">|&gt;</span> <span class="fu">fct_infreq</span>() <span class="sc">|&gt;</span> <span class="fu">fct_rev</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> barplot_labs <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="ch04_files/figure-html/sorting-barplots-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="recodingcombining-categories" class="level3" data-number="4.3.12">
+<h3 data-number="4.3.12" class="anchored" data-anchor-id="recodingcombining-categories"><span class="header-section-number">4.3.12</span> Recoding/Combining Categories</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Automatically combining using <code>fct_lump()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/fct-lump_f94f00b8fbe96f0c74641aee85d0bf42">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">relig =</span> <span class="fu">fct_lump</span>(relig)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(relig)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-559c90d26f1d561f3251" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-559c90d26f1d561f3251">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2"],["Protestant","Other"],[10846,10637]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>relig<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Manually Combining using <code>fct_recode()</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/fct-recode_67404f0950835e0229d806419cc32774">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disp</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>    <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>      <span class="ot">=</span> <span class="st">"Not str republican"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"Ind,near rep"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"Ind,near dem"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>        <span class="ot">=</span> <span class="st">"Not str democrat"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>      <span class="ot">=</span> <span class="st">"Strong democrat"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"No answer"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"Don't know"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"Other party"</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(partyid)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-de9b5fa1eaf80b5ba653" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-de9b5fa1eaf80b5ba653">{"x":{"filter":"none","vertical":false,"extensions":["FixedColumns","FixedHeader"],"data":[["1","2","3","4"],["Other","Republican","Independent","Democrat"],[548,5346,8409,7180]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>partyid<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":6,"scrollX":true,"paging":true,"dom":"t","fixedHeader":true,"filter":false,"ordering":false,"language":{"paginate":{"previous":"<i class='bi bi-chevron-left'><\/i>","next":"<i class='bi bi-chevron-right'><\/i>"}},"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[6,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="readr" class="level3" data-number="4.3.13">
+<h3 data-number="4.3.13" class="anchored" data-anchor-id="readr"><span class="header-section-number">4.3.13</span> <code>readr</code></h3>
+<p><a href="https://readr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li><p>Two key functions: <code>read_csv()</code>, <code>write_csv()</code></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Warning! `read_csv()` vs. `read.csv()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning! <code>read_csv()</code> vs.&nbsp;<code>read.csv()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that these are <strong>not the same</strong> as <code>R</code>’s built-in <code>read.csv()</code> and <code>write.csv()</code>! The built-in <code>R</code> functions will produce a plain <code>data.frame</code> object, when in this class we want to work with <code>tibble</code> objects.</p>
+</div>
+</div></li>
+<li><p>Plus a bonus: <code>read_delim()</code></p></li>
+</ul>
+</section>
+<section id="stringr" class="level3" data-number="4.3.14">
+<h3 data-number="4.3.14" class="anchored" data-anchor-id="stringr"><span class="header-section-number">4.3.14</span> <code>stringr</code></h3>
+<p><a href="https://stringr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/strings.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf" target="_blank">Cheatsheet</a></p>
+</section>
+<section id="tidyr" class="level3" data-number="4.3.15">
+<h3 data-number="4.3.15" class="anchored" data-anchor-id="tidyr"><span class="header-section-number">4.3.15</span> <code>tidyr</code></h3>
+<p><a href="https://tidyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tidy-data.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" target="_blank">Cheatsheet</a></p>
+</section>
+<section id="purrr-functional-programming" class="level3 smaller" data-number="4.3.16">
+<h3 class="smaller anchored" data-number="4.3.16" data-anchor-id="purrr-functional-programming"><span class="header-section-number">4.3.16</span> <code>purrr</code>: Functional Programming</h3>
+<p><a href="https://purrr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf" target="_blank">Cheatsheet</a> | <a href="https://jennybc.github.io/purrr-tutorial/index.html" target="_blank">Tutorials, with Applications</a></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Provides an <strong>anonymous function</strong> operator <code>~</code>, arguments get named <code>.x</code>, <code>.y</code>:</p>
+<div class="cell" data-hash="ch04_cache/html/purrr-map_28697d953ce4249499a96d27fe52c36c">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>my_points <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Midterm"</span><span class="ot">=</span><span class="dv">18</span>, <span class="st">"Final"</span><span class="ot">=</span><span class="dv">300</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>total_points <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Midterm"</span><span class="ot">=</span><span class="dv">20</span>, <span class="st">"Final"</span><span class="ot">=</span><span class="dv">400</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>(avg_score <span class="ot">&lt;-</span> <span class="fu">map2</span>(my_points, total_points,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">list</span>(<span class="at">frac=</span>.x <span class="sc">/</span> .y, <span class="at">pct=</span>(.x<span class="sc">/</span>.y)<span class="sc">*</span><span class="dv">100</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Midterm
+$Midterm$frac
+[1] 0.9
+
+$Midterm$pct
+[1] 90
 
 
+$Final
+$Final$frac
+[1] 0.75
+
+$Final$pct
+[1] 75</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Along with helpful functions for transforming the output</p>
+<div class="cell" data-hash="ch04_cache/html/purrr-flatten_47260f97814fcbb43cfcd6178dc058aa">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_flatten</span>(avg_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Midterm_frac
+[1] 0.9
+
+$Midterm_pct
+[1] 90
+
+$Final_frac
+[1] 0.75
+
+$Final_pct
+[1] 75</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="ch04_cache/html/purrr-every_4a9111a0dd83dc0455bf0a51c7fea60f">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">every</span>(avg_score, <span class="sc">~</span> .x<span class="sc">$</span>frac <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="lubridate" class="level3" data-number="4.3.17">
+<h3 data-number="4.3.17" class="anchored" data-anchor-id="lubridate"><span class="header-section-number">4.3.17</span> <code>lubridate</code>*</h3>
+<p><a href="https://lubridate.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/dates-and-times.html" target="_blank">Overview</a> | <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank">Cheatsheet</a></p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Caution: Importing `lubridate`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution: Importing <code>lubridate</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that <code>lubridate</code> <strong>does not</strong> get loaded with the other packages in the <code>tidyverse</code> when you call <code>library(tidyverse)</code>. It needs to be imported explicitly:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="looking-forward" class="level2" data-state="hide-menubar" data-number="4.4">
+<h2 data-state="hide-menubar" data-number="4.4" class="anchored" data-anchor-id="looking-forward"><span class="header-section-number">4.4</span> Looking Forward</h2>
+<ul>
+<li>Exploratory Data Analysis</li>
+<li>We’ve got our data in a format where we can start <strong>exploring</strong> it…</li>
+<li>Set of <strong>tools</strong> and <strong>principles</strong> for understanding “what’s going on” in the data, <strong>before</strong> we carry out formal hypothesis testing</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-immerwahr_how_2019" class="csl-entry" role="listitem">
+Immerwahr, Daniel. 2019. <em>How to <span>Hide</span> an <span>Empire</span>: <span>A History</span> of the <span>Greater United States</span></em>. <span>Farrar, Straus and Giroux</span>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

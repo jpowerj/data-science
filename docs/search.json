@@ -201,5 +201,257 @@
     "title": "Appendix A — Data Sources",
     "section": "A.2 Economics",
     "text": "A.2 Economics\n\nFRED: Federal Reserve Economic Data"
+  },
+  {
+    "objectID": "ch04.html#data-cleaning",
+    "href": "ch04.html#data-cleaning",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.1 Data Cleaning",
+    "text": "4.1 Data Cleaning\n\n\n\nCode\nset.seed(1948)\nknitr::opts_template$set(\n    tikz_settings = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(dvisvgm.opts = \"--font-format=woff\")\n    ),\n    tikz_settings_fancy = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(\n            dvisvgm.opts = \"--font-format=woff\",\n            template = \"./assets/code/tikz2pdf.tex\"\n        )\n    )\n)\ndisp &lt;- function(df, obs_per_page = 6, custom_callback = NULL, ...) {\n    # If length of df is less than obs_per_page, disable pagination\n    dom_str &lt;- \"tp\"\n    if (nrow(df) &lt;= obs_per_page) {\n        dom_str &lt;- \"t\"\n    }\n    return(DT::datatable(\n        df,\n        extensions = c(\"FixedColumns\", \"FixedHeader\"),\n        options = list(\n            pageLength = obs_per_page,\n            scrollX = TRUE,\n            paging = TRUE,\n            dom = dom_str,\n            fixedHeader = TRUE,\n            filter = FALSE,\n            ordering = FALSE,\n            language = list(\n                \"paginate\" = list(\n                    \"previous\" = \"&lt;i class='bi bi-chevron-left'&gt;&lt;/i&gt;\",\n                    \"next\" = \"&lt;i class='bi bi-chevron-right'&gt;&lt;/i&gt;\"\n                )\n            ),\n            callback = custom_callback\n        )\n    ))\n}\n\n# library(knitr)\n## define a method for objects of the class data.frame\n# knit_print.data.frame &lt;- function(x, ...) {\n#    #res &lt;- paste(c(\"\", \"\", disp(x)), collapse = \"\\n\")\n#    asis_output(disp(x))\n# }\n## register the method\n# registerS3method(\"knit_print\", \"data.frame\", knit_print.data.frame)\n\n\n\n\n\n\nCode\n# For slides\nlibrary(ggplot2)\ncbPalette &lt;- c(\"#E69F00\", \"#56B4E9\", \"#009E73\", \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\")\noptions(ggplot2.discrete.colour = cbPalette)\n# Theme generator, for given sizes\ndsan_theme &lt;- function(plot_type = \"full\") {\n    if (plot_type == \"full\") {\n        custom_base_size &lt;- 16\n    } else if (plot_type == \"half\") {\n        custom_base_size &lt;- 22\n    } else if (plot_type == \"quarter\") {\n        custom_base_size &lt;- 28\n    } else {\n        # plot_type == \"col\"\n        custom_base_size &lt;- 22\n    }\n    theme &lt;- theme_classic(base_size = custom_base_size) +\n        theme(\n            plot.title = element_text(hjust = 0.5),\n            plot.subtitle = element_text(hjust = 0.5),\n            legend.title = element_text(hjust = 0.5),\n            legend.box.background = element_rect(colour = \"black\")\n        )\n    return(theme)\n}\n\nknitr::opts_chunk$set(fig.align = \"center\")\ng_pointsize &lt;- 5\ng_linesize &lt;- 1\n# Technically it should always be linewidth\ng_linewidth &lt;- 1\ng_textsize &lt;- 14\n\nremove_legend_title &lt;- function() {\n    return(theme(\n        legend.title = element_blank(),\n        legend.spacing.y = unit(0, \"mm\")\n    ))\n}\n\n\n\n\n\\[\n\\DeclareMathOperator*{\\argmax}{argmax}\n\\DeclareMathOperator*{\\argmin}{argmin}\n\\newcommand{\\bigexpect}[1]{\\mathbb{E}\\mkern-4mu \\left[ #1 \\right]}\n\\newcommand{\\definedas}{\\overset{\\text{defn}}{=}}\n\\newcommand{\\definedalign}{\\overset{\\phantom{\\text{defn}}}{=}}\n\\newcommand{\\eqeventual}{\\overset{\\text{eventually}}{=}}\n\\newcommand{\\expect}[1]{\\mathbb{E}[#1]}\n\\newcommand{\\expectsq}[1]{\\mathbb{E}^2[#1]}\n\\newcommand{\\fw}[1]{\\texttt{#1}}\n\\newcommand{\\given}{\\mid}\n\\newcommand{\\green}[1]{\\color{green}{#1}}\n\\newcommand{\\heads}{\\outcome{heads}}\n\\newcommand{\\lik}{\\mathcal{L}}\n\\newcommand{\\mle}{\\textsf{ML}}\n\\newcommand{\\orange}[1]{\\color{orange}{#1}}\n\\newcommand{\\outcome}[1]{\\textsf{#1}}\n\\newcommand{\\param}[1]{{\\color{purple} #1}}\n\\newcommand{\\pgsamplespace}{\\{\\green{1},\\green{2},\\green{3},\\purp{4},\\purp{5},\\purp{6}\\}}\n\\newcommand{\\prob}[1]{P\\left( #1 \\right)}\n\\newcommand{\\purp}[1]{\\color{purple}{#1}}\n\\newcommand{\\spacecap}{\\; \\cap \\;}\n\\newcommand{\\spacewedge}{\\; \\wedge \\;}\n\\newcommand{\\tails}{\\outcome{tails}}\n\\newcommand{\\Var}[1]{\\text{Var}[#1]}\n\\newcommand{\\bigVar}[1]{\\text{Var}\\mkern-4mu \\left[ #1 \\right]}\n\\]\n\n\nThe most undervalued skill in data science!\nRegardless of industry, absurd variety of data formats\n\n\n\n\n\nSource: XKCD #927\n\n\n\n\n\nTo fully appreciate the importance of standards in the modern industrial/technology-driven world, see Chapter 18: “The Empire of the Red Octagon” (referring to the US’s octagonal stop sign), in Immerwahr (2019).\n\n4.1.1 The Data Cleaning Toolbox\n\nText Editors\nRegular Expressions\nConversion Tools\nHTML Parsers\n\n\n\n4.1.2 Text Editors\n\n“Broken” data can often be fixed by manually examining it in a text editor!\n\n\n\n\nmy_data.csv\n\nid,var_A,var_B,var_C\\n\n1,val_1A,val_1B,val_1C\\r\\n\n2,val_2A,val_2B,val_2C\\n\n3,val_3A,val_3B,val_3C\\n\n\n\n\n\nCode\nlibrary(readr)\ndata &lt;- read_csv(\"./assets/data/mydata.csv\")\ndata\n\n\n# A tibble: 3 × 4\n  index var_1  var_2  var_3 \n  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; \n1 A     val_A1 val_A2 val_A3\n2 B     val_B1 val_B2 val_B3\n3 C     val_C1 val_C2 val_C3"
+  },
+  {
+    "objectID": "ch04.html#the-data-cleaning-toolbox",
+    "href": "ch04.html#the-data-cleaning-toolbox",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.2 The Data Cleaning Toolbox",
+    "text": "4.2 The Data Cleaning Toolbox\n\nText Editors\nRegular Expressions\nConversion Tools\nHTML Parsers"
+  },
+  {
+    "objectID": "ch04.html#text-editors",
+    "href": "ch04.html#text-editors",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.3 Text Editors",
+    "text": "4.3 Text Editors\n\n“Broken” data can often be fixed by manually examining it in a text editor!\n\n\n\n\nmy_data.csv\n\nid,var_A,var_B,var_C\\n\n1,val_1A,val_1B,val_1C\\r\\n\n2,val_2A,val_2B,val_2C\\n\n3,val_3A,val_3B,val_3C\\n\n\n\n\n\nCode\nlibrary(readr)\ndata &lt;- read_csv(\"./assets/data/mydata.csv\")\ndata\n\n\n# A tibble: 3 × 4\n  index var_1  var_2  var_3 \n  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; \n1 A     val_A1 val_A2 val_A3\n2 B     val_B1 val_B2 val_B3\n3 C     val_C1 val_C2 val_C3"
+  },
+  {
+    "objectID": "ch04.html#regular-expressions",
+    "href": "ch04.html#regular-expressions",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.2 Regular Expressions",
+    "text": "4.2 Regular Expressions\n\nThe language for turning unstructured data into structured data\nIn Computer Science, a whole course, if not two…\ntldr: a regular expression, or a RegEx string, represents a machine that either accepts or rejects input strings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegEx\n[A-Za-z0-9]+\n@\n[A-Za-z0-9.-]+\n\\.\n(com|org|edu)\nResult:\n\n\nString A\njj1088\n@\ngeorgetown\n.\nedu\nAccept✅\n\n\nString B\nspammer\n@\nfakesite!!\n.\ncoolio\nReject\n\n\n\n\n\n4.2.1 Regular Expressions: Intuition\n\nThe guiding principle: think of the types of strings you want to match:\n\nWhat kinds of characters do they contain? (and, what kinds of characters should they not contain?)\nWhat is the pattern in which these characters appear: is there a character limit? Which characters/patterns are optional, which are required?\n\nYou can then use the RegEx syntax to encode the answers to these questions!\n\n\n\n4.2.2 RegEx Syntax: Single Characters\n\nz: Match lowercase z, a single time\nzz: Match two lowercase zs in a row\nz{n}: Match \\(n\\) lowercase zs in a row\n[abc]: Match a, b, or c, a single time\n[A-Z]: Match one uppercase letter\n[0-9]: Match one numeric digit\n[A-Za-z0-9]: Match a single alphanumeric character\n[A-Za-z0-9]{n}: Match \\(n\\) alphanumeric characters\n\n\n\n4.2.3 RegEx Syntax: Repeating Patterns\n\nz*: Match lowercase z zero or more times\nz+: Match lowercase z one or more times\nz?: Match zero or one lowercase zs\n\n\n\n\n\n\n\n\n\n\n\n\n\nz*\nz+\nz?\nz{3}\n\n\n\n\n\"\"\n✅\n\n✅\n\n\n\n\"z\"\n✅\n✅\n✅\n\n\n\n\"zzz\"\n✅\n✅\n\n✅\n\n\n\n\n\n4.2.4 Example: US Phone Numbers\n\nArea code sometimes surrounded by parentheses:\n\n202-687-1587 and (202) 687-1587 both valid!\n\nWhich repeating pattern syntax (from the previous slide) helps us here?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegEx\n[(]?\n[0-9]{3}\n[)]?\n[ -]\n[0-9]{3}-[0-9]{4}\nResult\n\n\n\"202-687-1587\"\n\\(\\varepsilon\\)\n202\n\\(\\varepsilon\\)\n-\n687-1587\nAccept\n\n\n\"(202) 687-1587\"\n(\n202\n)\n \n687-1587\nAccept\n\n\n\"2020687-1587\"\n\\(\\varepsilon\\)\n202\n\\(\\varepsilon\\)\n0\n687-1587\nReject\n\n\n\n\n\n\n4.2.5 Building Regular Expressions"
+  },
+  {
+    "objectID": "ch04.html#regular-expressions-intuition",
+    "href": "ch04.html#regular-expressions-intuition",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.3 Regular Expressions: Intuition",
+    "text": "4.3 Regular Expressions: Intuition\n\nThe guiding principle: think of the types of strings you want to match:\n\nWhat kinds of characters do they contain? (and, what kinds of characters should they not contain?)\nWhat is the pattern in which these characters appear: is there a character limit? Which characters/patterns are optional, which are required?\n\nYou can then use the RegEx syntax to encode the answers to these questions!"
+  },
+  {
+    "objectID": "ch04.html#regex-syntax-single-characters",
+    "href": "ch04.html#regex-syntax-single-characters",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.4 RegEx Syntax: Single Characters",
+    "text": "4.4 RegEx Syntax: Single Characters\n\nz: Match lowercase z, a single time\nzz: Match two lowercase zs in a row\nz{n}: Match \\(n\\) lowercase zs in a row\n[abc]: Match a, b, or c, a single time\n[A-Z]: Match one uppercase letter\n[0-9]: Match one numeric digit\n[A-Za-z0-9]: Match a single alphanumeric character\n[A-Za-z0-9]{n}: Match \\(n\\) alphanumeric characters"
+  },
+  {
+    "objectID": "ch04.html#regex-syntax-repeating-patterns",
+    "href": "ch04.html#regex-syntax-repeating-patterns",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.5 RegEx Syntax: Repeating Patterns",
+    "text": "4.5 RegEx Syntax: Repeating Patterns\n\nz*: Match lowercase z zero or more times\nz+: Match lowercase z one or more times\nz?: Match zero or one lowercase zs\n\n\n\n\n\n\n\n\n\n\n\n\n\nz*\nz+\nz?\nz{3}\n\n\n\n\n\"\"\n✅\n\n✅\n\n\n\n\"z\"\n✅\n✅\n✅\n\n\n\n\"zzz\"\n✅\n✅\n\n✅"
+  },
+  {
+    "objectID": "ch04.html#example-us-phone-numbers",
+    "href": "ch04.html#example-us-phone-numbers",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.6 Example: US Phone Numbers",
+    "text": "4.6 Example: US Phone Numbers\n\nArea code sometimes surrounded by parentheses:\n\n202-687-1587 and (202) 687-1587 both valid!\n\nWhich repeating pattern syntax (from the previous slide) helps us here?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegEx\n[(]?\n[0-9]{3}\n[)]?\n[ -]\n[0-9]{3}-[0-9]{4}\nResult\n\n\n\"202-687-1587\"\n\\(\\varepsilon\\)\n202\n\\(\\varepsilon\\)\n-\n687-1587\nAccept\n\n\n\"(202) 687-1587\"\n(\n202\n)\n \n687-1587\nAccept\n\n\n\"2020687-1587\"\n\\(\\varepsilon\\)\n202\n\\(\\varepsilon\\)\n0\n687-1587\nReject"
+  },
+  {
+    "objectID": "ch04.html#building-regular-expressions",
+    "href": "ch04.html#building-regular-expressions",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.7 Building Regular Expressions",
+    "text": "4.7 Building Regular Expressions"
+  },
+  {
+    "objectID": "ch04.html#tidy-data",
+    "href": "ch04.html#tidy-data",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.3 Tidy Data",
+    "text": "4.3 Tidy Data\nOverview | In-Depth\nThe tidy data paradigm is a standard for how datasets should be structured so as to enable libraries like Pandas and the Tidyverse to easily parse and analyze them. It boils down to three principles of data organization:\n\nEvery column is a variable\nEvery row is an observation\nEvery cell is a value\n\n\n\n\n\nVar1\nVar 2\n\n\n\n\nObs 1\nVal 1\nVal 2\n\n\nObs 2\nVal 3\nVal 4\n\n\n\nUnder these constraints, the following dataset is tidy:\n\n\nCode\nlibrary(tidyverse)\ndisp(table1, obs_per_page=3)\n\n\n\n\n\n\nwhereas this dataset is not:\n\n\nCode\n#table2 %&gt;% head()\ndisp(table2, obs_per_page=3)\n\n\n\n\n\n\nCan you explain why?\n\n4.3.1 R: The Tidyverse\n\n\nhttps://www.tidyverse.org/\n\n\n\ndplyr →\nggplot2 →\nforcats →\ntibble →\nreadr →\nstringr →\ntidyr →\npurrr →\n\n\n\n\n\n4.3.2 tibble\nHomepage | Overview | Cheatsheet\n\nReplaces R’s built-in data.frame objects\n\n\n\n4.3.3 dplyr\nHomepage | Overview | Cheatsheet\n\n\nGrammar of data manipulation (think verbs):\n\nfilter()\nselect()\narrange()\nmutate()\nsummarize()\n\n\nfilter():\n\n\nCode\ndisp(table1 |&gt; filter(year == 2000))\n\n\n\n\n\n\n\n\n\n\n4.3.4 select() and arrange()\n\n\nselect():\n\n\nCode\ndisp(table1 |&gt; select(country))\n\n\n\n\n\n\n\narrange():\n\n\nCode\ndisp(table1 |&gt; arrange(population))\n\n\n\n\n\n\n\n\n\n\n4.3.5 mutate()\nmutate():\n\n\nCode\ndisp(table1 |&gt; mutate(newvar = 300))\n\n\n\n\n\n\n\n\n4.3.6 summarize()\n\n\nsummarize():\n\n\nCode\ndisp(\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n)\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ndisp(\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n)\n\n\n\n\n\n\n\n\n\n\n4.3.7 ggplot2\nHomepage | Overview | Cheatsheet\n\nA grammar for graphics\n\n\n\n4.3.8 The Rest of the Tidyverse\n\nforcats\nreadr\nstringr\ntidyr\npurrr\nlubridate*\n\n\n\n4.3.9 forcats\nHomepage | Overview | Cheatsheet\n\nUtilities for working with factor variables (R’s data structure for categorical variables)\nfactors = data + levels:\n\n\n\nCode\nmonth_levels &lt;- c(\n    \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\",\n    \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"\n)\ndata &lt;- c(\"Jan\",\"Jan\",\"Feb\",\"Dec\")\nprint(data)\n\n\n[1] \"Jan\" \"Jan\" \"Feb\" \"Dec\"\n\n\nCode\ndataf &lt;- parse_factor(data, levels=month_levels)\nprint(dataf)\n\n\n[1] Jan Jan Feb Dec\nLevels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec\n\n\n\n\n4.3.10 Factors for Ordering Plot Elements\n\n\n\n\nCode\nrelig_summary &lt;- gss_cat %&gt;%\n  group_by(relig) %&gt;%\n  summarise(\n    age = mean(age, na.rm = TRUE),\n    tvhours = mean(tvhours, na.rm = TRUE),\n    n = n()\n  )\nrelig_labs &lt;- labs(\n  x = \"TV Hours / Day\",\n  y = \"Religion\"\n)\n\n\nWithout forcats:\n\n\nCode\nrelig_summary |&gt;\n  ggplot(aes(tvhours, relig)) +\n  geom_point(size=g_pointsize) +\n  geom_segment(aes(yend = relig, x=0, xend = tvhours)) +\n  dsan_theme(\"half\") +\n  relig_labs\n\n\n\n\n\n\nWith forcats:\n\n\nCode\nrelig_summary |&gt;\n  mutate(relig = fct_reorder(relig, tvhours)) |&gt;\n  ggplot(aes(x=tvhours, y=relig)) +\n    geom_point(size=g_pointsize) +\n    geom_segment(aes(yend = relig, x=0, xend = tvhours)) +\n    dsan_theme(\"half\") +\n    relig_labs\n\n\n\n\n\n\n\n\n\n4.3.11 Sorting Barplots with fct_infreq()\n\n\nCode\nbarplot_labs &lt;- labs(\n  title = \"Respondents by Marital Status\",\n  x = \"Marital Status\",\n  y = \"Count\"\n)\n\n\n\n\nCode\ngss_cat |&gt;\n  mutate(marital = marital |&gt; fct_infreq() |&gt; fct_rev()) |&gt;\n  ggplot(aes(marital)) + geom_bar() + barplot_labs +\n  dsan_theme(\"full\")\n\n\n\n\n\n\n\n4.3.12 Recoding/Combining Categories\n\n\nAutomatically combining using fct_lump():\n\n\nCode\ndisp(\ngss_cat %&gt;%\n    mutate(relig = fct_lump(relig)) %&gt;%\n    count(relig)\n)\n\n\n\n\n\n\n\nManually Combining using fct_recode():\n\n\nCode\ndisp(\ngss_cat %&gt;%\n    mutate(partyid = fct_recode(partyid,\n    \"Republican\"    = \"Strong republican\",\n    \"Republican\"      = \"Not str republican\",\n    \"Independent\" = \"Ind,near rep\",\n    \"Independent\" = \"Ind,near dem\",\n    \"Democrat\"        = \"Not str democrat\",\n    \"Democrat\"      = \"Strong democrat\",\n    \"Other\"                 = \"No answer\",\n    \"Other\"                 = \"Don't know\",\n    \"Other\"                 = \"Other party\"\n  )) %&gt;%\n  count(partyid)\n)\n\n\n\n\n\n\n\n\n\n\n4.3.13 readr\nHomepage | Overview | Cheatsheet\n\nTwo key functions: read_csv(), write_csv()\n\n\n\n\n\n\nWarning! read_csv() vs. read.csv()\n\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, when in this class we want to work with tibble objects.\n\n\nPlus a bonus: read_delim()\n\n\n\n4.3.14 stringr\nHomepage | Overview | Cheatsheet\n\n\n4.3.15 tidyr\nHomepage | Overview | Cheatsheet\n\n\n4.3.16 purrr: Functional Programming\nHomepage | Overview | Cheatsheet | Tutorials, with Applications\n\n\nProvides an anonymous function operator ~, arguments get named .x, .y:\n\n\nCode\nmy_points &lt;- c(\"Midterm\"=18, \"Final\"=300)\ntotal_points &lt;- c(\"Midterm\"=20, \"Final\"=400)\n(avg_score &lt;- map2(my_points, total_points,\n  ~ list(frac=.x / .y, pct=(.x/.y)*100)))\n\n\n$Midterm\n$Midterm$frac\n[1] 0.9\n\n$Midterm$pct\n[1] 90\n\n\n$Final\n$Final$frac\n[1] 0.75\n\n$Final$pct\n[1] 75\n\n\n\nAlong with helpful functions for transforming the output\n\n\nCode\nlist_flatten(avg_score)\n\n\n$Midterm_frac\n[1] 0.9\n\n$Midterm_pct\n[1] 90\n\n$Final_frac\n[1] 0.75\n\n$Final_pct\n[1] 75\n\n\n\n\nCode\nevery(avg_score, ~ .x$frac &gt; 0.5)\n\n\n[1] TRUE\n\n\n\n\n\n\n4.3.17 lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
+  },
+  {
+    "objectID": "ch04.html#the-tidyverse",
+    "href": "ch04.html#the-tidyverse",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.4 The Tidyverse",
+    "text": "4.4 The Tidyverse\n\n\nhttps://www.tidyverse.org/\n\n\n\ndplyr →\nggplot2 →\nforcats →\ntibble →\nreadr →\nstringr →\ntidyr →\npurrr →"
+  },
+  {
+    "objectID": "ch04.html#tibble",
+    "href": "ch04.html#tibble",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.5 tibble",
+    "text": "4.5 tibble\nHomepage | Overview | Cheatsheet\n\nReplaces R’s built-in data.frame objects"
+  },
+  {
+    "objectID": "ch04.html#dplyr",
+    "href": "ch04.html#dplyr",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.6 dplyr",
+    "text": "4.6 dplyr\nHomepage | Overview | Cheatsheet\n\n\nGrammar of data manipulation (think verbs):\n\nfilter()\nselect()\narrange()\nmutate()\nsummarize()\n\n\nfilter():\n\n\nCode\ndisp(table1 |&gt; filter(year == 2000))\n\n\n\n\n\n\n\n\n\ndplyr 1"
+  },
+  {
+    "objectID": "ch04.html#section",
+    "href": "ch04.html#section",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.7 ",
+    "text": "4.7 \n\n\nselect():\n\n\nCode\ndisp(table1 |&gt; select(country))\n\n\n\n\n\n\n\narrange():\n\n\nCode\ndisp(table1 |&gt; arrange(population))\n\n\n\n\n\n\n\n\n\ndplyr 2"
+  },
+  {
+    "objectID": "ch04.html#section-1",
+    "href": "ch04.html#section-1",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.8 ",
+    "text": "4.8 \nmutate():\n\n\nCode\ndisp(table1 |&gt; mutate(newvar = 300))\n\n\n\n\n\n\n\ndplyr 3"
+  },
+  {
+    "objectID": "ch04.html#section-2",
+    "href": "ch04.html#section-2",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.9 ",
+    "text": "4.9 \n\n\nsummarize():\n\n\nCode\ndisp(\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n)\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ndisp(\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n)\n\n\n\n\n\n\n\n\n\ndplyr 4 / 4"
+  },
+  {
+    "objectID": "ch04.html#ggplot2",
+    "href": "ch04.html#ggplot2",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.10 ggplot2",
+    "text": "4.10 ggplot2\nHomepage | Overview | Cheatsheet\n\nA grammar for graphics"
+  },
+  {
+    "objectID": "ch04.html#the-rest-of-the-tidyverse",
+    "href": "ch04.html#the-rest-of-the-tidyverse",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.11 The Rest of the Tidyverse",
+    "text": "4.11 The Rest of the Tidyverse\n\nforcats\nreadr\nstringr\ntidyr\npurrr\nlubridate*"
+  },
+  {
+    "objectID": "ch04.html#forcats",
+    "href": "ch04.html#forcats",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.12 forcats",
+    "text": "4.12 forcats\nHomepage | Overview | Cheatsheet\n\nUtilities for working with factor variables (R’s data structure for categorical variables)\nfactors = data + levels:\n\n\n\nCode\nmonth_levels &lt;- c(\n    \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\",\n    \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"\n)\ndata &lt;- c(\"Jan\",\"Jan\",\"Feb\",\"Dec\")\nprint(data)\n\n\n[1] \"Jan\" \"Jan\" \"Feb\" \"Dec\"\n\n\nCode\ndataf &lt;- parse_factor(data, levels=month_levels)\nprint(dataf)\n\n\n[1] Jan Jan Feb Dec\nLevels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+  },
+  {
+    "objectID": "ch04.html#factors-for-ordering-plot-elements",
+    "href": "ch04.html#factors-for-ordering-plot-elements",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.13 Factors for Ordering Plot Elements",
+    "text": "4.13 Factors for Ordering Plot Elements\n\n\n\n\nCode\nrelig_summary &lt;- gss_cat %&gt;%\n  group_by(relig) %&gt;%\n  summarise(\n    age = mean(age, na.rm = TRUE),\n    tvhours = mean(tvhours, na.rm = TRUE),\n    n = n()\n  )\nrelig_labs &lt;- labs(\n  x = \"TV Hours / Day\",\n  y = \"Religion\"\n)\n\n\nWithout forcats:\n\n\nCode\nrelig_summary |&gt;\n  ggplot(aes(tvhours, relig)) +\n  geom_point(size=g_pointsize) +\n  geom_segment(aes(yend = relig, x=0, xend = tvhours)) +\n  dsan_theme(\"half\") +\n  relig_labs\n\n\n\n\n\n\nWith forcats:\n\n\nCode\nrelig_summary |&gt;\n  mutate(relig = fct_reorder(relig, tvhours)) |&gt;\n  ggplot(aes(x=tvhours, y=relig)) +\n    geom_point(size=g_pointsize) +\n    geom_segment(aes(yend = relig, x=0, xend = tvhours)) +\n    dsan_theme(\"half\") +\n    relig_labs"
+  },
+  {
+    "objectID": "ch04.html#sorting-barplots-with-fct_infreq",
+    "href": "ch04.html#sorting-barplots-with-fct_infreq",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.14 Sorting Barplots with fct_infreq()",
+    "text": "4.14 Sorting Barplots with fct_infreq()\n\n\nCode\nbarplot_labs &lt;- labs(\n  title = \"Respondents by Marital Status\",\n  x = \"Marital Status\",\n  y = \"Count\"\n)\n\n\n\n\nCode\ngss_cat |&gt;\n  mutate(marital = marital |&gt; fct_infreq() |&gt; fct_rev()) |&gt;\n  ggplot(aes(marital)) + geom_bar() + barplot_labs +\n  dsan_theme(\"full\")"
+  },
+  {
+    "objectID": "ch04.html#recodingcombining-categories",
+    "href": "ch04.html#recodingcombining-categories",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.15 Recoding/Combining Categories",
+    "text": "4.15 Recoding/Combining Categories\n\n\nAutomatically combining using fct_lump():\n\n\nCode\ndisp(\ngss_cat %&gt;%\n    mutate(relig = fct_lump(relig)) %&gt;%\n    count(relig)\n)\n\n\n\n\n\n\n\nManually Combining using fct_recode():\n\n\nCode\ndisp(\ngss_cat %&gt;%\n    mutate(partyid = fct_recode(partyid,\n    \"Republican\"    = \"Strong republican\",\n    \"Republican\"      = \"Not str republican\",\n    \"Independent\" = \"Ind,near rep\",\n    \"Independent\" = \"Ind,near dem\",\n    \"Democrat\"        = \"Not str democrat\",\n    \"Democrat\"      = \"Strong democrat\",\n    \"Other\"                 = \"No answer\",\n    \"Other\"                 = \"Don't know\",\n    \"Other\"                 = \"Other party\"\n  )) %&gt;%\n  count(partyid)\n)"
+  },
+  {
+    "objectID": "ch04.html#readr",
+    "href": "ch04.html#readr",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.16 readr",
+    "text": "4.16 readr\nHomepage | Overview | Cheatsheet\n\nTwo key functions: read_csv(), write_csv()\n\n\n\n\n\n\nWarning! read_csv() vs. read.csv()\n\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, when in this class we want to work with tibble objects.\n\n\nPlus a bonus: read_delim()"
+  },
+  {
+    "objectID": "ch04.html#stringr",
+    "href": "ch04.html#stringr",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.17 stringr",
+    "text": "4.17 stringr\nHomepage | Overview | Cheatsheet"
+  },
+  {
+    "objectID": "ch04.html#tidyr",
+    "href": "ch04.html#tidyr",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.18 tidyr",
+    "text": "4.18 tidyr\nHomepage | Overview | Cheatsheet"
+  },
+  {
+    "objectID": "ch04.html#purrr-functional-programming",
+    "href": "ch04.html#purrr-functional-programming",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.19 purrr: Functional Programming",
+    "text": "4.19 purrr: Functional Programming\nHomepage | Overview | Cheatsheet | Tutorials, with Applications\n\n\nProvides an anonymous function operator ~, arguments get named .x, .y:\n\n\nCode\nmy_points &lt;- c(\"Midterm\"=18, \"Final\"=300)\ntotal_points &lt;- c(\"Midterm\"=20, \"Final\"=400)\n(avg_score &lt;- map2(my_points, total_points,\n  ~ list(frac=.x / .y, pct=(.x/.y)*100)))\n\n\n$Midterm\n$Midterm$frac\n[1] 0.9\n\n$Midterm$pct\n[1] 90\n\n\n$Final\n$Final$frac\n[1] 0.75\n\n$Final$pct\n[1] 75\n\n\n\nAlong with helpful functions for transforming the output\n\n\nCode\nlist_flatten(avg_score)\n\n\n$Midterm_frac\n[1] 0.9\n\n$Midterm_pct\n[1] 90\n\n$Final_frac\n[1] 0.75\n\n$Final_pct\n[1] 75\n\n\n\n\nCode\nevery(avg_score, ~ .x$frac &gt; 0.5)\n\n\n[1] TRUE"
+  },
+  {
+    "objectID": "ch04.html#lubridate",
+    "href": "ch04.html#lubridate",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.20 lubridate*",
+    "text": "4.20 lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
+  },
+  {
+    "objectID": "ch04.html#next-week",
+    "href": "ch04.html#next-week",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.4 Next Week",
+    "text": "4.4 Next Week\n\nExploratory Data Analysis\nWe’ve got our data in a format where we can start exploring it…\nSet of tools and principles for understanding “what’s going on” in the data, before we carry out formal hypothesis testing\n\n\n\n\n\nImmerwahr, Daniel. 2019. How to Hide an Empire: A History of the Greater United States. Farrar, Straus and Giroux."
+  },
+  {
+    "objectID": "ch04.html#looking-forward",
+    "href": "ch04.html#looking-forward",
+    "title": "4  Data Cleaning and Tidy Data",
+    "section": "4.4 Looking Forward",
+    "text": "4.4 Looking Forward\n\nExploratory Data Analysis\nWe’ve got our data in a format where we can start exploring it…\nSet of tools and principles for understanding “what’s going on” in the data, before we carry out formal hypothesis testing\n\n\n\n\n\nImmerwahr, Daniel. 2019. How to Hide an Empire: A History of the Greater United States. Farrar, Straus and Giroux."
+  },
+  {
+    "objectID": "ch05.html#recap",
+    "href": "ch05.html#recap",
+    "title": "5  Exploratory Data Analysis",
+    "section": "5.1 Recap",
+    "text": "5.1 Recap\n\n\n\nCode\nset.seed(1948)\nknitr::opts_template$set(\n    tikz_settings = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(dvisvgm.opts = \"--font-format=woff\")\n    ),\n    tikz_settings_fancy = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(\n            dvisvgm.opts = \"--font-format=woff\",\n            template = \"./assets/code/tikz2pdf.tex\"\n        )\n    )\n)\ndisp &lt;- function(df, obs_per_page = 6, custom_callback = NULL, ...) {\n    # If length of df is less than obs_per_page, disable pagination\n    dom_str &lt;- \"tp\"\n    if (nrow(df) &lt;= obs_per_page) {\n        dom_str &lt;- \"t\"\n    }\n    return(DT::datatable(\n        df,\n        extensions = c(\"FixedColumns\", \"FixedHeader\"),\n        options = list(\n            pageLength = obs_per_page,\n            scrollX = TRUE,\n            paging = TRUE,\n            dom = dom_str,\n            fixedHeader = TRUE,\n            filter = FALSE,\n            ordering = FALSE,\n            language = list(\n                \"paginate\" = list(\n                    \"previous\" = \"&lt;i class='bi bi-chevron-left'&gt;&lt;/i&gt;\",\n                    \"next\" = \"&lt;i class='bi bi-chevron-right'&gt;&lt;/i&gt;\"\n                )\n            ),\n            callback = custom_callback\n        )\n    ))\n}\n\n# library(knitr)\n## define a method for objects of the class data.frame\n# knit_print.data.frame &lt;- function(x, ...) {\n#    #res &lt;- paste(c(\"\", \"\", disp(x)), collapse = \"\\n\")\n#    asis_output(disp(x))\n# }\n## register the method\n# registerS3method(\"knit_print\", \"data.frame\", knit_print.data.frame)\n\n\n\n\n\n\nCode\n# For slides\nlibrary(ggplot2)\ncbPalette &lt;- c(\"#E69F00\", \"#56B4E9\", \"#009E73\", \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\")\noptions(ggplot2.discrete.colour = cbPalette)\n# Theme generator, for given sizes\ndsan_theme &lt;- function(plot_type = \"full\") {\n    if (plot_type == \"full\") {\n        custom_base_size &lt;- 16\n    } else if (plot_type == \"half\") {\n        custom_base_size &lt;- 22\n    } else if (plot_type == \"quarter\") {\n        custom_base_size &lt;- 28\n    } else {\n        # plot_type == \"col\"\n        custom_base_size &lt;- 22\n    }\n    theme &lt;- theme_classic(base_size = custom_base_size) +\n        theme(\n            plot.title = element_text(hjust = 0.5),\n            plot.subtitle = element_text(hjust = 0.5),\n            legend.title = element_text(hjust = 0.5),\n            legend.box.background = element_rect(colour = \"black\")\n        )\n    return(theme)\n}\n\nknitr::opts_chunk$set(fig.align = \"center\")\ng_pointsize &lt;- 5\ng_linesize &lt;- 1\n# Technically it should always be linewidth\ng_linewidth &lt;- 1\ng_textsize &lt;- 14\n\nremove_legend_title &lt;- function() {\n    return(theme(\n        legend.title = element_blank(),\n        legend.spacing.y = unit(0, \"mm\")\n    ))\n}\n\n\n\n\nData Cleaning\nTidyverse"
+  },
+  {
+    "objectID": "ch05.html#exploratory-data-analysis-eda",
+    "href": "ch05.html#exploratory-data-analysis-eda",
+    "title": "5  Exploratory Data Analysis",
+    "section": "5.2 Exploratory Data Analysis (EDA)",
+    "text": "5.2 Exploratory Data Analysis (EDA)\n\nIn contrast to confirmatory data analysis\n\n\n\n\n\n\n\nG\n\n\ncluster_2\n\nUnderstand\n\n\ncluster_0\n\nExploratory\n\n\ncluster_1\n\nConfirmatory\n\n\n\nImport\n\nImport\n\n\n\nTidy\n\nTidy\n\n\n\nImport-&gt;Tidy\n\n\n\n\n\nV\n\nVisualize\n\n\n\nTidy-&gt;V\n\n\n\n\n\nModel\n\nModel\n\n\n\nV-&gt;Model\n\n\n\n\n\ngg\n\nggplot\n\n\n\nModel-&gt;V\n\n\n\n\n\nCommunicate\n\nCommunicate\n\n\n\nModel-&gt;Communicate\n\n\n\n\n\ne10\n\ne1071"
+  },
+  {
+    "objectID": "ch07.html#types-of-classification",
+    "href": "ch07.html#types-of-classification",
+    "title": "7  Introduction to Classification",
+    "section": "7.1 Types of Classification",
+    "text": "7.1 Types of Classification\n\n\n\nCode\nset.seed(1948)\nknitr::opts_template$set(\n    tikz_settings = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(dvisvgm.opts = \"--font-format=woff\")\n    ),\n    tikz_settings_fancy = list(\n        fig.ext = \"svg\",\n        fig.align = \"center\",\n        engine.opts = list(\n            dvisvgm.opts = \"--font-format=woff\",\n            template = \"./assets/code/tikz2pdf.tex\"\n        )\n    )\n)\ndisp &lt;- function(df, obs_per_page = 6, custom_callback = NULL, ...) {\n    # If length of df is less than obs_per_page, disable pagination\n    dom_str &lt;- \"tp\"\n    if (nrow(df) &lt;= obs_per_page) {\n        dom_str &lt;- \"t\"\n    }\n    return(DT::datatable(\n        df,\n        extensions = c(\"FixedColumns\", \"FixedHeader\"),\n        options = list(\n            pageLength = obs_per_page,\n            scrollX = TRUE,\n            paging = TRUE,\n            dom = dom_str,\n            fixedHeader = TRUE,\n            filter = FALSE,\n            ordering = FALSE,\n            language = list(\n                \"paginate\" = list(\n                    \"previous\" = \"&lt;i class='bi bi-chevron-left'&gt;&lt;/i&gt;\",\n                    \"next\" = \"&lt;i class='bi bi-chevron-right'&gt;&lt;/i&gt;\"\n                )\n            ),\n            callback = custom_callback\n        )\n    ))\n}\n\n# library(knitr)\n## define a method for objects of the class data.frame\n# knit_print.data.frame &lt;- function(x, ...) {\n#    #res &lt;- paste(c(\"\", \"\", disp(x)), collapse = \"\\n\")\n#    asis_output(disp(x))\n# }\n## register the method\n# registerS3method(\"knit_print\", \"data.frame\", knit_print.data.frame)\n\n\n\n\n\n\nCode\n# For slides\nlibrary(ggplot2)\ncbPalette &lt;- c(\"#E69F00\", \"#56B4E9\", \"#009E73\", \"#F0E442\", \"#0072B2\", \"#D55E00\", \"#CC79A7\")\noptions(ggplot2.discrete.colour = cbPalette)\n# Theme generator, for given sizes\ndsan_theme &lt;- function(plot_type = \"full\") {\n    if (plot_type == \"full\") {\n        custom_base_size &lt;- 16\n    } else if (plot_type == \"half\") {\n        custom_base_size &lt;- 22\n    } else if (plot_type == \"quarter\") {\n        custom_base_size &lt;- 28\n    } else {\n        # plot_type == \"col\"\n        custom_base_size &lt;- 22\n    }\n    theme &lt;- theme_classic(base_size = custom_base_size) +\n        theme(\n            plot.title = element_text(hjust = 0.5),\n            plot.subtitle = element_text(hjust = 0.5),\n            legend.title = element_text(hjust = 0.5),\n            legend.box.background = element_rect(colour = \"black\")\n        )\n    return(theme)\n}\n\nknitr::opts_chunk$set(fig.align = \"center\")\ng_pointsize &lt;- 5\ng_linesize &lt;- 1\n# Technically it should always be linewidth\ng_linewidth &lt;- 1\ng_textsize &lt;- 14\n\nremove_legend_title &lt;- function() {\n    return(theme(\n        legend.title = element_blank(),\n        legend.spacing.y = unit(0, \"mm\")\n    ))\n}\n\n\n\n\nBinary\nMulticlass\nRegression*"
+  },
+  {
+    "objectID": "ch07.html#binary-classification",
+    "href": "ch07.html#binary-classification",
+    "title": "7  Introduction to Classification",
+    "section": "7.2 Binary Classification",
+    "text": "7.2 Binary Classification"
+  },
+  {
+    "objectID": "ch07.html#multiclass-classification",
+    "href": "ch07.html#multiclass-classification",
+    "title": "7  Introduction to Classification",
+    "section": "7.3 Multiclass Classification",
+    "text": "7.3 Multiclass Classification"
+  },
+  {
+    "objectID": "ch07.html#regression",
+    "href": "ch07.html#regression",
+    "title": "7  Introduction to Classification",
+    "section": "7.4 Regression",
+    "text": "7.4 Regression\nJust as continuous probability distributions like the Normal distribution have to be treated a bit differently from discrete probability distributions like the Binomial distribution, the task of regression has to be treated a bit differently from the discrete classification tasks we’ve seen thus far. If you feel comfortable with the concept of loss functions that we used in the previous examples, however, this leap to regression tasks shouldn’t be too difficult!\nIn the section on binary classification, for example, we saw a loss function that looks like\n\\[\n\\mathcal{L}(\\widehat{x_i}) = (\\widehat{x_i} - x_i)^2\n\\]\nand since in that case the true values \\(x_i\\) were in \\(\\{0, 1\\}\\), as were our predicted values \\(\\widehat{x_i}\\), this loss function only ever produced two values:\n\n\n\n\n\n\n\n\n\n\\(x_i = 0\\)\n\\(x_i = 1\\)\n\n\n\n\n\\(\\widehat{x_i} = 0\\)\n\\(\\mathcal{L}(\\widehat{x}, x) = (0 - 0)^2 = 0\\)\n\\(\\mathcal{L}(\\widehat{x}, x) = (0 - 1)^2 = 1\\)\n\n\n\\(\\widehat{x_i} = 1\\)\n\\(\\mathcal{L}(\\widehat{x}, x) = (1 - 0)^2 = 1\\)\n\\(\\mathcal{L}(\\widehat{x}, x) = (1 - 1)^2 = 0\\)\n\n\n\nSo we see that, as we wanted, for binary classification this loss function produces a \\(1\\), its highest possible value, when the prediction does not match the true value, and \\(0\\) otherwise. But, looking at this loss function, there’s nothing preventing us from plugging in continuous values! And, if we fix the true value \\(x\\) and treat this loss function as just a function of \\(\\widehat{x}\\), we get the expected parabolic curve:\n\n\nCode\nlibrary(ggplot2)\nmySquare &lt;- function(x) x^2\nggplot(data=data.frame(x=c(-4,4)), aes(x=x)) +\n  stat_function(fun=mySquare, linewidth = g_linewidth) +\n  dsan_theme(\"full\")\n\n\n\n\n\n\n\n\n\nso that now the loss function gets lower and lower as the predicted value gets closer to the true value, until it hits a minimum when the predicted value is exactly equal to the true value, giving a loss value of \\(0\\). So, we can use this continuous loss function in exactly the same way we used it when training discrete classifiers—that is, by minimizing the average of the loss function over all the data. The only difference is that, whereas in the discrete case the only feedback we were able to give to the classifier was “correct” (a loss function value of \\(0\\)) or “incorrect” (a loss function value of \\(1\\)), here we also have a magnitude telling us “how wrong” the algorithm’s predictions were.\nHopefully this link helps drive home the point that (a) we train regression algorithms the exact same way we train classification algorithms, and that (b) in either case, what really matters is what loss function we choose. To emphasize the importance of this latter point, imagine we’re in a case where overpredictions are far more dangerous than underpredictions: if we’re trying to predict how much water an empty pool can hold given a photo of the empty pool, for example, perhaps underestimates are okay (the pool just won’t be filled to the brim) while overestimates will lead us to overflow the pool and ruin some important electrical equipment nearby. In this case, we could train our regression algorithm using a loss function that looks like:\n\n\nCode\nlibrary(ggplot2)\ncustomLoss &lt;- function(x) ifelse(x &gt; 0, 100, x^2)\nggplot(data=data.frame(x=c(-10,10)), aes(x=x)) +\n  stat_function(fun = customLoss) +\n  dsan_theme(\"full\")"
+  },
+  {
+    "objectID": "ch08.html",
+    "href": "ch08.html",
+    "title": "8  Classification Algorithms",
+    "section": "",
+    "text": "Decision Trees and Random Forests\nSupport Vector Machines"
   }
 ]

@@ -1,1 +1,55 @@
-# Exploratory Data Analysis
+---
+title: "Exploratory Data Analysis"
+date: last-modified
+format:
+  html:
+    cache: true
+metadata-files: 
+  - "_bookdown.globals.yml"
+---
+
+## Recap
+
+{{< include _r.globals.qmd >}}
+{{< include _gg.globals.qmd >}}
+
+* Data Cleaning
+* Tidyverse
+
+## Exploratory Data Analysis (EDA)
+
+* In contrast to **confirmatory** data analysis
+
+```{dot}
+digraph G {
+  rankdir=LR;
+  nodedir=LR;
+  nodesep=0.5;
+  ranksep=0.5;
+  overlap=false;
+  forcelabels=true;
+  Import -> Tidy;
+	
+  subgraph cluster_2 {
+    label = "Understand";
+    subgraph cluster_0 {
+      label = "Exploratory";
+      margin = 18;
+      labeljust="center";
+      V[label="Visualize"];
+      gg[label="ggplot",fontname="Courier New",penwidth=0]
+    }
+    subgraph cluster_1 {
+      Model;
+      label = "Confirmatory";
+      margin = 18;
+      e10[label="e1071",penwidth=0,fontname="Courier New"]
+    }
+  }
+  
+  Tidy -> V;
+  V -> Model;
+  Model -> V;
+  Model -> Communicate;
+}
+```

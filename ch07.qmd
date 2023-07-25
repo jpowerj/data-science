@@ -1,2 +1,63 @@
 # Introduction to Classification
 
+---
+format:
+  html:
+    cache: false
+metadata-files: 
+  - "_bookdown.globals.yml"
+---
+
+## Types of Classification {data-name="Classification Tasks"}
+
+{{< include _r.globals.qmd >}}
+{{< include _gg.globals.qmd >}}
+
+* Binary
+* Multiclass
+* Regression*
+
+## Binary Classification
+
+## Multiclass Classification
+
+## Regression
+
+Just as continuous probability distributions like the Normal distribution have to be treated a bit differently from discrete probability distributions like the Binomial distribution, the task of **regression** has to be treated a bit differently from the discrete classification tasks we've seen thus far. If you feel comfortable with the concept of **loss functions** that we used in the previous examples, however, this leap to regression tasks shouldn't be too difficult!
+
+In the section on **binary classification**, for example, we saw a loss function that looks like
+
+$$
+\mathcal{L}(\widehat{x_i}) = (\widehat{x_i} - x_i)^2
+$$
+
+and since in that case the true values $x_i$ were in $\{0, 1\}$, as were our predicted values $\widehat{x_i}$, this loss function only ever produced two values:
+
+| | $x_i = 0$ | $x_i = 1$ |
+|-|:-----------:|:-----------:|
+| $\widehat{x_i} = 0$ | $\mathcal{L}(\widehat{x}, x) = (0 - 0)^2 = 0$ | $\mathcal{L}(\widehat{x}, x) = (0 - 1)^2 = 1$ |
+|$\widehat{x_i} = 1$ | $\mathcal{L}(\widehat{x}, x) = (1 - 0)^2 = 1$ | $\mathcal{L}(\widehat{x}, x) = (1 - 1)^2 = 0$ |
+
+So we see that, as we wanted, for binary classification this loss function produces a $1$, its highest possible value, when the prediction does not match the true value, and $0$ otherwise. But, looking at this loss function, there's nothing preventing us from plugging in **continuous** values! And, if we fix the true value $x$ and treat this loss function as just a function of $\widehat{x}$, we get the expected parabolic curve:
+
+```{r}
+library(ggplot2)
+mySquare <- function(x) x^2
+ggplot(data=data.frame(x=c(-4,4)), aes(x=x)) +
+  stat_function(fun=mySquare, linewidth = g_linewidth) +
+  dsan_theme("full")
+```
+
+so that now the loss function gets lower and lower as the predicted value gets closer to the true value, until it hits a minimum when the predicted value is exactly equal to the true value, giving a loss value of $0$. So, we can use this continuous loss function in exactly the same way we used it when training discrete classifiers---that is, by minimizing the average of the loss function over all the data. The only difference is that, whereas in the discrete case the only feedback we were able to give to the classifier was "correct" (a loss function value of $0$) or "incorrect" (a loss function value of $1$), here we also have a **magnitude** telling us "how wrong" the algorithm's predictions were.
+
+Hopefully this link helps drive home the point that (a) we train regression algorithms the exact same way we train classification algorithms, and that (b) in either case, what really matters is what **loss function** we choose. To emphasize the importance of this latter point, imagine we're in a case where overpredictions are far more dangerous than underpredictions: if we're trying to predict how much water an empty pool can hold given a photo of the empty pool, for example, perhaps underestimates are okay (the pool just won't be filled to the brim) while overestimates will lead us to overflow the pool and ruin some important electrical equipment nearby. In this case, we could train our regression algorithm using a loss function that looks like:
+
+```{r}
+#| label: loss-fn-asymmetric
+library(ggplot2)
+customLoss <- function(x) ifelse(x > 0, 100, x^2)
+ggplot(data=data.frame(x=c(-10,10)), aes(x=x)) +
+  stat_function(fun = customLoss) +
+  dsan_theme("full")
+```
+
