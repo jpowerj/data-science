@@ -453,5 +453,26 @@
     "title": "8  Classification Algorithms",
     "section": "",
     "text": "Decision Trees and Random Forests\nSupport Vector Machines"
+  },
+  {
+    "objectID": "ch08.html#support-vector-machines",
+    "href": "ch08.html#support-vector-machines",
+    "title": "8  Classification Algorithms",
+    "section": "8.1 Support Vector Machines",
+    "text": "8.1 Support Vector Machines\nThe Support Vector Machine algorithm is often the first Machine Learning algorithm taught in computer science courses, because it gets to the heart of the fundamental goal of most ML algorithms:\n\n\n\n\n\n\nMachine Learning: The Fundamental Goal\n\n\n\nGiven a set of labeled training data, create an algorithm which best predicts future (unlabeled) data from the same source."
+  },
+  {
+    "objectID": "ch08.html#decision-trees",
+    "href": "ch08.html#decision-trees",
+    "title": "8  Classification Algorithms",
+    "section": "8.2 Decision Trees",
+    "text": "8.2 Decision Trees"
+  },
+  {
+    "objectID": "ch08.html#random-forests",
+    "href": "ch08.html#random-forests",
+    "title": "8  Classification Algorithms",
+    "section": "8.3 Random Forests",
+    "text": "8.3 Random Forests"
   }
 ]

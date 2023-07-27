@@ -8,5 +8,44 @@ metadata-files:
 
 # Classification Algorithms
 
-* Decision Trees and Random Forests
-* Support Vector Machines
+In the previous chapter we learned about classification and regression as **tasks**: what we're trying to accomplish and how we will "grade" a classifier on its predictions. In this chapter we now dive into the specific **algorithms** that accomplish these tasks, each having a slightly different focus on **how** to accomplish them. The first algorithm we'll see, for example, is the Support Vector Machine algorithm, which focuses on finding an optimal **decision boundary** between positive and negative cases, for simple binary classification.
+
+Then we'll turn to **decision trees** and the closely-related **random forests** algorithm, which construct a **hierarchical series** of splits in the independent variables which best predict the dependent variable, in a statistically-meaningful sense. Similarly to the game of **20 Questions**, the decision tree algorithm aims to figure out questions we can ask of the independent variables (the information we *already know*) which best enable us to predict the *unknown* value of the dependent variable. For example, if we're training our algorithm to predict somone's age given their height, weight, and gender, we might see the question "Is their weight greater than 80 pounds?", as this quickly allows us to eliminate a large chunk of potential ages: if the person's weight is less than 80 pounds, we can get high accuracy by guessing an age between 0 and 14 for the person.
+
+## Support Vector Machines
+
+The Support Vector Machine algorithm is often the first Machine Learning algorithm taught in computer science courses, because it gets to the heart of the fundamental goal of most ML algorithms:
+
+::: {.callout-tip title="Machine Learning: The Fundamental Goal"}
+
+Given a set of labeled training data, create an algorithm which best predicts future (unlabeled) data from the same source.
+
+:::
+
+Notice the potentially confusing use of the term "algorithm" in both our introduction to the chapter and in this "fundamental goal": a Machine Learning algorithm like the Support Vector Machine is an algorithm which **takes in data** and **produces another algorithm**, specifically, an algorithm which we can then use to predict labels for future data. Pictorally, this looks like:
+
+```{dot}
+digraph g {
+  rankdir=LR
+  nodedir=TB
+  tr[label="Labeled Data"]
+  ml[label="ML Algorithm",shape="rect"]
+  subgraph cluster02 {
+    label=""
+    cl[label="Classification Algorithm",penwidth=0]
+    
+    
+  }
+  ml -> cl[label="Outputs"]
+  unlabeled[label="Unlabeled Data"]
+  pred[label="Predicted Label"]
+  tr -> ml;
+  ml -> unlabeled[style="invis"];
+  unlabeled -> cl -> pred;
+  
+}
+```
+
+## Decision Trees
+
+## Random Forests
